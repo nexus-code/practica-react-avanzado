@@ -1,16 +1,22 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { getUserLS, isEmpty } from '../utils/localStorage'
+import { PATH_REGISTER } from '../constants'
 
-export function getUserFromLocalStorage() {
+export function getUser() {
+    // get user from local storage if exits, otherwise redirect to register
 
-    console.log('getUserFromLocalStorage');
+    console.log('getUser');
 
     const user = getUserLS();
     if (isEmpty(user)){
         console.log('user.selector Redirect');
 
-        return <Redirect to="../components/Register/Register" />
+        return <Redirect to= '[PATH_REGISTER]' />
     }
     
+}
+
+export function setUser() {
+
 }

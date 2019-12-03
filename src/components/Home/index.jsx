@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux';
-import { getUserFromLocalStorage } from '../../store/user.selectors';
+import { getUser } from '../../store/user.selectors';
 import Home from './Home';
 
 
@@ -11,7 +11,7 @@ function mapStateToProps(state) {
     console.log ('connect home /index.jsx');
 
     return {
-        user: getUserFromLocalStorage(),
+        user: getUser(),
     };
 }
 
