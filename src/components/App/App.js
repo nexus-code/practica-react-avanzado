@@ -13,26 +13,11 @@ import NotFoundPage from '../404/NotFoundPage';
 
 
 export default class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.updateUser = this.updateUser.bind(this);
-  //   this.state = {
-  //     user: {},
-  //     updateUser: this.updateUser
-  //   }
-  // }
-
-  // updateUser(user) {
-    
-  //   this.setState({ user });
-  // }
 
   render() {
     
     return (
       <div>
-        {/* <UserProvider value={this.state}> */}
           <ErrorBoundary>
               <Router>
                 <Switch>
@@ -50,7 +35,6 @@ export default class App extends React.Component {
                 </Switch>
               </Router>
           </ErrorBoundary>
-        {/* </UserProvider> */}
       </div>
     );
   }
