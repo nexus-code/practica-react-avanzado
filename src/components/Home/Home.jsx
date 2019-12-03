@@ -5,6 +5,8 @@ import { getUserLS, isEmpty } from '../../utils/localStorage';
 import * as API      from '../../services/AdService';
 import AdList        from '../AdList/AdList';
 
+
+
 export default class Home extends React.Component {
 
     /* Show ads by user selected tag */
@@ -15,7 +17,13 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
        
+
+        //luego quitar:
+
+        console.log('HOME constructor LLEGA');
+
         const user = getUserLS();
+
         if (isEmpty(user)) {
             
             this.gotoRegisterWithoutUser();
@@ -31,6 +39,7 @@ export default class Home extends React.Component {
         }
 
     }
+
 
     searchAds = () => {
 
@@ -48,16 +57,16 @@ export default class Home extends React.Component {
             this.props.history.push("/register");
         }
 
-    recoverContext() {
-        //Recover context from localStorage (recovered on this.state.user)
+    // recoverContext() {
+    //     //Recover context from localStorage (recovered on this.state.user)
 
-        if (isEmpty(this.context.user))
-            this.context.updateUser(this.state.user);
-    }
+    //     if (isEmpty(this.context.user))
+    //         this.context.updateUser(this.state.user);
+    // }
 
     componentDidMount() {
 
-        this.recoverContext();
+        // this.recoverContext();
     }
 
 

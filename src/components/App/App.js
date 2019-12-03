@@ -1,38 +1,38 @@
 import React from 'react';
-import { UserProvider } from './context/UserContext';
-import ErrorBoundary    from '../src/ErrorBoundary/ErrorBoundary';
+// import { UserProvider } from '../../context/UserContext';
+import ErrorBoundary    from '../../ErrorBoundary/ErrorBoundary';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home      from './components/Home/Home';
-import Search    from './components/Search/Search';
-import Register  from './components/Register/Register';
-import Profile   from './components/Register/Profile'; 
-import AdEdit    from './components/AdEdit/AdEdit';
-import AdDetail  from './components/AdDetail/AdDetail';
-import NotFoundPage from './components/404/NotFoundPage';
+import Home      from '../Home';
+import Search    from '../Search/Search';
+import Register  from '../Register/Register';
+import Profile   from '../Register/Profile'; 
+import AdEdit    from '../AdEdit/AdEdit';
+import AdDetail  from '../AdDetail/AdDetail';
+import NotFoundPage from '../404/NotFoundPage';
 
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.updateUser = this.updateUser.bind(this);
-    this.state = {
-      user: {},
-      updateUser: this.updateUser
-    }
-  }
+  //   this.updateUser = this.updateUser.bind(this);
+  //   this.state = {
+  //     user: {},
+  //     updateUser: this.updateUser
+  //   }
+  // }
 
-  updateUser(user) {
+  // updateUser(user) {
     
-    this.setState({ user });
-  }
+  //   this.setState({ user });
+  // }
 
   render() {
     
     return (
       <div>
-        <UserProvider value={this.state}>
+        {/* <UserProvider value={this.state}> */}
           <ErrorBoundary>
               <Router>
                 <Switch>
@@ -50,7 +50,7 @@ export default class App extends React.Component {
                 </Switch>
               </Router>
           </ErrorBoundary>
-        </UserProvider>
+        {/* </UserProvider> */}
       </div>
     );
   }
