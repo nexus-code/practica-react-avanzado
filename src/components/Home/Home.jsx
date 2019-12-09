@@ -31,9 +31,7 @@ export default class Home extends React.Component {
 
     searchAds = () => {
 
-        //Register tag is used to default search
-
-        API.searchAds(`tag=${this.state.user.tags}`).then(ads => {
+        API.searchAds().then(ads => {
             this.setState({
                 ads
             })
