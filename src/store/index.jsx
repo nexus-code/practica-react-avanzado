@@ -12,11 +12,11 @@ import { setUserLS, getUserLS } from '../utils/localStorage';
 const loggerMiddleware = createLogger();
 const composeEnhancers = composeWithDevTools;
 
-const initialData = getUserLS();
+const initialData = { user: getUserLS()};
 
 console.log('initialData', initialData);
 
-export function configureStore(preloadedState) {
+export function configureStore() {
     const reducer = combineReducers(userReducers, adsReducers);
     const middlewares = [thunkMiddleware];
     
@@ -26,7 +26,6 @@ export function configureStore(preloadedState) {
     
     const store = createStore(
         reducer,
-        preloadedState,
         initialData,
         composeEnhancers(applyMiddleware(...middlewares)),
     );
