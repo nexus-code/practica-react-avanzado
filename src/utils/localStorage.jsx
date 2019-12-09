@@ -4,11 +4,11 @@
 
 export const setUserLS = user => {
 
-  localStorage.setItem('data', JSON.stringify(user));
+  localStorage.setItem('user', JSON.stringify(user));
 };
 
 export const getUserLS = () => {
-	const user = localStorage.getItem('data');
+	const user = localStorage.getItem('user');
   return JSON.parse(user)
 };
 

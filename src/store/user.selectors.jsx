@@ -12,7 +12,7 @@ export function getUser() {
     if (isEmpty(user)){
         console.log('user.selector Redirect');
 
-        return <Redirect to= '[PATH_REGISTER]' />
+        return <Redirect to= {PATH_REGISTER} />
     }
     
 }
