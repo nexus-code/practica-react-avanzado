@@ -14,8 +14,6 @@ const composeEnhancers = composeWithDevTools;
 
 const initialData = { user: getUserLS()};
 
-console.log('initialData', initialData);
-
 export function configureStore() {
     const reducer = combineReducers(userReducers, adsReducers);
     const middlewares = [thunkMiddleware];

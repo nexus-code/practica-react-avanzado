@@ -14,24 +14,33 @@ import NotFoundPage from '../404/NotFoundPage';
 
 export default class App extends React.Component {
 
+  allRoutes = () => {
+
+  }
+
   render() {
     
+    console.log('this.props', this.props.user);
+    
+    if (!this.props.user){
+
+      return <Route component={Register} />
+    }
+
     return (
       <div>
           <ErrorBoundary>
               <Router>
                 <Switch>
-                  <Route exact path="/register" component={ Register } />
-                  <Route exact path="/profile" component={ Profile } />
-                  <Route path='/advert/create' component={ AdEdit } />
-                  <Route path='/advert/edit/:id' component={ AdEdit } />
-                  <Route path='/advert/:id' component={ AdDetail } />
-                  <Route path='/advert/' component={ Search } />
-                  <Route exact path='/home' component={ Home } />
-                  <Route exact path='/' component={ Home } />
-                  <Route path='*' component={ NotFoundPage } />
-
-                  <Route component={Register} />
+                    <Route exact path="/register" component={ Register } />
+                    <Route exact path="/profile" component={ Profile } />
+                    <Route path='/advert/create' component={ AdEdit } />
+                    <Route path='/advert/edit/:id' component={ AdEdit } />
+                    <Route path='/advert/:id' component={ AdDetail } />
+                    <Route path='/advert/' component={ Search } />
+                    <Route exact path='/home' component={ Home } />
+                    <Route exact path='/' component={ Home } />
+                    <Route path='*' component={ NotFoundPage } />
                 </Switch>
               </Router>
           </ErrorBoundary>
