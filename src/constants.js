@@ -1,2 +1,2 @@
 
-export const PATH_REGISTER = '../components/Register/Register';
+export const PATH_REGISTER = '../register';

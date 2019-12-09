@@ -1,13 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
+// import React from 'react';
+// import { connect } from 'react-redux';
 
 
-import { Redirect } from 'react-router-dom';
-import { PATH_REGISTER } from '../constants'
-
-export const nextURL = () => {
-
-}
+// import { Redirect } from 'react-router-dom';
+// import { PATH_REGISTER } from '../constants'
 
 
 // export function getUser() {
