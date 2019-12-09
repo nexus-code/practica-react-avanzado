@@ -14,44 +14,38 @@ import NotFoundPage from '../404/NotFoundPage';
 import { PATH_REGISTER } from '../../constants';
 
 
-export default class App extends React.Component {
+function App({user = undefined}) {
+  
+  
+  const  location = useLocation();
+  console.log('this.props to hook', user);
+  console.log('location', location);
+  console.log('!user && location.pathname', !user && location.pathname !== PATH_REGISTER);
 
-  render() {
-    
-    console.log('this.props', this.props.user);
-    
-
-    if (!this.props.user){
+  
+  if (!user && location.pathname !== PATH_REGISTER){
       
-      return <Redirect to={PATH_REGISTER} />
-    }
-    
-    
-  // const { user } = this.props.user;
-  // console.log('user', user);
-    
-
-    return (
-      <div>
-          <ErrorBoundary>
-              <Router>
-                <Switch>
-                {!this.props.user && <Route component={Register} />}
-
-                <Route path='/register/' component={Register } />
-                  <Route exact path="/profile" component={Profile} user={ this.props.user } />
-                  <Route path='/advert/create' component={ AdEdit } />
-                  <Route path='/advert/edit/:id' component={ AdEdit } />
-                  <Route path='/advert/:id' component={ AdDetail } />
-                  <Route path='/advert/' component={ Search } />
-                  <Route exact path='/home' component={ Home } />
-                  <Route exact path='/' component={ Home } />
-                  <Route path='*' component={ NotFoundPage } />
-                  <Route component={ Register } />
-                </Switch>
-              </Router>
-          </ErrorBoundary>
-      </div>
-    );
+    return <Redirect to={PATH_REGISTER} />
   }
+    
+  return <div>
+        <ErrorBoundary>
+            <Router>
+              <Switch>
+                <Route path='/register' component={Register } />
+                <Route exact path="/profile" component={Profile} user={ user } />
+                <Route path='/advert/create' component={ AdEdit } />
+                <Route path='/advert/edit/:id' component={ AdEdit } />
+                <Route path='/advert/:id' component={ AdDetail } />
+                <Route path='/advert/' component={ Search } />
+                <Route exact path='/home' component={ Home } />
+                <Route exact path='/' component={ Home } />
+                <Route path='*' component={ NotFoundPage } />
+                <Route component={ Register } />
+              </Switch>
+            </Router>
+        </ErrorBoundary>
+    </div>
 }
+
+export default App;
