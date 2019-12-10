@@ -5,9 +5,9 @@ import { getUser } from '../../store/user.selectors';
 import { setUser } from '../../store/user.actions'
 
 
-function mapStateToProps(state) {
+function mapStateToProps() {
     return {
-        user: getUser(state.user),
+        user: getUser(),
     };
 }
 

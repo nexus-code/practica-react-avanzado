@@ -40,15 +40,17 @@ export const setUserLS = user => {
 };
 
 export const getUserLS = () => {
-	const user = localStorage.getItem('user');
-  return JSON.parse(user)
+  const user = localStorage.getItem('user');
+  // console.log('user', user);
+
+  return !user ? undefined : JSON.parse(user);
 };
 
 export const clearLocalStorage = () => {
   localStorage.clear();
 }
 
-//Note: See configuring on sessionStorage or to make configurable
+
 
 /*
 * complementary functions

@@ -9,7 +9,7 @@ export const user = (state = initialState, action) => {
         case TYPES.SET_USER:
             return {
                 ...state,
-                // user: action.user,
+                user: action.user,
             }
         case TYPES.LOGOUT:
             return initialState.user;

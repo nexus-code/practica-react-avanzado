@@ -93,7 +93,7 @@ function Register({ user, setUser}) {
 }
 
 Register.propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,//.isRequired,
     // setUser: PropTypes.func.isRequired,
 }
 
