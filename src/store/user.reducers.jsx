@@ -4,10 +4,13 @@ const initialState = {
     user: {},
 };
 
-export const user = (state = initialState.user, action) => {
+export const user = (state = initialState, action) => {
     switch (action.type) {
         case TYPES.SET_USER:
-            return action.user;
+            return {
+                ...state,
+                user: action.user
+            }
         case TYPES.LOGOUT:
             return initialState.user;
         default:

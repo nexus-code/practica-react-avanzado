@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import Home      from '../Home';
 import Search    from '../Search/Search';
 import Register  from '../Register/Register';
-import Profile   from '../Register/Profile'; 
 import AdEdit    from '../AdEdit/AdEdit';
 import AdDetail  from '../AdDetail/AdDetail';
 import NotFoundPage from '../404/NotFoundPage';
@@ -19,11 +18,7 @@ function App({user = undefined}) {
   
   
   const  location = useLocation();
-  // console.log('this.props to hook', user);
-  // console.log('location', location);
-  // console.log('!user && location.pathname', !user && location.pathname !== PATH_REGISTER);
-
-  
+ 
   if (!user && location.pathname !== PATH_REGISTER){
       
     return <Redirect to={PATH_REGISTER} />
@@ -34,8 +29,7 @@ function App({user = undefined}) {
             <Router>
               <Switch>
                 <Route path='/register' component={Register } />
-          {/* <Route exact path="/profile" component={Profile} user={user} /> */}
-                <Route path="/profile" component={() => <Profile user={user} />} />
+                <Route path="/profile" component={() => <Register user={user} />} />
                 <Route path='/advert/create' component={ AdEdit } />
                 <Route path='/advert/edit/:id' component={ AdEdit } />
                 <Route path='/advert/:id' component={ AdDetail } />

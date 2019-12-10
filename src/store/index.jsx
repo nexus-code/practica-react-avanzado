@@ -30,7 +30,7 @@ export function configureStore() {
 
     store.subscribe(function () {
         setUserLS(store.getState())
-    })
+    });
 
     return store;
 }

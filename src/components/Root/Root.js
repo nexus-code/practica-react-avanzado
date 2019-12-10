@@ -1,10 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from '../App';
 
-export default function Root({ store, ...props }) {
+function Root({ store, ...props }) {
   return (
     <Provider store={store}>
       <Router>
@@ -13,3 +14,9 @@ export default function Root({ store, ...props }) {
     </Provider>
   );
 }
+
+Root.propTypes = {
+  store: PropTypes.object.isRequired,
+};
+
+export default Root;

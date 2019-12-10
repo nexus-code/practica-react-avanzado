@@ -1,90 +1,98 @@
-import React from "react";
+import React, { useReducer } from "react";
+import { PropTypes } from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
-import { UserContext } from '../../context/UserContext'
-import { setUserLS } from '../../utils/localStorage';
-import TagSelect from '../TagsSelect/TagSelect'
+import AppNavbar        from '../AppNavbar/AppNavbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { setUserLS } from '../../utils/localStorage'
+
+toast.configure({
+    autoClose: 8000,
+    draggable: false,
+});
+
+/**
+ *  admin user 
+ */
 
 
-export default class Register extends React.Component { 
-    
-    // Define user & save on context & local storage
-    
-    static contextType = UserContext;
+function Register({ user }) { 
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            user: {
-                name: '',
-                surname: '',
-                tags: ''
-            }
-        };
+    const [userInput, setUserInput] = useReducer(
+        (state, newState) => ({ ...state, ...newState }),
+        {
+            name: typeof(user) === 'undefined' ? '' : user.name,
+            surname: typeof(user)  === 'undefined' ? '' : user.surname,
+            title: typeof (user) === 'undefined' ? 'Register user' : 'Edit profile',
+        }
+    );
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    const handleChange = event => {
+        const name = event.target.name;
+        const newValue = event.target.value;
+        setUserInput({ [name]: newValue });
     }
 
-    handleChange(event) {
-
-        const { name, value } = event.target;
-        
-        this.setState(({ user }) => ({
-            user: {
-                ...user,
-                [name]: value
-            }
-        }));
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        
-        const { name, surname } = this.state.user;
 
-        if (name.trim().length <= 3) {
-            alert("The name must be bigger than 3 characters");
+        if (userInput.name.trim().length <= 3) {
+            notifyWarning('The name must be bigger than 3 characters');
             return;
         }
 
-        if (surname.trim().length <= 3) {
-            alert("The surname must be bigger than 3 characters");
+        if (userInput.surname.trim().length <= 3) {
+            notifyWarning('The surname must be bigger than 3 characters');
             return;
         }
 
-        setUserLS(this.state.user);
-        
-        this.context.updateUser(this.state.user);
+        try {
+            //// Guardar en STORE!!!!!!!!!!!!!!!!!!
+            setUserLS({ name: userInput.name, surname: userInput.surname});
+            notifySaved();
 
-        this.props.history.push("/home");
+        } catch (error) {
+            
+            notifyError();            
+        }
+
     }
 
-    render (){
+    const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
+    const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
+    const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
         
-        return (
+    return (
+        <>
+            <AppNavbar />
+            <ToastContainer enableMultiContainer containerId={'OK'} position={toast.POSITION.TOP_RIGHT} />
+            <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
 
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                <h2>Wellcome to WallaKeep</h2>
-                <Form onSubmit = { this.handleSubmit }>
+                <h2>{userInput.title}</h2>
+                <Form onSubmit = { handleSubmit }>
                     <Form.Group controlId="formGroupname" >
                         <Form.Label>Name</Form.Label>
-                        <Form.Control name="name" placeholder="Enter name" onChange={ this.handleChange } />
+                        <Form.Control name="name" placeholder="Enter name" value={ userInput.name } onChange={ handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGroupsurname" >
                         <Form.Label>Surname</Form.Label>
-                        <Form.Control name="surname" placeholder="surname" onChange={ this.handleChange } />
-                    </Form.Group>
-                    <Form.Group controlId="formGrouptags" >
-                        <Form.Label>Tags</Form.Label>
-                        <TagSelect onChange={this.handleChange } />
+                        <Form.Control name="surname" placeholder="surname" value={ userInput.surname } onChange={ handleChange } />
                     </Form.Group>
 
-                    <Button variant="primary  float-right" type="submit">
-                        Access
+                    <Button variant="primary float-right" type="submit">
+                        Save
                     </Button>
                 </Form>
             </div>
-        );
-    }
+        </>
+    );
 }
+
+Register.propTypes = {
+    user: PropTypes.object.isRequired,
+}
+
+export default Register;
