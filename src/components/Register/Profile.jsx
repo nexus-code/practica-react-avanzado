@@ -1,16 +1,25 @@
-import React, { useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { setUserLS }    from '../../utils/localStorage';
 import AppNavbar        from '../AppNavbar/AppNavbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 toast.configure({
     autoClose: 8000,
     draggable: false,
 });
 
+/**
+ * 
+ * @param { user object } 
+ */
+
+
 function Profile({user}) { 
+
+    const [message, setMessage] = useState('initial');
 
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
@@ -30,12 +39,16 @@ function Profile({user}) {
         event.preventDefault();
 
         if (userInput.name.trim().length <= 3) {
-            alert("The name must be bigger than 3 characters");
+            // alert("The name must be bigger than 3 characters");
+            setMessage("The name must be bigger than 3 characters");
+            notifyWarning();
             return;
         }
 
         if (userInput.surname.trim().length <= 3) {
-            alert("The surname must be bigger than 3 characters");
+            // alert("The surname must be bigger than 3 characters");
+            setMessage("The surname must be bigger than 3 characters");
+            notifyWarning();
             return;
         }
 
@@ -52,8 +65,10 @@ function Profile({user}) {
 
     }
 
+
     const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
     const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
+    const notifyWarning = () => toast.warning(message, { containerId: 'KO' });
 
         
     return (
@@ -81,6 +96,10 @@ function Profile({user}) {
             </div>
         </>
     );
+}
+
+Profile.propTypes = {
+    user: PropTypes.object
 }
 
 export default Profile;
