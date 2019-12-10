@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorBoundary    from '../../ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
@@ -34,7 +34,8 @@ function App({user = undefined}) {
             <Router>
               <Switch>
                 <Route path='/register' component={Register } />
-                <Route exact path="/profile" component={Profile} user={ user } />
+          {/* <Route exact path="/profile" component={Profile} user={user} /> */}
+                <Route path="/profile" component={() => <Profile user={user} />} />
                 <Route path='/advert/create' component={ AdEdit } />
                 <Route path='/advert/edit/:id' component={ AdEdit } />
                 <Route path='/advert/:id' component={ AdDetail } />
