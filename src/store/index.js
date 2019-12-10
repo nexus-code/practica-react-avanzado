@@ -30,7 +30,8 @@ export function configureStore() {
 
     store.subscribe(function () {
         console.log('store.subscribe', store.getState());
-        setUserLS(store.getState().user)
+        //why user.user!!!!! ?????
+        setUserLS(store.getState().user.user)
     });
 
     return store;

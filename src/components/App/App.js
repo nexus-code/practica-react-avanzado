@@ -14,11 +14,13 @@ import NotFoundPage from '../404/NotFoundPage';
 import { PATH_REGISTER } from '../../constants';
 
 
-function App({user = undefined}) {
+function App({ user }) {
   
   
   const  location = useLocation();
  
+console.log ('App User', user);
+
   if (!user && location.pathname !== PATH_REGISTER){
       
     return <Redirect to={PATH_REGISTER} />
