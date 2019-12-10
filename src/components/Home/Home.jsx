@@ -19,8 +19,6 @@ export default class Home extends React.Component {
        
         //constructor will been replaced by redux:
 
-        console.log('HOME constructor LLEGA');
-
         this.state = {
             ads: [],
             user: getUserLS()
