@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useParams } from "react-router";
+import React, { useReducer } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { setUserLS }    from '../../utils/localStorage';
 import AppNavbar        from '../AppNavbar/AppNavbar';
@@ -13,29 +12,36 @@ toast.configure({
 
 function Profile({user}) { 
 
-    console.log('user', user);
+    const [userInput, setUserInput] = useReducer(
+        (state, newState) => ({ ...state, ...newState }),
+        {
+            name: user.name,
+            surname: user.surname,
+        }
+    );
 
-    const [name, setName] = useState(user.name);
-    const [surname, setSurname] = useState(user.surname);
-    const handleChange1 = event => setName(event.target.value);
-    const handleChange2 = event => setSurname(event.target.value);
+    const handleChange = event => {
+        const name = event.target.name;
+        const newValue = event.target.value;
+        setUserInput({ [name]: newValue });
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (name.trim().length <= 3) {
+        if (userInput.name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
             return;
         }
 
-        if (surname.trim().length <= 3) {
+        if (userInput.surname.trim().length <= 3) {
             alert("The surname must be bigger than 3 characters");
             return;
         }
 
         try {
             
-            setUserLS({ name: name, surname: surname});
+            setUserLS({ name: userInput.name, surname: userInput.surname});
 
             notifySaved();
 
@@ -61,11 +67,11 @@ function Profile({user}) {
                 <Form onSubmit = { handleSubmit }>
                     <Form.Group controlId="formGroupname" >
                         <Form.Label>Name</Form.Label>
-                        <Form.Control name="name" placeholder="Enter name" value={ name } onChange={ handleChange1 } />
+                        <Form.Control name="name" placeholder="Enter name" value={ userInput.name } onChange={ handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGroupsurname" >
                         <Form.Label>Surname</Form.Label>
-                        <Form.Control name="surname" placeholder="surname" value={ surname } onChange={ handleChange2 } />
+                        <Form.Control name="surname" placeholder="surname" value={ userInput.surname } onChange={ handleChange } />
                     </Form.Group>
 
                     <Button variant="primary float-right" type="submit">
