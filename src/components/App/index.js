@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import App from './App';
 
 const mapStateToProps = store => ({
-    user: store.user
+    user: store.user,
+    ads_filter: store.ads,
 })
 
 export default connect(

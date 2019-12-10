@@ -2,6 +2,7 @@ import React from 'react';
 import ErrorBoundary    from '../../ErrorBoundary/ErrorBoundary';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useLocation } from 'react-router';
+import PropTypes from 'prop-types';
 
 import Home      from '../Home';
 import Search    from '../Search/Search';
@@ -18,9 +19,9 @@ function App({user = undefined}) {
   
   
   const  location = useLocation();
-  console.log('this.props to hook', user);
-  console.log('location', location);
-  console.log('!user && location.pathname', !user && location.pathname !== PATH_REGISTER);
+  // console.log('this.props to hook', user);
+  // console.log('location', location);
+  // console.log('!user && location.pathname', !user && location.pathname !== PATH_REGISTER);
 
   
   if (!user && location.pathname !== PATH_REGISTER){
@@ -46,6 +47,10 @@ function App({user = undefined}) {
             </Router>
         </ErrorBoundary>
     </div>
+}
+
+App.propTypes = {
+  user: PropTypes.object
 }
 
 export default App;
