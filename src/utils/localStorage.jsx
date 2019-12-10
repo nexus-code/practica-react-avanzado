@@ -3,30 +3,30 @@
  * 
  */
 
-export const getState = () => {
-  try {
+// export const getState = () => {
+//   try {
 
-    const data = localStorage.getItem('state')
-    if (data === null) {
-      return undefined; 
-    }
-    return JSON.parse(data);
+//     const data = localStorage.getItem('state')
+//     if (data === null) {
+//       return undefined; 
+//     }
+//     return JSON.parse(data);
 
-  } catch (error) {
+//   } catch (error) {
     
-    return undefined;
-  }
-}
+//     return undefined;
+//   }
+// }
 
-export const setState = (state) => {
-  try {
+// export const setState = (state) => {
+//   try {
 
-    const data = JSON.stringify(state)
-    localStorage.setItem('state', data)
-  } catch (error) {
-    // pending
-  }
-}
+//     const data = JSON.stringify(state)
+//     localStorage.setItem('state', data)
+//   } catch (error) {
+//     // pending
+//   }
+// }
 
 
 /*

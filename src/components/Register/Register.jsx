@@ -5,7 +5,7 @@ import AppNavbar        from '../AppNavbar/AppNavbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { setUserLS } from '../../utils/localStorage'
+// import { setUserLS } from '../../utils/localStorage'
 
 toast.configure({
     autoClose: 8000,
@@ -17,15 +17,15 @@ toast.configure({
  */
 
 
-function Register({ user }) { 
+function Register({ user, setUser}) { 
 
 
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            name: typeof(user) === 'undefined' ? '' : user.name,
-            surname: typeof(user)  === 'undefined' ? '' : user.surname,
-            title: typeof (user) === 'undefined' ? 'Register user' : 'Edit profile',
+            name: typeof(user)    === 'undefined' ? '' : user.name,
+            surname: typeof(user) === 'undefined' ? '' : user.surname, 
+            title: typeof (user)  === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
         }
     );
 
@@ -50,11 +50,12 @@ function Register({ user }) {
 
         try {
             //// Guardar en STORE!!!!!!!!!!!!!!!!!!
-            setUserLS({ name: userInput.name, surname: userInput.surname});
+            // setUserLS({ name: userInput.name, surname: userInput.surname });
+            setUser({ name: userInput.name, surname: userInput.surname});
             notifySaved();
 
         } catch (error) {
-            
+            console.log(error);
             notifyError();            
         }
 
@@ -93,6 +94,7 @@ function Register({ user }) {
 
 Register.propTypes = {
     user: PropTypes.object.isRequired,
+    // setUser: PropTypes.func.isRequired,
 }
 
 export default Register;

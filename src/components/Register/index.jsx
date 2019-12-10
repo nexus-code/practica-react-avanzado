@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Register from './Register';
 
-import { setUser } from '../../store/actions';
 import { getUser } from '../../store/selectors';
+import { setUser } from '../../store/actions';
 
 
 function mapStateToProps() {
@@ -11,9 +11,16 @@ function mapStateToProps() {
     };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-    return dispatch(setUser(ownProps.user))
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setUser: () => dispatch(setUser()),
+    };
 }
+
+// const mapDispatchToProps = {
+//     setUser,
+// }
 
 export default connect(
     mapStateToProps,
