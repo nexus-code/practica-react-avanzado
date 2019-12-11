@@ -1,7 +1,7 @@
 import {
     SET_USER,
     LOGOUT,
-} from './user.types';
+} from './types';
 
 export const setUser = user => ({
     type: SET_USER,

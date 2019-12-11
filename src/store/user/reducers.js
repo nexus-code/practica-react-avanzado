@@ -1,4 +1,4 @@
-import * as TYPES from './user.types';
+import * as TYPES from './types';
 import { getUserLS } from '../../utils/localStorage'
 
 const userLS =  getUserLS();

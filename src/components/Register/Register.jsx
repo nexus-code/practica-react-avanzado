@@ -5,12 +5,7 @@ import AppNavbar        from '../AppNavbar/AppNavbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import { setUserLS } from '../../utils/localStorage'
 
-toast.configure({
-    autoClose: 8000,
-    draggable: false,
-});
 
 /**
  *  admin user 
@@ -18,6 +13,17 @@ toast.configure({
 
 
 function Register({ user, setUser}) { 
+
+    // uses toast to ui add notifications
+    toast.configure({
+        autoClose: 8000,
+        draggable: false,
+    });
+
+    const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
+    const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
+    const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
+    ///
 
 
     const [userInput, setUserInput] = useReducer(
@@ -49,8 +55,7 @@ function Register({ user, setUser}) {
         }
 
         try {
-            //// Guardar en STORE!!!!!!!!!!!!!!!!!!
-            // setUserLS({ name: userInput.name, surname: userInput.surname });
+            
             setUser({ name: userInput.name, surname: userInput.surname});
             notifySaved();
 
@@ -60,10 +65,6 @@ function Register({ user, setUser}) {
         }
 
     }
-
-    const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
-    const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
-    const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
         
     return (
         <>

@@ -1,5 +1,5 @@
 import { ADS_FILTERS } from '../../constants';
-import * as TYPES from './ads.types';
+import * as TYPES from './types';
 
 const initialState = {
     ads_filter: ADS_FILTERS.ALL,

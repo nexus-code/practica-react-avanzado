@@ -16,6 +16,8 @@ import { PATH_REGISTER } from '../../constants';
 
 function App({ user }) {
   
+  console.log('App param user', user)
+
   const  location = useLocation();
  
   if (!user.user && location.pathname !== PATH_REGISTER){

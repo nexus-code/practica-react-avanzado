@@ -6,7 +6,7 @@ import {
 
     SET_FILTER,
 
-} from './ads.types';
+} from './types';
 
 import AdService from '../../services/AdService';
 

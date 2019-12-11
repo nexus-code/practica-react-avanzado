@@ -3,8 +3,8 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import * as userReducers from './user/user.reducers';
-import * as adsReducers from './ads/ads.reducers';
+import * as userReducers from './user/reducers';
+import * as adsReducers from './ads/reducers';
 
 import { setUserLS } from '../utils/localStorage';
 
@@ -16,14 +16,19 @@ const composeEnhancers = composeWithDevTools;
 
 export function configureStore(preloadedState) {
     
-    // const reducer = userReducers; // OK
+    
     const reducer = combineReducers(userReducers); // OK
     // const reducer = combineReducers({userReducers}); // ERROR
 
     // const reducer = combineReducers({
     //     userReducers, 
     //     adsReducers,
-    // });
+    // }); ERROR
+
+    // const reducer = combineReducers({
+    //     ur: userReducers,
+    //     ar: adsReducers,
+    // }); ERROR
 
 
     const middlewares = [thunkMiddleware];
