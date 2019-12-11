@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { user } from './user/reducers';
-import * as adsReducers  from './ads/reducers';
+import { ads, ui}  from './ads/reducers';
 
 import { setUserLS } from '../utils/localStorage';
 
@@ -18,12 +18,10 @@ export function configureStore(preloadedState) {
     
     const reducer = combineReducers({
         user, 
-        adsReducers,
-    }); // ERROR
+        ads,
+        ui
+    });
     
-    // console.log('configureStore userReducers', reducer);
-    console.log('configureStore adsReducers', adsReducers);
-
     const middlewares = [thunkMiddleware];
     
     if (process.env.NODE_ENV === 'development') {
@@ -36,10 +34,10 @@ export function configureStore(preloadedState) {
         composeEnhancers(applyMiddleware(...middlewares)),
     );
 
-    console.log('configureStore', store.getState());
+    // console.log('configureStore', store.getState());
 
     store.subscribe(function () {
-        console.log('store.subscribe', store.getState());
+        // console.log('store.subscribe', store.getState());
         // User user.user by combineReducers. View to rename
         setUserLS(store.getState().user.user)
     });
