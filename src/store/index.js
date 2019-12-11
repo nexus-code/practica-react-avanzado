@@ -18,17 +18,12 @@ export function configureStore(preloadedState) {
     
     
     // const reducer = combineReducers(userReducers); // OK
-    const reducer = combineReducers({userReducers}); // ERROR
+    // const reducer = combineReducers({userReducers}); // ERROR
 
-    // const reducer = combineReducers({
-    //     userReducers, 
-    //     adsReducers,
-    // }); ERROR
-
-    // const reducer = combineReducers({
-    //     ur: userReducers,
-    //     ar: adsReducers,
-    // }); ERROR
+    const reducer = combineReducers({
+        userReducers, 
+        adsReducers,
+    }); // ERROR
 
 
     const middlewares = [thunkMiddleware];

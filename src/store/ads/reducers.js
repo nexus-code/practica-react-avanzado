@@ -10,7 +10,7 @@ const initialState = {
 };
 
 
-export const ads = (state = initialState.ads, action) => {
+export const ads = (state = initialState, action) => {
     switch (action.type) {
         case TYPES.FETCH_ADS_SUCCESS:
             return action.ads;
@@ -19,14 +19,14 @@ export const ads = (state = initialState.ads, action) => {
     }
 };
 
-export const filter = (state = initialState.filter, action) => {
-    switch (action.type) {
-        case TYPES.SET_FILTER:
-            return action.filter;
-        default:
-            return state;
-    }
-};
+// export const filter = (state = initialState.filter, action) => {
+//     switch (action.type) {
+//         case TYPES.SET_FILTER:
+//             return action.filter;
+//         default:
+//             return state;
+//     }
+// };
 
 export const ui = (state = initialState.ui, action) => {
     switch (action.type) {
