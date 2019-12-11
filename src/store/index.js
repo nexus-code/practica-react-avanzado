@@ -6,27 +6,25 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import * as userReducers from './user.reducers';
 import * as adsReducers from './ads.reducers';
 
-import { setUserLS, getUserLS } from '../utils/localStorage';
+import { setUserLS } from '../utils/localStorage';
 
 
 const loggerMiddleware = createLogger();
 const composeEnhancers = composeWithDevTools;
 
-// const initialData = { 
-//     // user: getUserLS(),
-//     // find_ads: 'ALL'
-// };
+// const initialData = {};
 
-export function configureStore() {
-    const reducer = combineReducers({
-        userReducers, 
-        adsReducers,
-    });
+export function configureStore(preloadedState) {
+    
+    // const reducer = userReducers; // OK
+    const reducer = combineReducers(userReducers); // OK
+    // const reducer = combineReducers({userReducers}); // ERROR
 
-    // const reducer = combineReducers({userReducers});
+    // const reducer = combineReducers({
+    //     userReducers, 
+    //     adsReducers,
+    // });
 
-
-    console.log('reducer', reducer);
 
     const middlewares = [thunkMiddleware];
     
@@ -36,14 +34,15 @@ export function configureStore() {
     
     const store = createStore(
         reducer,
-        // initialData,
+        preloadedState,
         composeEnhancers(applyMiddleware(...middlewares)),
     );
 
     store.subscribe(function () {
         console.log('store.subscribe', store.getState());
-        //why user.user!!!!! ?????
+        // why user.user? becose combineReducers???
         setUserLS(store.getState().user.user)
+        // setUserLS(store.getState().user)
     });
 
     return store;

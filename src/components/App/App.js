@@ -16,13 +16,9 @@ import { PATH_REGISTER } from '../../constants';
 
 function App({ user }) {
   
-  
   const  location = useLocation();
  
-  console.log('App User', user);
-  // console.log('App User', user.logged);
-
-  if (!user && location.pathname !== PATH_REGISTER){
+  if (!user.user && location.pathname !== PATH_REGISTER){
       
     return <Redirect to={PATH_REGISTER} />
   }

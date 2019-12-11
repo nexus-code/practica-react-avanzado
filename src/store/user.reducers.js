@@ -1,13 +1,11 @@
 import * as TYPES from './user.types';
 import { getUserLS } from '../utils/localStorage'
 
+const userLS =  getUserLS();
 
 const initialState = {
-    logged: getUserLS(),
+    user: userLS,
 };
-
-console.log('initialState', initialState);
-
 
 export const user = (state = initialState, action) => {
     switch (action.type) {
@@ -17,7 +15,7 @@ export const user = (state = initialState, action) => {
                 user: action.user,
             }
         case TYPES.LOGOUT:
-            return initialState.user;
+            return initialState;
         default:
             return state;
     }
