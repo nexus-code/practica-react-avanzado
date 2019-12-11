@@ -1,5 +1,5 @@
 
-import { getUserLS } from '../utils/localStorage';
+import { getUserLS } from '../../utils/localStorage';
 
 export function getUser() {
 

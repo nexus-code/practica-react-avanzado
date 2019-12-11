@@ -8,7 +8,7 @@ import {
 
 } from './ads.types';
 
-import AdService from '../services/AdService';
+import AdService from '../../services/AdService';
 
 
 export const fetchAds = () => {

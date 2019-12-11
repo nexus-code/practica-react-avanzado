@@ -3,8 +3,8 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import * as userReducers from './user.reducers';
-import * as adsReducers from './ads.reducers';
+import * as userReducers from './user/user.reducers';
+import * as adsReducers from './ads/ads.reducers';
 
 import { setUserLS } from '../utils/localStorage';
 

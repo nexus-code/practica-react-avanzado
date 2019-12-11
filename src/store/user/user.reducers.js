@@ -1,5 +1,5 @@
 import * as TYPES from './user.types';
-import { getUserLS } from '../utils/localStorage'
+import { getUserLS } from '../../utils/localStorage'
 
 const userLS =  getUserLS();
 
