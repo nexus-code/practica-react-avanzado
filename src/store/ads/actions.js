@@ -1,29 +1,20 @@
 import {
-
     FETCH_ADS_REQUEST,
     FETCH_ADS_FAILURE,
     FETCH_ADS_SUCCESS,
-
-    SET_FILTER,
-
+    // SET_FILTER,
 } from './types';
 
-import AdService from '../../services/AdService';
-
-
 export const fetchAds = () => {
-    
-    async function myFetchAds(dispatch, getState, extraArgument) {
+    return async function (dispatch, _getState, { services: { AdsService } }) {
         dispatch(fetchAdsRequest());
         try {
-            const ads = await AdService.searchAds();
+            const ads = await AdsService.getAllAds();
             dispatch(fetchAdsSuccess(ads));
         } catch (error) {
             dispatch(fetchAdsFailure(error));
         }
-    }
-    
-    return myFetchAds;
+    };
 };
 
 export const fetchAdsRequest = () => ({
@@ -40,7 +31,7 @@ export const fetchAdsSuccess = ads => ({
     ads,
 });
 
-export const setFilter = filter => ({
-    type: SET_FILTER,
-    filter,
-});
+// export const setFilter = filter => ({
+//     type: SET_FILTER,
+//     filter,
+// });

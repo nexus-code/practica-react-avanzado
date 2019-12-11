@@ -3,12 +3,10 @@ import * as TYPES from './types';
 
 const initialState = {
     ads: [],
-    // ads_filter: ADS_FILTERS.ALL,
-    // ads_filter: '',
-    // ui: {
-    //     isFetching: false,
-    //     error: null,
-    // },
+    ui: {
+        isFetching: false,
+        error: null,
+    },
 };
 
 
