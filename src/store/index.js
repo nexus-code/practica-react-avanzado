@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { user } from './user/reducers';
-import { ads, ui}  from './ads/reducers';
+import { ads }  from './ads/reducers';
 
 import { setUserLS } from '../utils/localStorage';
 
@@ -19,7 +19,6 @@ export function configureStore(preloadedState) {
     const reducer = combineReducers({
         user, 
         ads,
-        ui
     });
     
     const middlewares = [thunkMiddleware];
