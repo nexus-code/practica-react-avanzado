@@ -21,7 +21,7 @@ function App({ user }) {
       
     return <Redirect to={PATH_REGISTER} />
   }
-    
+
   return <div>
         <ErrorBoundary>
             <Router>

@@ -1,16 +1,25 @@
 
 import { connect } from 'react-redux';
-import { getAds } from '../../store/ads/selectors'
+import { fetchAds } from '../../store/ads/actions'
 
 import Home from './Home';
 
-function mapStateToProps(state, ownProps) {
-    return {
-        ads: getAds(state.ads, ownProps),
-    };
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     loadAds: () => dispatch(fetchAds()),
+//   };
+// }
+
+const mapDispatchToProps = {
+    loadAds: fetchAds,
+};
+
+
+function mapStateToProps(state) {
+    return state.ads.ui;
 }
 
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
 )(Home);

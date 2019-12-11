@@ -5,16 +5,22 @@ import {
     // SET_FILTER,
 } from './types';
 
+import { searchAds } from '../../services/AdService';
+
+
 export const fetchAds = () => {
-    return async function (dispatch, _getState, { services: { AdsService } }) {
+    
+    async function __fetchAds(dispatch, getState, extraArgument) {
         dispatch(fetchAdsRequest());
         try {
-            const ads = await AdsService.getAllAds();
+            const ads = await searchAds();
             dispatch(fetchAdsSuccess(ads));
         } catch (error) {
             dispatch(fetchAdsFailure(error));
         }
     };
+
+    return __fetchAds;
 };
 
 export const fetchAdsRequest = () => ({

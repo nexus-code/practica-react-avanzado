@@ -38,7 +38,7 @@ const searchAds = (query) => {
     
     const url = query === '' ? `${API_URL}anuncios` : `${API_URL}anuncios/?${query}`;
     
-    console.log('', url);
+    console.log('AdService: ', url);
 
     return getRequest(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
