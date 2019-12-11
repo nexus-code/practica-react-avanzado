@@ -13,9 +13,11 @@ export const user = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.user,
-            }
+            };
+
         case TYPES.LOGOUT:
             return initialState;
+
         default:
             return state;
     }

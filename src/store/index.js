@@ -17,8 +17,8 @@ const composeEnhancers = composeWithDevTools;
 export function configureStore(preloadedState) {
     
     
-    const reducer = combineReducers(userReducers); // OK
-    // const reducer = combineReducers({userReducers}); // ERROR
+    // const reducer = combineReducers(userReducers); // OK
+    const reducer = combineReducers({userReducers}); // ERROR
 
     // const reducer = combineReducers({
     //     userReducers, 
