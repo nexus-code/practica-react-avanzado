@@ -3,20 +3,21 @@ import AppNavbar from '../AppNavbar/AppNavbar';
 
 import AdList        from '../AdList/AdList';
 
-
-
 export default class Home extends React.Component {
+
+    componentDidMount() {
+        this.loadAds();
+    }
+
+    loadAds = this.props.loadAds;
 
     render() {
 
+        const { ads } = this.props;
 
-        const a = this.props.loadAds();
-        console.log ('ads?', a);
+        console.log('ads::', ads);
 
-        const { ads } = a;
-
-
-        return (           
+        return (
             <>
                 <AppNavbar />
 
@@ -25,7 +26,7 @@ export default class Home extends React.Component {
                     &&
                     ads.length
                     &&
-                    <AdList ads={ ads } />
+                    <AdList ads={ads} />
                 }
             </>
         );
