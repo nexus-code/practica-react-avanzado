@@ -1,8 +1,13 @@
 import * as TYPES from './user.types';
+import { getUserLS } from '../utils/localStorage'
+
 
 const initialState = {
-    user: {},
+    logged: getUserLS(),
 };
+
+console.log('initialState', initialState);
+
 
 export const user = (state = initialState, action) => {
     switch (action.type) {

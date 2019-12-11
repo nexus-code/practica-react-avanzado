@@ -19,7 +19,8 @@ function App({ user }) {
   
   const  location = useLocation();
  
-console.log ('App User', user);
+  console.log('App User', user);
+  // console.log('App User', user.logged);
 
   if (!user && location.pathname !== PATH_REGISTER){
       

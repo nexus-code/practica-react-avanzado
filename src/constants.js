@@ -2,8 +2,8 @@
 export const PATH_REGISTER = '/register';
 
 export const ADS_TYPES = {
-    ID: 'id',
-    SEARCH: 'search',
+    ID: '',
+    QUERY: '',
 };
 
 export const ADS_FILTERS = {

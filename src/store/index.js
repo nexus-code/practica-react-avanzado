@@ -12,10 +12,22 @@ import { setUserLS, getUserLS } from '../utils/localStorage';
 const loggerMiddleware = createLogger();
 const composeEnhancers = composeWithDevTools;
 
-const initialData = { user: getUserLS()};
+// const initialData = { 
+//     // user: getUserLS(),
+//     // find_ads: 'ALL'
+// };
 
 export function configureStore() {
-    const reducer = combineReducers(userReducers, adsReducers);
+    const reducer = combineReducers({
+        userReducers, 
+        adsReducers,
+    });
+
+    // const reducer = combineReducers({userReducers});
+
+
+    console.log('reducer', reducer);
+
     const middlewares = [thunkMiddleware];
     
     if (process.env.NODE_ENV === 'development') {
@@ -24,7 +36,7 @@ export function configureStore() {
     
     const store = createStore(
         reducer,
-        initialData,
+        // initialData,
         composeEnhancers(applyMiddleware(...middlewares)),
     );
 
