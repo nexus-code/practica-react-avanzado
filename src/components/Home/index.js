@@ -6,7 +6,7 @@ import Home from './Home';
 
 function mapStateToProps(state, ownProps) {
     return {
-        bikes: getAds(state.ads, ownProps),
+        ads: getAds(state.ads, ownProps),
     };
 }
 
