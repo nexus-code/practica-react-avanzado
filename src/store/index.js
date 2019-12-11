@@ -3,8 +3,8 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import * as userReducers from './user/reducers';
-import * as adsReducers from './ads/reducers';
+import { user } from './user/reducers';
+import * as adsReducers  from './ads/reducers';
 
 import { setUserLS } from '../utils/localStorage';
 
@@ -16,15 +16,13 @@ const composeEnhancers = composeWithDevTools;
 
 export function configureStore(preloadedState) {
     
-    
-    // const reducer = combineReducers(userReducers); // OK
-    // const reducer = combineReducers({userReducers}); // ERROR
-
     const reducer = combineReducers({
-        userReducers, 
+        user, 
         adsReducers,
     }); // ERROR
-
+    
+    // console.log('configureStore userReducers', reducer);
+    console.log('configureStore adsReducers', adsReducers);
 
     const middlewares = [thunkMiddleware];
     
@@ -38,11 +36,12 @@ export function configureStore(preloadedState) {
         composeEnhancers(applyMiddleware(...middlewares)),
     );
 
+    console.log('configureStore', store.getState());
+
     store.subscribe(function () {
         console.log('store.subscribe', store.getState());
-        // why user.user? becose combineReducers???
+        // User user.user by combineReducers. View to rename
         setUserLS(store.getState().user.user)
-        // setUserLS(store.getState().user)
     });
 
     return store;

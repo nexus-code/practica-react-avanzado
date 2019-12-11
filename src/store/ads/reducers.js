@@ -1,12 +1,14 @@
-import { ADS_FILTERS } from '../../constants';
+// import { ADS_FILTERS } from '../../constants';
 import * as TYPES from './types';
 
 const initialState = {
-    ads_filter: ADS_FILTERS.ALL,
-    ui: {
-        isFetching: false,
-        error: null,
-    },
+    ads: [],
+    // ads_filter: ADS_FILTERS.ALL,
+    // ads_filter: '',
+    // ui: {
+    //     isFetching: false,
+    //     error: null,
+    // },
 };
 
 

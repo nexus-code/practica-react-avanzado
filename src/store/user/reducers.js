@@ -7,6 +7,8 @@ const initialState = {
     user: userLS,
 };
 
+// const initialState = userLS;
+
 export const user = (state = initialState, action) => {
     switch (action.type) {
         case TYPES.SET_USER:
