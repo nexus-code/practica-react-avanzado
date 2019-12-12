@@ -1,8 +1,9 @@
 import React from "react";
 import { withRouter }   from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-
+import { UserContext }  from '../../context/UserContext'
 import { saveAd, getAdDetail } from '../../services/AdService';
+import { getUserLS, isEmpty } from '../../utils/localStorage';
 import AppNavbar        from '../AppNavbar/AppNavbar';
 import TagSelect        from '../TagsSelect/TagSelect'
 
@@ -19,6 +20,12 @@ class AdEdit extends React.Component {
     constructor(props) {
         super(props);
 
+        const user = getUserLS();
+        if (isEmpty(user)) {
+
+            this.gotoRegisterWithoutUser();
+            return;
+        }
 
         this.state = {
             advert: {
@@ -63,6 +70,22 @@ class AdEdit extends React.Component {
         });
     }
 
+    gotoRegisterWithoutUser() {
+
+        this.props.history.push("/register");
+    }
+
+    componentDidMount() {
+
+        this.recoverContext();
+    }
+
+    recoverContext() {
+        //Recover context from localStorage (recovered on this.state.user)
+
+        if (isEmpty(this.context.user))
+            this.context.updateUser(getUserLS());
+    }
 
     handleChange(event) {
 
@@ -138,6 +161,12 @@ class AdEdit extends React.Component {
 
     render() {
 
+        if (isEmpty(this.state)) {
+
+            // there is no local user but the component needs to be rendered
+            return (<></>);
+        }
+
         const { advert, title, status } = this.state;
 
         return (
@@ -199,5 +228,7 @@ class AdEdit extends React.Component {
         );
     }
 }
+
+AdEdit.contextType = UserContext;
 
 export default withRouter(AdEdit);

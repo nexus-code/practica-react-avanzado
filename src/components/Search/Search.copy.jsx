@@ -5,6 +5,8 @@ import AdList    from '../AdList/AdList';
 import TagSelect from '../TagsSelect/TagSelect'
 import Input     from '../Input/Input'
 import * as API  from '../../services/AdService';
+import { UserContext } from '../../context/UserContext'
+import { getUserLS, isEmpty } from '../../utils/localStorage';
 
 const TYPES = ['sell', 'buy']
 
@@ -12,12 +14,15 @@ export default class Search extends React.Component {
 
     /* Show ads by filters */
 
+    static contextType = UserContext;
+
+
     constructor(props) {
         super(props);
 
         this.state = {
             ads: [],
-            // user: getUserLS(),
+            user: getUserLS(),
             tags: '',
             type: '',
             name: '',
@@ -29,8 +34,17 @@ export default class Search extends React.Component {
         this.reset = this.reset.bind(this);
     }
 
+    checkRegisteredUser() {
+
+        const user = getUserLS();
+        if (isEmpty(user))
+            this.gotoRegisterWithoutUser();
+
+    }
+
     searchAds = () => {
 
+        this.checkRegisteredUser();
 
         // Mounting searchString to send to the API
         const { tags, name, type, minPrice, maxPrice } = this.state;
@@ -65,7 +79,20 @@ export default class Search extends React.Component {
 
     componentDidMount() {
 
+        this.recoverContext();
         this.searchAds();
+    }
+
+    gotoRegisterWithoutUser() {
+
+        this.props.history.push("/register");
+    }
+
+    recoverContext() {
+        //Recover context from localStorage (recovered on this.state.user)
+
+        if (isEmpty(this.context.user))
+            this.context.updateUser(this.state.user);
     }
 
 

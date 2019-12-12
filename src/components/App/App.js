@@ -5,9 +5,9 @@ import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 
 import Home      from '../Home';
-import Search    from '../Search/Search';
+import Search    from '../Search';
 import Register  from '../Register';
-import AdEdit    from '../AdEdit/AdEdit';
+import AdEdit    from '../AdEdit';
 import AdDetail  from '../AdDetail';
 import NotFoundPage from '../404/NotFoundPage';
 

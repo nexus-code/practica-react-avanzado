@@ -12,8 +12,6 @@ import { setUserLS } from '../utils/localStorage';
 const loggerMiddleware = createLogger();
 const composeEnhancers = composeWithDevTools;
 
-// const initialData = {};
-
 export function configureStore(preloadedState) {
     
     const reducer = combineReducers({
@@ -33,10 +31,7 @@ export function configureStore(preloadedState) {
         composeEnhancers(applyMiddleware(...middlewares)),
     );
 
-    // console.log('configureStore', store.getState());
-
     store.subscribe(function () {
-        // console.log('store.subscribe', store.getState());
         // User user.user by combineReducers. View to rename
         setUserLS(store.getState().user.user)
     });
