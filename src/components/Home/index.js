@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 
 
 function mapStateToProps(state) {
-    return state.ads;
+    return state;
 }
 
 export default connect(

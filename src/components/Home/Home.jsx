@@ -13,15 +13,11 @@ export default class Home extends React.Component {
 
     render() {
 
-        console.log('this.props::', this.props);
-        
-        const { ads } = this.props; //error
-
+        const { ads } = this.props; 
 
         return (
             <>
                 <AppNavbar />
-
                 {
                     ads
                     &&
