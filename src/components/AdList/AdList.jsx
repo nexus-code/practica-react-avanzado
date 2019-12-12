@@ -14,9 +14,7 @@ class AdList extends React.Component {
         this.state = {
             pages: Math.ceil(this.props.ads.length / ITEMS_PER_PAGE),
             currentPage: this.getCurrentPage(this.props.ads.length),
-            
         }
-    
     }
 
     buildMovieList = (ads) => {
