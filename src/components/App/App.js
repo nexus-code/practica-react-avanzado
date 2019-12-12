@@ -8,7 +8,7 @@ import Home      from '../Home';
 import Search    from '../Search/Search';
 import Register  from '../Register';
 import AdEdit    from '../AdEdit/AdEdit';
-import AdDetail  from '../AdDetail/AdDetail';
+import AdDetail  from '../AdDetail';
 import NotFoundPage from '../404/NotFoundPage';
 
 import { PATH_REGISTER } from '../../constants';

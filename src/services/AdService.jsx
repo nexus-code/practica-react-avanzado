@@ -6,7 +6,7 @@ const API_URL = 'http://localhost:3001/apiv1/';
     API: https://github.com/IsmaelB83/keepcoding-backend-node
 */
 
-const getRequest = (url) => {
+const getFetch = (url) => {
     return fetch(url,
         { method: "GET" },
         { Accept: "application/json, text/plain, */*" },
@@ -17,13 +17,13 @@ const getRequest = (url) => {
 
 const getTagsList = () => {
     // [] of tags (strings)
-    return getRequest(`${API_URL}tags`)
+    return getFetch(`${API_URL}tags`)
         .then(res => res.results)
         .catch(error => console.error('Error:', error));
 }
 
 const getAdDetail = (adID) => {
-    return getRequest(`${API_URL}anuncios/${adID}`)
+    return getFetch(`${API_URL}anuncios/${adID}`)
         .then(res => {
             if (!res.success) {
                 return res;
@@ -40,7 +40,7 @@ const searchAds = (query) => {
     
     console.log('AdService: ', url);
 
-    return getRequest(url)
+    return getFetch(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
         .catch(error => console.error('Error:', error));
 }
