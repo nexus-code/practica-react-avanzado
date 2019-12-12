@@ -5,12 +5,9 @@ import AppNavbar        from '../AppNavbar/AppNavbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 /**
- *  admin user 
+ *  logged user
  */
-
 
 function Register({ user, setUser}) { 
 

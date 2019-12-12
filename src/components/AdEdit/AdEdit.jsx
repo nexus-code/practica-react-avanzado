@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter }   from "react-router-dom";
+import { withRouter, useParams, useHistory }   from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 
 import { saveAd, getAdDetail } from '../../services/AdService';
@@ -11,16 +11,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const TYPES = ['sell', 'buy'];
 
-class AdEdit extends React.Component { 
+// https://leewarrick.com/blog/a-guide-to-usestate-and-usereducer/
+// https://medium.com/javascript-in-plain-english/react-controlled-forms-with-hooks-538762aab935
+
+function AdEdit() { 
 
     // Create & update Ads
     // On create change page title and disables save button
 
-    constructor(props) {
-        super(props);
-
-
-        this.state = {
+    const initialState = {
             advert: {
                 id: '',
                 name: '',
@@ -32,10 +31,20 @@ class AdEdit extends React.Component {
             },
             title: 'Create advertisement',
             method: 'POST',
-            status: false
-        };
+            status: false        
+    }
         
-        if (this.props.match.params.hasOwnProperty('id')) {
+    const { id } = useParams();
+    console.log('id', id);
+
+    const _constructor = () => {
+
+        this.state = {};
+        
+        // if (this.props.match.params.hasOwnProperty('id')) {
+
+        
+        if (id) {
             const AdID = this.props.match.params.id;
 
             getAdDetail(AdID).then(advert => {
@@ -54,29 +63,24 @@ class AdEdit extends React.Component {
             });
         }
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
-        toast.configure({
-            autoClose: 8000,
-            draggable: false,
-        });
     }
+    
+    toast.configure({
+        autoClose: 8000,
+        draggable: false,
+    });
 
+    const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
+    const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
+    const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
 
-    handleChange(event) {
+    const handleChange = event => {
+        const name = event.target.name;
+        const newValue = event.target.value;
+        setUserInput({ [name]: newValue });
+    } 
 
-        const { name, value } = event.target;
-
-        this.setState(({ advert }) => ({
-            advert: {
-                ...advert,
-                [name]: value
-            }
-        }));
-    }   
-
-    handleSubmit(event) {
+    const handleSubmit = event => {
         
         event.preventDefault();
 
@@ -117,9 +121,9 @@ class AdEdit extends React.Component {
                                 status: true
                             });
 
-                        this.notifySaved();
+                        notifySaved();
                     } else {
-                        this.notifyError();
+                        notifyError();
                     }
                 })
             .catch(res => {
@@ -131,73 +135,68 @@ class AdEdit extends React.Component {
         return false;
     } 
 
-    gotoHome = () => this.props.history.push('/');
 
-    notifySaved = () => toast.success('Advertisement saved !', { containerId: 'OK' });
-    notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
+    const { advert, title, status } = this.state;
+    const history = useHistory();
 
-    render() {
 
-        const { advert, title, status } = this.state;
+    return (
+        <>
+            <AppNavbar />
+            <ToastContainer enableMultiContainer containerId={'OK'} position={toast.POSITION.TOP_RIGHT} />
+            <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
+            
+            <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
+                <h2>{title}</h2>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="formGroupName" >
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control name="name" placeholder="Product name" value={advert.name} onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupPrice" >
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control name="price" placeholder="on €" value={advert.price} onChange={ this.handleChange } type="number" />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupPhoto" >
+                        <Form.Label>Photo</Form.Label>
+                        <Form.Control name="photo" placeholder="Select a prety photo" value={advert.photo} onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupType" >
+                        <Form.Label>Type</Form.Label>
+                        {TYPES.map(type => (
+                            <div key={`inline-${type}`} className="mb-3">
+                                <Form.Check inline type='radio' id={`check-api-${type}`}>
+                                    <Form.Check.Input 
+                                        name='type' 
+                                        value={`${type}`} 
+                                        type='radio' 
+                                        onChange={ this.handleChange }
+                                        checked = { `${type}` === advert.type}
+                                        />
+                                    <Form.Check.Label style= {{textTransform:'capitalize'}}>{` ${type}`}</Form.Check.Label>
+                                </Form.Check>
+                            </div>
+                        ))}
+                    </Form.Group>
+                    <Form.Group controlId="formGroupDescription">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control name="description" as="textarea" rows="3" value={advert.description} onChange={ this.handleChange } />
+                    </Form.Group>
+                    <Form.Group controlId="formGrouptags" >
+                        <Form.Label>Tag</Form.Label>
+                        <TagSelect onChange={this.handleChange}  value={ advert.tags } isMulti />
+                    </Form.Group>
 
-        return (
-            <>
-                <AppNavbar />
-                <ToastContainer enableMultiContainer containerId={'OK'} position={toast.POSITION.TOP_RIGHT} />
-                <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
-                
-                <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                    <h2>{title}</h2>
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="formGroupName" >
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control name="name" placeholder="Product name" value={advert.name} onChange={ this.handleChange } />
-                        </Form.Group>
-                        <Form.Group controlId="formGroupPrice" >
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control name="price" placeholder="on €" value={advert.price} onChange={ this.handleChange } type="number" />
-                        </Form.Group>
-                        <Form.Group controlId="formGroupPhoto" >
-                            <Form.Label>Photo</Form.Label>
-                            <Form.Control name="photo" placeholder="Select a prety photo" value={advert.photo} onChange={ this.handleChange } />
-                        </Form.Group>
-                        <Form.Group controlId="formGroupType" >
-                            <Form.Label>Type</Form.Label>
-                            {TYPES.map(type => (
-                                <div key={`inline-${type}`} className="mb-3">
-                                    <Form.Check inline type='radio' id={`check-api-${type}`}>
-                                        <Form.Check.Input 
-                                            name='type' 
-                                            value={`${type}`} 
-                                            type='radio' 
-                                            onChange={ this.handleChange }
-                                            checked = { `${type}` === advert.type}
-                                            />
-                                        <Form.Check.Label style= {{textTransform:'capitalize'}}>{` ${type}`}</Form.Check.Label>
-                                    </Form.Check>
-                                </div>
-                            ))}
-                        </Form.Group>
-                        <Form.Group controlId="formGroupDescription">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control name="description" as="textarea" rows="3" value={advert.description} onChange={ this.handleChange } />
-                        </Form.Group>
-                        <Form.Group controlId="formGrouptags" >
-                            <Form.Label>Tag</Form.Label>
-                            <TagSelect onChange={this.handleChange}  value={ advert.tags } isMulti />
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit" disabled={status}>
-                            Save
-                        </Button>
-                        <Button variant="secondary" className="float-right" onClick={ this.gotoHome }>
-                            Exit
-                        </Button>
-                    </Form>
-                </div>
-            </>
-        );
-    }
+                    <Button variant="primary" type="submit" disabled={status}>
+                        Save
+                    </Button>
+                    <Button variant="secondary" className="float-right" onClick={() => history.push('/')}>
+                        Exit
+                    </Button>
+                </Form>
+            </div>
+        </>
+    );
 }
 
-export default withRouter(AdEdit);
+export default AdEdit;

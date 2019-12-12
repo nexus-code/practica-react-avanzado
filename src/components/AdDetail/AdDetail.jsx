@@ -19,12 +19,14 @@ const useGetAdFromAPI = (id) => {
 
                 setError('404');
             } else {
-                console.log('setResponse de useFetch', { ad });
+
                 setResponse( ad );
             }
         });
 
     }, [id]);
+
+    // Refactor: handle error
 
     return response
 };
