@@ -1,47 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router';
-import { getAdDetail } from '../../services/AdService';
+import { useGetAd } from '../../store/user/selectors'
 import { Button } from 'react-bootstrap'
 
 import AppNavbar from '../AppNavbar/AppNavbar';
-
-const useGetAdFromAPI = (id) => {
-    // Search the ad in API 
-
-    const [response, setResponse] = useState(null);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-
-        getAdDetail(id).then(ad => {
-
-            if (ad.hasOwnProperty('success')) {
-
-                setError('404');
-            } else {
-
-                setResponse( ad );
-            }
-        });
-
-    }, [id]);
-
-    // Refactor: handle error
-
-    return response
-};
-
-const getAdFromStore = (ads, id) => {
-    // ad stored by redux
-    return ads.filter(ad => ad.id === id)[0];
-};
-
-const useGetAd = (adsStore, id) => {
-
-    // hook in conditional statement: fetch add from store or API
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    return typeof adsStore.ads.length !== 'undefined' ? getAdFromStore(adsStore.ads, id) : useGetAdFromAPI(id);
-};
 
 function AdDetail(ads) {
 
@@ -75,7 +37,6 @@ function AdDetail(ads) {
                     <Button className='btn btn-dark' onClick={() => history.goBack()}>Go back</Button>
                 </div>
             }
-
             {
                 !ad
                 &&

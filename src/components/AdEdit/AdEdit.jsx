@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { withRouter, useParams, useHistory }   from "react-router-dom";
+import { useGetAd } from '../../store/user/selectors'
+
+
 import { Form, Button } from 'react-bootstrap';
 
 import { saveAd, getAdDetail } from '../../services/AdService';
@@ -14,11 +17,24 @@ const TYPES = ['sell', 'buy'];
 // https://leewarrick.com/blog/a-guide-to-usestate-and-usereducer/
 // https://medium.com/javascript-in-plain-english/react-controlled-forms-with-hooks-538762aab935
 
+
+// uses toast to ui add notifications
+toast.configure({
+    autoClose: 8000,
+    draggable: false,
+});
+
+
+const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
+const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
+const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
+///
+
+
 function AdEdit() { 
 
     // Create & update Ads
-    // On create change page title and disables save button
-
+    
     const initialState = {
             advert: {
                 id: '',
@@ -33,52 +49,44 @@ function AdEdit() {
             method: 'POST',
             status: false        
     }
+
         
     const { id } = useParams();
     console.log('id', id);
 
-    const _constructor = () => {
+    if (id) {
+        const AdID = this.props.match.params.id;
 
-        this.state = {};
-        
-        // if (this.props.match.params.hasOwnProperty('id')) {
+        getAdDetail(id).then(advert => {
 
-        
-        if (id) {
-            const AdID = this.props.match.params.id;
+            if (advert.hasOwnProperty('success')) {
 
-            getAdDetail(AdID).then(advert => {
+                this.props.history.push("/404");
+            } else {
 
-                if (advert.hasOwnProperty('success')) {
-
-                    this.props.history.push("/404");
-                } else {
-
-                    this.setState({
-                        advert: advert,
-                        title: `Edit advertisement #${AdID}`,
-                        method: 'PUT'
-                    });
-                }
-            });
-        }
-
+                this.setState({
+                    advert: advert,
+                    title: `Edit advertisement #${AdID}`,
+                    method: 'PUT'
+                });
+            }
+        });
     }
-    
-    toast.configure({
-        autoClose: 8000,
-        draggable: false,
-    });
 
-    const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
-    const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
-    const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
+    // const [userInput, setUserInput] = useReducer(
+    //     (state, newState) => ({ ...state, ...newState }),
+    //     {
+    //         name: typeof (user) === 'undefined' ? '' : user.name,
+    //         surname: typeof (user) === 'undefined' ? '' : user.surname,
+    //         title: typeof (user) === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
+    //     }
+    // );
 
-    const handleChange = event => {
-        const name = event.target.name;
-        const newValue = event.target.value;
-        setUserInput({ [name]: newValue });
-    } 
+    // const handleChange = event => {
+    //     const name = event.target.name;
+    //     const newValue = event.target.value;
+    //     setUserInput({ [name]: newValue });
+    // } 
 
     const handleSubmit = event => {
         
