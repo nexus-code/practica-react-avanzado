@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 
+import { ToastContainer } from "react-toastify";
+
 import Home      from '../Home';
 import Search    from '../Search';
 import Register  from '../Register';
@@ -23,6 +25,7 @@ function App({ user }) {
   }
 
   return <div>
+      <ToastContainer />
         <ErrorBoundary>
             <Router>
               <Switch>

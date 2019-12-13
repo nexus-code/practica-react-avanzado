@@ -1,26 +1,27 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { PropTypes } from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
 import AppNavbar        from '../AppNavbar/AppNavbar';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 /**
- *  logged user
+ *  logged user handler
  */
 
 function Register({ user, setUser}) { 
 
     // uses toast to ui add notifications
-    toast.configure({
+    const toastConf ={
         autoClose: 8000,
         draggable: false,
-    });
+        position: 'top-right',
+    };
 
-    const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
-    const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
-    const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
-    ///
+    
+    const notifySaved = () => toast.success('Profile saved!', toastConf);
+    const notifyError = () => toast.error('Error on save!', toastConf);
+    const notifyWarning = (warning) => toast.warning(warning, toastConf);
 
 
     const [userInput, setUserInput] = useReducer(
@@ -57,17 +58,15 @@ function Register({ user, setUser}) {
             notifySaved();
 
         } catch (error) {
-            console.log(error);
-            notifyError();            
-        }
 
+            notifyError();            
+            console.log(error);
+        }
     }
         
     return (
         <>
             <AppNavbar />
-            <ToastContainer enableMultiContainer containerId={'OK'} position={toast.POSITION.TOP_RIGHT} />
-            <ToastContainer enableMultiContainer containerId={'KO'} position={toast.POSITION.TOP_RIGHT} />
 
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                 <h2>{userInput.title}</h2>
