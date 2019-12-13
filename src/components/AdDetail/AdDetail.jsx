@@ -41,7 +41,7 @@ function AdDetail(ads) {
                 !ad
                 &&
                 <div>
-                    <h3><br/>404. No se encuentra el elemento solicitado</h3>
+                    <h3><br/>404. Elemento no encontrado</h3>
                 </div>
             }
         </div>
