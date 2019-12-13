@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAdDetail } from '../../services/AdService';
 
 import { getUserLS } from '../../utils/localStorage';
@@ -14,24 +14,19 @@ const useGetAdFromAPI = (id) => {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
 
-        getAdDetail(id).then(ad => {
+    getAdDetail(id).then(ad => {
 
-            if (ad.hasOwnProperty('success')) {
+        if (ad.hasOwnProperty('success')) {
 
-                setError('404');
-            } else {
+            setError('404');
+        } else {
 
-                setResponse(ad);
-            }
-        });
+            setResponse(ad);
+        }
+    });
 
-    }, [id]);
-
-    // Refactor: handle error
-
-    return response
+    return error === '404' ? null : response;
 };
 
 const getAdFromStore = (ads, id) => {
@@ -41,9 +36,11 @@ const getAdFromStore = (ads, id) => {
 
 export const useGetAd = (adsStore, id) => {
 
-    console.log('From selector with lovE!!');
+    if (!id)
+        return null; // improve this if (control input)
 
-    // WARNING: hook in conditional statement: fetch add from store or API.
+    // Improve this:
+    // WARNING: hook in conditional statement: fetch add from store or API. 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     return typeof adsStore.ads.length !== 'undefined' ? getAdFromStore(adsStore.ads, id) : useGetAdFromAPI(id);
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { withRouter, useParams, useHistory }   from "react-router-dom";
-import { useGetAd } from '../../store/user/selectors'
+import { useGetAd } from '../../store/user/selectors';
 
 
 import { Form, Button } from 'react-bootstrap';
@@ -31,11 +31,11 @@ const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' })
 ///
 
 
-function AdEdit() { 
+function AdEdit(ads) { 
 
     // Create & update Ads
     
-    const initialState = {
+    const initialAdState = {
             advert: {
                 id: '',
                 name: '',
@@ -47,30 +47,27 @@ function AdEdit() {
             },
             title: 'Create advertisement',
             method: 'POST',
-            status: false        
+            status: false,        
     }
 
-        
+    const [adState, setAdState] = useState(initialAdState);
+
     const { id } = useParams();
     console.log('id', id);
 
-    if (id) {
-        const AdID = this.props.match.params.id;
 
-        getAdDetail(id).then(advert => {
+    const ad = useGetAd(ads, id);
 
-            if (advert.hasOwnProperty('success')) {
+    if (ad){
 
-                this.props.history.push("/404");
-            } else {
+        const loadedAd = {
+            ...initialAdState,
+            advert: ad,
+            title: 'Edit advertisement',
+            method: 'PUT',
+        };
 
-                this.setState({
-                    advert: advert,
-                    title: `Edit advertisement #${AdID}`,
-                    method: 'PUT'
-                });
-            }
-        });
+        setAdState(loadedAd);
     }
 
     // const [userInput, setUserInput] = useReducer(
@@ -144,7 +141,7 @@ function AdEdit() {
     } 
 
 
-    const { advert, title, status } = this.state;
+    const { advert, title, status } = adState;
     const history = useHistory();
 
 

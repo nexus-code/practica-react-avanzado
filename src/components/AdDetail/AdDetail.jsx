@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useHistory } from 'react-router';
-import { useGetAd } from '../../store/user/selectors'
-import { Button } from 'react-bootstrap'
+import { useGetAd } from '../../store/user/selectors';
+import { Button } from 'react-bootstrap';
 
 import AppNavbar from '../AppNavbar/AppNavbar';
 
