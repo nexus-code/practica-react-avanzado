@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useHistory } from 'react-router';
-import { useGetAd } from '../../store/user/selectors';
+import { useGetAd } from '../../store/ads/selectors';
 import { Button } from 'react-bootstrap';
 
 import AppNavbar from '../AppNavbar/AppNavbar';
