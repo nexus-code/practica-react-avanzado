@@ -19,15 +19,9 @@ const TYPES = ['sell', 'buy'];
 
 
 // uses toast to ui add notifications
-toast.configure({
-    autoClose: 8000,
-    draggable: false,
-});
-
-
-const notifySaved = () => toast.success('Profile saved !', { containerId: 'OK' });
-const notifyError = () => toast.error('Error on save !', { containerId: 'KO' });
-const notifyWarning = (warning) => toast.warning(warning, { containerId: 'KO' });
+const notifySaved = () => toast.success('Profile saved!');
+const notifyError = () => toast.error('Error on save!');
+const notifyWarning = (warning) => toast.warning(warning);
 ///
 
 

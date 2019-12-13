@@ -11,18 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Register({ user, setUser}) { 
 
-    // uses toast to ui add notifications
-    const toastConf ={
-        autoClose: 8000,
-        draggable: false,
-        position: 'top-right',
-    };
-
-    
-    const notifySaved = () => toast.success('Profile saved!', toastConf);
-    const notifyError = () => toast.error('Error on save!', toastConf);
-    const notifyWarning = (warning) => toast.warning(warning, toastConf);
-
+    // uses toast to ui add notifications   
+    const notifySaved = () => toast.success('Profile saved!');
+    const notifyError = () => toast.error('Error on save!');
+    const notifyWarning = (warning) => toast.warning(warning);
+    ///
 
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),

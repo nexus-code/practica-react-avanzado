@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import Home      from '../Home';
 import Search    from '../Search';
@@ -17,6 +17,14 @@ import { PATH_REGISTER } from '../../constants';
 
 function App({ user }) {
   
+  //
+  toast.configure({
+    autoClose: 5000,
+    draggable: false,
+    position: 'top-right',
+  });
+  ///
+
   const  location = useLocation();
  
   if (!user.user && location.pathname !== PATH_REGISTER){
@@ -25,7 +33,7 @@ function App({ user }) {
   }
 
   return <div>
-      <ToastContainer />
+        <ToastContainer />
         <ErrorBoundary>
             <Router>
               <Switch>
