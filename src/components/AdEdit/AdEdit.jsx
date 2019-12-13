@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { withRouter, useParams, useHistory }   from "react-router-dom";
+import React, { useState, useReducer } from "react";
+import { useParams, useHistory }   from "react-router-dom";
 import { useGetAd } from '../../store/user/selectors';
 
 
 import { Form, Button } from 'react-bootstrap';
 
-import { saveAd, getAdDetail } from '../../services/AdService';
+import { saveAd } from '../../services/AdService';
 import AppNavbar        from '../AppNavbar/AppNavbar';
 import TagSelect        from '../TagsSelect/TagSelect'
 
@@ -50,49 +50,50 @@ function AdEdit(ads) {
             status: false,        
     }
 
-    const [adState, setAdState] = useState(initialAdState);
+    // const [adState, setAdState] = useState(initialAdState);
 
     const { id } = useParams();
-    console.log('id', id);
-
 
     const ad = useGetAd(ads, id);
 
-    if (ad){
+    console.log('loadedAd', ad);
+    console.log('typeof loadedAd', typeof ad);
+    
+    const [adState, setAdState] = useReducer(
+        (state, newState) => ({ ...state, ...newState }),
+        {
+            name: typeof (ad) === 'undefined' ? '' : ad.name,
+            // surname: typeof (user) === 'undefined' ? '' : user.surname,
+            // title: typeof (user) === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
+        }
+    );
 
-        const loadedAd = {
-            ...initialAdState,
-            advert: ad,
-            title: 'Edit advertisement',
-            method: 'PUT',
-        };
+    // if (ad){
 
-        setAdState(loadedAd);
-    }
+    //     const loadedAd = {
+    //         ...initialAdState,
+    //         advert: ad,
+    //         title: 'Edit advertisement',
+    //         method: 'PUT',
+    //     };
 
-    // const [userInput, setUserInput] = useReducer(
-    //     (state, newState) => ({ ...state, ...newState }),
-    //     {
-    //         name: typeof (user) === 'undefined' ? '' : user.name,
-    //         surname: typeof (user) === 'undefined' ? '' : user.surname,
-    //         title: typeof (user) === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
-    //     }
-    // );
+    //     setAdState(loadedAd);
+    // }
 
-    // const handleChange = event => {
-    //     const name = event.target.name;
-    //     const newValue = event.target.value;
-    //     setUserInput({ [name]: newValue });
-    // } 
+    const handleChange = event => {
+        const name = event.target.name;
+        const newValue = event.target.value;
+        setAdState({ [name]: newValue });
+    } 
 
     const handleSubmit = event => {
         
         event.preventDefault();
 
-        // console.log('submit', this.state);
+        // console.log('submit', adState);
         // return false;
 
-        const { name, price, description, photo } = this.state.advert;
+        const { name, price, description, photo } = adState.advert;
 
         if (name.trim().length <= 3) {
             alert("The name must be bigger than 3 characters");
@@ -114,13 +115,13 @@ function AdEdit(ads) {
             return;
         }        
 
-        saveAd(this.state.advert, this.state.method, this.state.advert.id)
+        saveAd(adState.advert, adState.method, adState.advert.id)
             .then (res => { 
 
                     console.log('res', res)
                     if (res === 'OK') {
                         
-                        if (this.state.method === 'POST')
+                        if (adState.method === 'POST')
                             this.setState({ 
                                 title: 'Advertisement saved!',
                                 status: true
@@ -153,18 +154,18 @@ function AdEdit(ads) {
             
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                 <h2>{title}</h2>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formGroupName" >
                         <Form.Label>Name</Form.Label>
-                        <Form.Control name="name" placeholder="Product name" value={advert.name} onChange={ this.handleChange } />
+                        <Form.Control name="name" placeholder="Product name" value={advert.name} onChange={ handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGroupPrice" >
                         <Form.Label>Price</Form.Label>
-                        <Form.Control name="price" placeholder="on €" value={advert.price} onChange={ this.handleChange } type="number" />
+                        <Form.Control name="price" placeholder="on €" value={advert.price} onChange={ handleChange } type="number" />
                     </Form.Group>
                     <Form.Group controlId="formGroupPhoto" >
                         <Form.Label>Photo</Form.Label>
-                        <Form.Control name="photo" placeholder="Select a prety photo" value={advert.photo} onChange={ this.handleChange } />
+                        <Form.Control name="photo" placeholder="Select a prety photo" value={advert.photo} onChange={ handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGroupType" >
                         <Form.Label>Type</Form.Label>
@@ -175,7 +176,7 @@ function AdEdit(ads) {
                                         name='type' 
                                         value={`${type}`} 
                                         type='radio' 
-                                        onChange={ this.handleChange }
+                                        onChange={ handleChange }
                                         checked = { `${type}` === advert.type}
                                         />
                                     <Form.Check.Label style= {{textTransform:'capitalize'}}>{` ${type}`}</Form.Check.Label>
@@ -185,11 +186,11 @@ function AdEdit(ads) {
                     </Form.Group>
                     <Form.Group controlId="formGroupDescription">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control name="description" as="textarea" rows="3" value={advert.description} onChange={ this.handleChange } />
+                        <Form.Control name="description" as="textarea" rows="3" value={advert.description} onChange={ handleChange } />
                     </Form.Group>
                     <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tag</Form.Label>
-                        <TagSelect onChange={this.handleChange}  value={ advert.tags } isMulti />
+                        <TagSelect onChange={handleChange}  value={ advert.tags } isMulti />
                     </Form.Group>
 
                     <Button variant="primary" type="submit" disabled={status}>
