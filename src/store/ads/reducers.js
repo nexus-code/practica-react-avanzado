@@ -5,8 +5,6 @@ import { getAdsLS } from '../../utils/localStorage'
 // Persists ads on LocalStorage. Improve in next versions
 const adsLS =  getAdsLS();
 
-// console.log('ads REducer', adsLS);
-
 const initialState = {
     ads: [] && adsLS,
     ui: {

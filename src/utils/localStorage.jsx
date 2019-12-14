@@ -1,38 +1,5 @@
-/**
- * v2
- * 
- */
-
-// export const getState = () => {
-//   try {
-
-//     const data = localStorage.getItem('state')
-//     if (data === null) {
-//       return undefined; 
-//     }
-//     return JSON.parse(data);
-
-//   } catch (error) {
-    
-//     return undefined;
-//   }
-// }
-
-// export const setState = (state) => {
-//   try {
-
-//     const data = JSON.stringify(state)
-//     localStorage.setItem('state', data)
-//   } catch (error) {
-//     // pending
-//   }
-// }
 
 
-/*
-* v1
-* Save user on local Storage
-*/
 
 export const setUserLS = user => {
 
@@ -49,15 +16,27 @@ export const getUserLS = () => {
 export const setAdsLS = ads => {
 
   localStorage.setItem('ads', JSON.stringify(ads));
-  // localStorage.setItem('ads', ads);
 };
 
 export const getAdsLS = () => {
   const ads = localStorage.getItem('ads');
 
-  // return !ads ? undefined : JSON.parse(ads);
   return !ads ? [] : JSON.parse(ads);
 };
+
+/**
+ * Pending the unification of functions!:
+ */
+
+// export const setLocalStorage = (key, value) => {
+
+//   localStorage.setItem(key, JSON.stringify(value));
+// };
+
+// export const getLocalStorage = key => {
+//   const ls = localStorage.getItem(key);
+//   return !ls ? undefined : JSON.parse(ls);
+// };
 
 
 export const clearLocalStorage = () => {
