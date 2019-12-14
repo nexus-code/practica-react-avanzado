@@ -40,6 +40,17 @@ export const useGetAd = (adsStore, id) => {
     if (!id)
         return null; // improve this if (control input)
 
+
+    console.log('selector adsStore ->', adsStore)
+    console.log('selector id ->', id)
+
+
+    if (typeof adsStore === 'undefined'){
+        // WARNING: hook in conditional statement: fetch add from store or API.
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        return useGetAdFromAPI(id)
+    }
+
     // Improve this:
     // WARNING: hook in conditional statement: fetch add from store or API. 
     // eslint-disable-next-line react-hooks/rules-of-hooks

@@ -3,8 +3,8 @@ import React from 'react'
 import HookForm from '../Form/HookForm'
 import AppNavbar from '../AppNavbar/AppNavbar';
 
-const AdEdit = (ads, props) => { 
-
+// const AdEdit = (ads, props) => { 
+function AdEdit(props) {
 
     return( 
         <>
