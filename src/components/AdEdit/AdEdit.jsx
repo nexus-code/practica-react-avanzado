@@ -1,21 +1,26 @@
 import React from 'react'
-// import HocForm from '../Form/HocForm'
+import { useParams, useHistory } from 'react-router';
+import { useGetAd } from '../../store/ads/selectors';
 import HookForm from '../Form/HookForm'
 import AppNavbar from '../AppNavbar/AppNavbar';
 
-// const AdEdit = (ads, props) => { 
-function AdEdit(props) {
+function AdEdit(ads) {
 
+    const { id } = useParams();
+    const history = useHistory();
+    const ad = useGetAd(ads, id);
+
+    console.log('AdEdit', ads);
     return( 
         <>
             <AppNavbar />
 
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                {/* <HocForm {...props} /> */}
-                <HookForm {...props} />
+                <HookForm {...ads} />
             </div>
         </>
         );
 
 }
+
 export default AdEdit;

@@ -5,7 +5,7 @@ import fieldsForm from './fields/fields'
 import useForm from './useForm'
 import Input from './Input/Input'
 
-import { useParams, useHistory } from 'react-router';
+// import { useParams, useHistory } from 'react-router';
 // import { useGetAd } from '../../store/ads/selectors';
 // import { getAdDetail } from '../../services/AdService';
 
@@ -34,14 +34,14 @@ import { useParams, useHistory } from 'react-router';
 
 const HookForm = props => {
 
-  const { id } = useParams();
-  const history = useHistory();
+  // const { id } = useParams();
+  // const history = useHistory();
 
-  console.log('HookForm props ->', props)
+  // console.log('HookForm props ->', props)
 
-  const ad = useGetAdFromAPI(id);
+  // const ad = useGetAdFromAPI(id);
 
-  console.log('HookForm ad ->', ad)
+  // console.log('HookForm ad ->', ad)
 
   const [renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, , onLoadData] = useForm(fieldsForm)
 
