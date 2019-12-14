@@ -18,23 +18,22 @@ const useForm = fieldForm => {
     return formElementsArr
   }
 
-  const handleSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
-
-    }
-    console.log('handleSubmit');
-    
-  }
-
   const onSubmitJSON = () => {
+
+    // console.log('onSubmitJSON');
     const data = {}
     for (let key in fieldState) {
       data[key] = fieldState[key].value
     }
 
+    doSubmit();
     return data
   }
+
+    const doSubmit = () =>{
+
+      console.log('hi');
+    }
 
   const handlerFormValidation = form => {
     let isValidForm = true
@@ -78,7 +77,7 @@ const useForm = fieldForm => {
     setFormIsValid(true)
   }
 
-  return [renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, onResetForm, handlerLoadData, handleSubmit ]
+  return [ renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, onResetForm, handlerLoadData ]
 }
 
 export default useForm
