@@ -14,11 +14,18 @@ function AdEdit(props) {
     const { ads } = props;
  
     const ad = getAd(props, id);
-    // console.log('AdEdit ad ', ad);
+    console.log('AdEdit ad ', ad);
+
+
+    const adValues = {
+        ...fieldsForm,
+        name.value: ad.name
+    }
+
 
     const formProps = {
         ...props,
-        fieldsForm: fieldsForm,
+        fieldsForm: adValues,
     }
     
     return <>
