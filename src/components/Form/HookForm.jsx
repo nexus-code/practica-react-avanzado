@@ -13,7 +13,7 @@ const HookForm = props => {
 
     const form = (
       <div style={{ padding: "20px", maxWidth: "600px", margin: "50px auto" }}>
-        <Form >
+        <form >
         {renderElementsForm().map(formElement => (
           <Input
             key={ formElement.id }
@@ -32,7 +32,7 @@ const HookForm = props => {
           <Button variant="secondary" className="float-right" >
             Save
           </Button>
-        </Form>
+        </form>
 
       </div>
     );
