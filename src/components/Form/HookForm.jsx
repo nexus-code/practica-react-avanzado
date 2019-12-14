@@ -4,18 +4,22 @@ import React from 'react'
 import useForm from './useForm'
 import Input from './Input/Input'
 
+const handleSubmit = event => {
+
+  event.preventDefault();
+
+  console.log('submit', 'HF submit');
+  return false;
+}
 
 const HookForm = props => {
 
-  console.log('HookForm props ->', props)
+  const [renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, onLoadData, handleSubmit] = useForm(props.fieldsForm)
 
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! fieldsForm ini form file: ln3
-  const [renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, , onLoadData] = useForm(props.fieldsForm)
-
-  const renderForm = () => {
-    let form = (
-      <div className="form-style-2">
-      <form>
+  const renderForm = ( handleSubmit ) => {
+    const form = (
+      <div style={{ padding: "20px", maxWidth: "600px", margin: "50px auto" }}>
+        <form name="hookForm">
         {renderElementsForm().map(formElement => (
           <Input
             key={ formElement.id }
@@ -27,7 +31,8 @@ const HookForm = props => {
             errorMessage={ formElement.config.errorMessage }
           />
         ))}
-        <button disabled={ !formIsValid } type="button">
+        {/* <button disabled={ !formIsValid } type="button"> */}
+          <button type="submit">
           Save
         </button>
       </form>
@@ -41,9 +46,10 @@ const HookForm = props => {
   return (
     <div className="container">
       <h2>Using Hooks</h2>
+      
       { renderForm() }
       <br />
-      { JSON.stringify(onSubmitJSON()) }
+      {/* {JSON.stringify(onSubmitJSON())} */}
     </div>
   )
 }

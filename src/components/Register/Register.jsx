@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer } from "react";
-import { PropTypes } from 'prop-types';
+import React, { useReducer } from "react";
+import { PropTypes }    from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
-import AppNavbar        from '../AppNavbar/AppNavbar';
+import AppNavbar from '../AppNavbar/AppNavbar';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
