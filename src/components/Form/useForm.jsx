@@ -25,15 +25,7 @@ const useForm = fieldForm => {
     for (let key in fieldState) {
       data[key] = fieldState[key].value
     }
-
-    doSubmit();
-    return data
   }
-
-    const doSubmit = () =>{
-
-      console.log('hi');
-    }
 
   const handlerFormValidation = form => {
     let isValidForm = true
