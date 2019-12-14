@@ -11,25 +11,19 @@ import Search    from '../Search';
 import Register  from '../Register';
 import AdEdit    from '../AdEdit';
 import AdDetail  from '../AdDetail';
+import * as config  from '../../constants';
 import NotFoundPage from '../404/NotFoundPage';
 
-import { PATH_REGISTER } from '../../constants';
 
-function App({ user }) {
+function App({ user, ads }) {
   
-  //
-  toast.configure({
-    autoClose: 5000,
-    draggable: false,
-    position: 'top-right',
-  });
-  ///
+  toast.configure(config.toastConfigure);
 
   const  location = useLocation();
  
-  if (!user.user && location.pathname !== PATH_REGISTER){
+  if (!user.user && location.pathname !== config.PATH_REGISTER){
       
-    return <Redirect to={PATH_REGISTER} />
+    return <Redirect to={config.PATH_REGISTER} />
   }
 
   return <div>

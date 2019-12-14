@@ -1,7 +1,6 @@
 import React     from "react";
 import AppNavbar from '../AppNavbar/AppNavbar';
-
-import AdList        from '../AdList/AdList';
+import AdList    from '../AdList/AdList';
 
 export default class Home extends React.Component {
 

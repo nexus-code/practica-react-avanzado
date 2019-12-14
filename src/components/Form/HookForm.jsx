@@ -1,49 +1,16 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
 
-import fieldsForm from './fields/fields'
+// import fieldsForm from './fields/fields'
 import useForm from './useForm'
 import Input from './Input/Input'
 
-// import { useParams, useHistory } from 'react-router';
-// import { useGetAd } from '../../store/ads/selectors';
-// import { getAdDetail } from '../../services/AdService';
-
-//BUCLE INFINITO
-
-// const useGetAdFromAPI = (id) => {
-//   // Search the ad in API 
-
-//   const [response, setResponse] = useState(null);
-//   const [error, setError] = useState(null);
-
-
-//   getAdDetail(id).then(ad => {
-
-//     if (ad.hasOwnProperty('success')) {
-
-//       setError('404');
-//     } else {
-
-//       setResponse(ad);
-//     }
-//   });
-
-//   return error === '404' ? null : response;
-// };
 
 const HookForm = props => {
 
-  // const { id } = useParams();
-  // const history = useHistory();
+  console.log('HookForm props ->', props)
 
-  // console.log('HookForm props ->', props)
-
-  // const ad = useGetAdFromAPI(id);
-
-  // console.log('HookForm ad ->', ad)
-
-  const [renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, , onLoadData] = useForm(fieldsForm)
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! fieldsForm ini form file: ln3
+  const [renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, , onLoadData] = useForm(props.fieldsForm)
 
   const renderForm = () => {
     let form = (
@@ -73,7 +40,6 @@ const HookForm = props => {
 
   return (
     <div className="container">
-      <NavLink to="/hoc"> GO TO HOC </NavLink>
       <h2>Using Hooks</h2>
       { renderForm() }
       <br />

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useHistory } from 'react-router';
-import { useGetAd } from '../../store/ads/selectors';
+import { getAd } from '../../store/ads/selectors';
 import { Button } from 'react-bootstrap';
 
 import AppNavbar from '../AppNavbar/AppNavbar';
@@ -9,7 +9,7 @@ function AdDetail(ads) {
 
     const { id } = useParams();
     const history = useHistory();
-    const ad = useGetAd(ads, id);
+    const ad = getAd(ads, id);
 
     return <>
         <AppNavbar />

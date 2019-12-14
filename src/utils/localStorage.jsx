@@ -46,6 +46,20 @@ export const getUserLS = () => {
   return !user ? undefined : JSON.parse(user);
 };
 
+export const setAdsLS = ads => {
+
+  localStorage.setItem('ads', JSON.stringify(ads));
+  // localStorage.setItem('ads', ads);
+};
+
+export const getAdsLS = () => {
+  const ads = localStorage.getItem('ads');
+
+  // return !ads ? undefined : JSON.parse(ads);
+  return !ads ? [] : JSON.parse(ads);
+};
+
+
 export const clearLocalStorage = () => {
   localStorage.clear();
 }

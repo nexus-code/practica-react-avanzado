@@ -1,25 +1,61 @@
 import React from 'react'
 import { useParams, useHistory } from 'react-router';
-import { useGetAd } from '../../store/ads/selectors';
+import { useGetAdFromAPI, getAdFromStore } from '../../store/ads/selectors';
 import HookForm from '../Form/HookForm'
 import AppNavbar from '../AppNavbar/AppNavbar';
+import { Button } from 'react-bootstrap';
 
-function AdEdit(ads) {
+import fieldsForm from './utils/fields'
 
+function AdEdit(props) {
+    
     const { id } = useParams();
     const history = useHistory();
-    const ad = useGetAd(ads, id);
+    const { ads } = props;
 
-    console.log('AdEdit', ads);
-    return( 
-        <>
+    // if (typeof ads.length === 'undefined' ){
+    //     return<>
+    //         <AppNavbar />
+    //         <div className="container">
+    //             <br />
+    //             <h3> Incorrect access </h3>
+    //             <p>Follow the usual path to edit an ad </p>
+    //             <br />
+    //             <Button className='btn btn-default' onClick={() => history.push(`/`)} >Go Home</Button>
+    //         </div>;
+    //     </>
+    // }
+   
+    const ad = useGetAdFromAPI(ads, id);
+    // console.log('AdEdit ad ', ad);
+
+    const formProps = {
+        ...props,
+        fieldsForm: fieldsForm,
+    }
+    
+    return <>
             <AppNavbar />
-
-            <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                <HookForm {...ads} />
+             <div className="container">
+                {
+                    ad
+                    &&
+                    <HookForm {...formProps} />
+                }
+                {
+                    !ad
+                    &&
+                    <div>
+                        <br />
+                        <h3> Incorrect access </h3>
+                        <p>Follow the usual path to edit an ad </p>
+                        <br />
+                        <Button className='btn btn-default' onClick={() => history.push(`/`)} >Go Home</Button>
+                    </div>
+                }
             </div>
         </>
-        );
+        ;
 
 }
 

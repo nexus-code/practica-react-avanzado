@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getAdDetail } from '../../services/AdService';
+import { fetchAds } from '../../store/ads/actions';
 
 export function getAds(ads, filter) {
 
@@ -9,7 +10,7 @@ export function getAds(ads, filter) {
 }
 
 
-const useGetAdFromAPI = (id) => {
+export const useGetAdFromAPI = (id) => {
     // Search the ad in API 
 
     const [response, setResponse] = useState(null);
@@ -30,22 +31,43 @@ const useGetAdFromAPI = (id) => {
     return error === '404' ? null : response;
 };
 
-const getAdFromStore = (ads, id) => {
+
+// DEPRECATED!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+export const getAdFromStore = (ads, id) => {
+
+
+    // console.log('getAdFromStore', ads);
+    // console.log('getAdFromStore []', ads[ads]);
+    // console.log('getAdFromStore ads.length', ads.length);
+
+
+    //if (typeof ads === 'undefined' || typeof id === 'undefined') {
+    if (ads.length === 'undefined' || typeof id === 'undefined'){
+        return null
+    }
+
     // ad stored by redux
     return ads.filter(ad => ad.id === id)[0];
 };
+/////////////////////////////////////////
 
-export const useGetAd = (adsStore, id) => {
+
+export const getAd = (props, id) => {
+
+    //props.ads.ads array of ads in redux
+
+    const { ads } = props.ads;
+
+    return ads.filter(ad => ad.id === id)[0];
+};
+
+export const useGetAd = (ads, id) => {
 
     if (!id)
         return null; // improve this if (control input)
 
 
-    console.log('selector adsStore ->', adsStore)
-    console.log('selector id ->', id)
-
-
-    if (typeof adsStore === 'undefined'){
+    if (typeof ads.length === 'undefined'){
         // WARNING: hook in conditional statement: fetch add from store or API.
         // eslint-disable-next-line react-hooks/rules-of-hooks
         return useGetAdFromAPI(id)
@@ -54,5 +76,10 @@ export const useGetAd = (adsStore, id) => {
     // Improve this:
     // WARNING: hook in conditional statement: fetch add from store or API. 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    return typeof adsStore.ads.length !== 'undefined' ? getAdFromStore(adsStore.ads, id) : useGetAdFromAPI(id);
+    return typeof ads.length !== 'undefined' ? getAdFromStore(ads, id) : useGetAdFromAPI(id);
 };
+
+export const editAd = (id) => {
+
+
+}

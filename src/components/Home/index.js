@@ -1,4 +1,3 @@
-
 import { connect } from 'react-redux';
 import { fetchAds } from '../../store/ads/actions'
 

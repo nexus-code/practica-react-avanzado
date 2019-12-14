@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { user } from './user/reducers';
 import { ads }  from './ads/reducers';
 
-import { setUserLS } from '../utils/localStorage';
+import { setUserLS, setAdsLS } from '../utils/localStorage';
 
 
 const loggerMiddleware = createLogger();
@@ -34,6 +34,7 @@ export function configureStore(preloadedState) {
     store.subscribe(function () {
         // User user.user by combineReducers. View to rename
         setUserLS(store.getState().user.user)
+        setAdsLS(store.getState().ads)
     });
 
     return store;

@@ -1,8 +1,14 @@
 // import { ADS_FILTERS } from '../../constants';
 import * as TYPES from './types';
+import { getAdsLS } from '../../utils/localStorage'
+
+// Persists ads on LocalStorage. Improve in next versions
+const adsLS =  getAdsLS();
+
+// console.log('ads REducer', adsLS);
 
 const initialState = {
-    ads: [],
+    ads: [] && adsLS,
     ui: {
         isFetching: false,
         error: null,
