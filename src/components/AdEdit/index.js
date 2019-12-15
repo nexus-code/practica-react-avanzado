@@ -8,13 +8,10 @@ const mapStateToProps = store => ({
     ads: store.ads,
 })
 
+const mapDispatchToProps = dispatch => ({
+    savedAd: (ad, method, id) => dispatch(savedAd(ad, method, id)),
+});
 
-function mapDispatchToProps(dispatch, ad, method, id) {
-  return {
-    //   savedAd: () => dispatch(savedAd(ad, method, id))
-      savedAd: dispatch(savedAd(ad, method, id)),
-  };
-}
 
 export default connect(
     mapStateToProps,

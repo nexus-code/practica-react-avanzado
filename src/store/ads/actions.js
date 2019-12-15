@@ -14,7 +14,7 @@ import { searchAds, saveAd } from '../../services/AdService';
 
 
 export const fetchAds = () => {
-    
+
     async function __fetchAds(dispatch, getState, extraArgument) {
         dispatch(fetchAdsRequest());
         try {
@@ -43,43 +43,37 @@ export const fetchAdsSuccess = ads => ({
 });
 
 
+// 1. Work out of Redux
+export const savedAd = async (ad, method, id) => {
 
-export const savedAd = (ad, method, id) => {
+    // console.log('Action savedAd', ad, method, id);
+    console.error('CONECTION TO STORE PROBLEMS: store/ads/actions: No dispatch arrives');
+   
+    const result = await saveAd(ad, method, id)
+        .then()
+        .catch();
 
-    console.log('Action savedAd', ad, method, id);
+    console.log('Action savedAd result', result);
 
-    return async function (dispatch, getState, extraArgument) {
-        // No entra ¿dispatch??
-        console.log('Action dispatch', ad, method, id);
-
-        dispatch(savedAdRequest());
-
-        const result = await saveAd(ad, method, id)
-        .then(() => dispatch(savedAdSuccess()))
-        .catch(() => dispatch(savedAdFailure()));
-    };
+    return result;
 };
 
+// 2. no dispatch arrives
 // export const savedAd = (ad, method, id) => {
 
 //     console.log('Action savedAd', ad, method, id);
+//     console.error('store/ads/actions ln 58: no dispatch arrives');
 
-//     async function __savedAd(dispatch, getState, extraArgument) {
+//     return {async function (dispatch, getState, extraArgument) {
 //         // No entra ¿dispatch??
+//         console.log('Action dispatch', ad, method, id);
+
 //         dispatch(savedAdRequest());
 
-//         try {
-//             console.log('savedAd TRY', ad);
-
-//             const result = await saveAd(ad, method, id);
-//             dispatch(savedAdSuccess(result));
-//             return result;
-//         } catch (error) {
-//             dispatch(savedAdFailure(error));
-//         }
-//     };
-
-//     return __savedAd;
+//         const result = await saveAd(ad, method, id)
+//         .then(() => dispatch(savedAdSuccess()))
+//         .catch(() => dispatch(savedAdFailure()));
+//     }};
 // };
 
 export const savedAdRequest = () => ({

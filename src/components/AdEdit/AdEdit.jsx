@@ -37,9 +37,11 @@ function AdEdit(props) {
         record = getAd(props, id);
     }
 
-    const handleSubmitCallback = async () => {
+    const handleSubmitCallback = () => {
 
         // Use Redux: ¿problems with dispatch?
+
+        console.log('handleSubmitCallback', formInput, method, record.id);
         savedAd(formInput, method, record.id);
 
         // Throught adsServide. Work ok
