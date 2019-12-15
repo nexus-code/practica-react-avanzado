@@ -6,6 +6,10 @@ const API_URL = 'http://localhost:3001/apiv1/';
     API: https://github.com/IsmaelB83/keepcoding-backend-node
 */
 
+/**
+ * 
+ * @param {*} url of API
+ */
 const getFetch = (url) => {
     return fetch(url,
         { method: "GET" },
@@ -58,13 +62,13 @@ const searchAds = (query) => {
  * 
  * @param {*} ad {advertisement}
  * @param {*} method POST / PUT (for insert / update ) 
- * @param {*} id empty in POST. advertisement ID with PUT
+ * @param {*} id empty in POST. advertisement ID with PUT <-- improve this
  */
 const saveAd = (ad, method, id) => {
-
-    console.log('saveAD ad:', ad);
+    console.log('AdService/saveAD ad:', ad);
 
     return fetch(`${API_URL}anuncios/${id}`, {
+        crossDomain: true,
         method: `${method}`,
         body: JSON.stringify(ad), // data can be `string` or {object}!
             headers: {

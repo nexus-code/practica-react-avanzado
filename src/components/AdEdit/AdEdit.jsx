@@ -14,12 +14,27 @@ function AdEdit(props) {
     // Create & update Ads
 
 
-    const { id } = useParams();
+    let title  = 'Edit advert';
+    let method = 'PUT'; //Edit -> POST to add
+    let  record = {
+        name: '',
+        price: '',
+        description: '',
+        type: TYPES[0],
+        photo: '',
+        tags: []
+    };
     const history = useHistory();
-    const [title, setTitle] = useState('Edit advert');
-    const [method, setMethod] = useState('PUT'); //Edit -> POST to add
+    const { id } = useParams();
+    
+    if (id === undefined) {
 
-    const ad = getAd(props, id);
+        title  = 'Create new advert';
+        method = 'POST';
+    } else {
+
+        record = getAd(props, id);
+    }
 
     const handleSubmitCallback = async () => {
         saveAd(formInput, method, id)
@@ -27,9 +42,7 @@ function AdEdit(props) {
                 console.log('res', res)
                 if (res === 'OK') {
 
-                    setMethod('POST');
                     return true;
-
                 } else {
 
                     notifyWarning(`${res.status}: ${res.statusText}`);
@@ -46,7 +59,7 @@ function AdEdit(props) {
         return false;        
     }
     
-    const [handleChange, handleSubmit, formInput, notifyWarning] = useForm( ad, handleSubmitCallback );
+    const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback );
 
     return <>
             <AppNavbar />
@@ -54,7 +67,6 @@ function AdEdit(props) {
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                 <h2>{title}</h2>
             <Form onSubmit={handleSubmit}>
-                <input type="hidden" name="id" value={formInput.id} />
                     <Form.Group controlId="formGroupName" >
                         <Form.Label>Name</Form.Label>
                     <Form.Control name="name" placeholder="Product name" value={formInput.name} onChange={handleChange} />
@@ -67,7 +79,7 @@ function AdEdit(props) {
                         <Form.Label>Photo</Form.Label>
                         <Form.Control name="photo" placeholder="Select a prety photo" value={formInput.photo} onChange={handleChange} />
                     </Form.Group>
-                    {/* <Form.Group controlId="formGroupType" >
+                    {/* */} <Form.Group controlId="formGroupType" >
                         <Form.Label>Type</Form.Label>
                         {TYPES.map(type => (
                             <div key={`inline-${type}`} className="mb-3">
@@ -83,7 +95,7 @@ function AdEdit(props) {
                                 </Form.Check>
                             </div>
                         ))}
-                    </Form.Group> */}
+                    </Form.Group>
                     <Form.Group controlId="formGroupDescription">
                         <Form.Label>Description</Form.Label>
                         <Form.Control name="description" as="textarea" rows="3" value={formInput.description} onChange={handleChange} />
