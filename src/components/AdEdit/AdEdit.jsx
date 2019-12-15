@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams, useHistory } from 'react-router';
 import useForm from '../Form/useForm';
 import { Form, Button } from 'react-bootstrap';
@@ -12,7 +12,6 @@ const TYPES = ['sell', 'buy'];
 function AdEdit(props) {
 
     // Create & update Ads
-
 
     let title  = 'Edit advert';
     let method = 'PUT'; //Edit , POST to add
@@ -38,26 +37,23 @@ function AdEdit(props) {
     }
 
     const handleSubmitCallback = async () => {
-        saveAd(formInput, method, record.id)
+        await saveAd(formInput, method, record.id)
             .then(res => {
                 console.log('res', res)
                 if (res === 'OK') {
 
-                    return true;
+                    return res;
                 } else {
 
                     notifyWarning(`${res.status}: ${res.statusText}`);
-                    return false;
+                    return 'ERROR';
                 }
             })
             .catch(res => {
 
                 console.log('Catch res: ', res)
-                return false;
+                return 'ERROR';
             })
-
-
-        return false;        
     }
     
     const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback );

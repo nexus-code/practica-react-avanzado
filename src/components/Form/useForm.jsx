@@ -1,11 +1,11 @@
-import { useReducer } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 /**
  * 
  * @param {*} initialArgs : object with form data
- * @param {*} handleSubmitCallback : update/create logic on parent
+ * @param {*} handleSubmitCallback : update/create logic on parent. IMPORTANT must return 'Ok' or 'ERROR'
  */
 
 const useForm = (initialArgs, handleSubmitCallback) => {
@@ -16,12 +16,11 @@ const useForm = (initialArgs, handleSubmitCallback) => {
   const notifyWarning = (warning) => toast.warning(warning);
   ///
 
+  // const [solved, setSolved] = useState('');
+  const [solved, setSolved] = useState('');
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     initialArgs
-    // {
-    //   //initialArgs
-    // }
   );
 
 
@@ -35,18 +34,17 @@ const useForm = (initialArgs, handleSubmitCallback) => {
     event.preventDefault();
 
     const result = await handleSubmitCallback();
-
-
     console.log('result', result);
-    if (result){
-      
-      notifySaved();
-    } else {
 
-      notifyError();
-    }
+    setSolved(result);
   }
+  
+  useEffect(() => {
+    console.log('useEffect solved', solved);
 
+    if (solved === 'OK') notifySaved();
+    if (solved === 'ERROR') notifyError();
+  }, [solved])
 
   return [
     handleChange,
