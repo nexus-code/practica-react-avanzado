@@ -21,7 +21,7 @@ function AdEdit(props) {
 
     const ad = getAd(props, id);
 
-    const handleSubmitCallback = () => {
+    const handleSubmitCallback = async () => {
         saveAd(formInput, method, id)
             .then(res => {
                 console.log('res', res)
@@ -31,13 +31,15 @@ function AdEdit(props) {
                     return true;
 
                 } else {
-                    notifyWarning(res);
+
+                    notifyWarning(`${res.status}: ${res.statusText}`);
                     return false;
                 }
             })
             .catch(res => {
 
-                console.log('res', res)
+                console.log('Catch res: ', res)
+                return false;
             })
 
 
@@ -52,6 +54,7 @@ function AdEdit(props) {
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                 <h2>{title}</h2>
             <Form onSubmit={handleSubmit}>
+                <input type="hidden" name="id" value={formInput.id} />
                     <Form.Group controlId="formGroupName" >
                         <Form.Label>Name</Form.Label>
                     <Form.Control name="name" placeholder="Product name" value={formInput.name} onChange={handleChange} />
@@ -85,10 +88,10 @@ function AdEdit(props) {
                         <Form.Label>Description</Form.Label>
                         <Form.Control name="description" as="textarea" rows="3" value={formInput.description} onChange={handleChange} />
                     </Form.Group>
-                    {/* <Form.Group controlId="formGrouptags" >
+                    <Form.Group controlId="formGrouptags" >
                         <Form.Label>Tag</Form.Label>
                         <TagSelect onChange={handleChange} value={formInput.tags} isMulti />
-                    </Form.Group> */}
+                    </Form.Group>
 
                     <Button variant="primary" type="submit">
                         Save

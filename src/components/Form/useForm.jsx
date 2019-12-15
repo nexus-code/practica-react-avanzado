@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 /**
  * 
  * @param {*} initialArgs : object with form data
- * @param {*} handleSubmitCallback : function who update/create record
+ * @param {*} handleSubmitCallback : update/create logic on parent
  */
 
 const useForm = (initialArgs, handleSubmitCallback) => {
@@ -21,7 +21,6 @@ const useForm = (initialArgs, handleSubmitCallback) => {
     initialArgs
     // {
     //   //initialArgs
-
     // }
   );
 
@@ -32,29 +31,20 @@ const useForm = (initialArgs, handleSubmitCallback) => {
     setFormInput({ [name]: newValue });
   }
   
-  const handleSubmit = event => { 
+  const handleSubmit = async (event) => { 
     event.preventDefault();
 
+    const result = await handleSubmitCallback();
 
-    if (handleSubmitCallback()){
 
+    console.log('result', result);
+    if (result){
+      
       notifySaved();
     } else {
 
       notifyError();
     }
-
-    // try {
-
-    //   handleSubmitCallback();
-    //   notifySaved();
-
-    // } catch (error) {
-
-    //   notifyError();
-    //   console.log(error);
-    // }
-
   }
 
 

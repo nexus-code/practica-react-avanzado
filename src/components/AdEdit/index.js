@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import AdEdit from './AdEdit';
+import { fetchAds } from '../../store/ads/actions'
 
 
 const mapStateToProps = store => ({
@@ -7,7 +8,11 @@ const mapStateToProps = store => ({
     ads: store.ads,
 })
 
+const mapDispatchToProps = {
+    loadAds: fetchAds,
+};
+
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
 )(AdEdit);

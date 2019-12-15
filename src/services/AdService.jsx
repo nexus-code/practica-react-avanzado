@@ -22,8 +22,12 @@ const getTagsList = () => {
         .catch(error => console.error('Error:', error));
 }
 
-const getAdDetail = (adID) => {
-    return getFetch(`${API_URL}anuncios/${adID}`)
+/**
+ * 
+ * @param {*} id The ad id to fetch
+ */
+const getAdDetail = (id) => {
+    return getFetch(`${API_URL}anuncios/${id}`)
         .then(res => {
             if (!res.success) {
                 return res;
@@ -33,6 +37,11 @@ const getAdDetail = (adID) => {
         })
         .catch(error => console.error('Error:', error));
 }
+
+/**
+ * 
+ * @param {*} query: filter anuncios
+ */
 
 const searchAds = (query) => {
     
@@ -45,11 +54,15 @@ const searchAds = (query) => {
         .catch(error => console.error('Error:', error));
 }
 
+/**
+ * 
+ * @param {*} ad {advertisement}
+ * @param {*} method POST / PUT (for insert / update ) 
+ * @param {*} id empty in POST. advertisement ID with PUT
+ */
 const saveAd = (ad, method, id) => {
 
-    // ad: {advertisement}
-    // method: POST / PUT (for insert / update ) 
-    // id: empty in POST. advertisement ID with PUT
+    console.log('saveAD ad:', ad);
 
     return fetch(`${API_URL}anuncios/${id}`, {
         method: `${method}`,
