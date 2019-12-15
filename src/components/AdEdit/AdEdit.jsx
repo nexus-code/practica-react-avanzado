@@ -15,8 +15,9 @@ function AdEdit(props) {
 
 
     let title  = 'Edit advert';
-    let method = 'PUT'; //Edit -> POST to add
+    let method = 'PUT'; //Edit , POST to add
     let  record = {
+        id: '',
         name: '',
         price: '',
         description: '',
@@ -37,7 +38,7 @@ function AdEdit(props) {
     }
 
     const handleSubmitCallback = async () => {
-        saveAd(formInput, method, id)
+        saveAd(formInput, method, record.id)
             .then(res => {
                 console.log('res', res)
                 if (res === 'OK') {

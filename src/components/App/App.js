@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Home      from '../Home';
 import Search    from '../Search';
 import Register  from '../Register';
-import AdEdit    from '../AdEdit';
+import AdEdit from '../AdEdit';
 import AdDetail  from '../AdDetail';
 import * as config  from '../../constants';
 import NotFoundPage from '../404/NotFoundPage';

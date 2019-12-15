@@ -21,7 +21,7 @@ function AdDetail(ads) {
                     <img src={ad.photo} alt={ad.name} />
 
                     <h1 style={{
-                        color: ad.type = 'sell' ? 'green' : 'blue'
+                        color: ad.type === 'sell' ? 'green' : 'blue'
                     }}>{ad.name} <span className='badge badge-primary'>{ad.price}€</span>
                     </h1>
                     <p>{ad.description}</p>
