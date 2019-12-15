@@ -32,7 +32,7 @@ export function configureStore(preloadedState) {
     );
 
     store.subscribe(function () {
-        // User user.user by combineReducers. View to rename
+        // User user.user & ads.ads by combineReducers. View to rename
         setUserLS(store.getState().user.user)
         setAdsLS(store.getState().ads)
     });

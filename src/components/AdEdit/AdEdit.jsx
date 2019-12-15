@@ -2,8 +2,9 @@ import React from "react";
 import { useParams, useHistory } from 'react-router';
 import useForm from '../Form/useForm';
 import { Form, Button } from 'react-bootstrap';
-import { getAd }  from '../../store/ads/selectors';
-import { saveAd } from '../../services/AdService';
+import { getAd } from '../../store/ads/selectors';
+import { savedAd }  from '../../store/ads/actions';
+// import { saveAd } from '../../services/AdService';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import TagSelect from '../TagsSelect/TagSelect'
 
@@ -37,23 +38,28 @@ function AdEdit(props) {
     }
 
     const handleSubmitCallback = async () => {
-        await saveAd(formInput, method, record.id)
-            .then(res => {
-                console.log('res', res)
-                if (res === 'OK') {
 
-                    return res;
-                } else {
+        // Use Redux: ¿problems with dispatch?
+        savedAd(formInput, method, record.id);
 
-                    notifyWarning(`${res.status}: ${res.statusText}`);
-                    return 'ERROR';
-                }
-            })
-            .catch(res => {
+        // Throught adsServide. Work ok
+        // await saveAd(formInput, method, record.id)
+        //     .then(res => {
+        //         console.log('res', res)
+        //         if (res === 'OK') {
 
-                console.log('Catch res: ', res)
-                return 'ERROR';
-            })
+        //             return res;
+        //         } else {
+
+        //             notifyWarning(`${res.status}: ${res.statusText}`);
+        //             return 'ERROR';
+        //         }
+        //     })
+        //     .catch(res => {
+
+        //         console.log('Catch res: ', res)
+        //         return 'ERROR';
+        //     })
     }
     
     const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback );

@@ -70,6 +70,7 @@ const saveAd = (ad, method, id) => {
     return fetch(`${API_URL}anuncios/${id}`, {
         crossDomain: true,
         method: `${method}`,
+        mode: "cors",
         body: JSON.stringify(ad), // data can be `string` or {object}!
             headers: {
                 'Content-Type': 'application/json'
