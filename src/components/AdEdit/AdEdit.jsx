@@ -1,127 +1,102 @@
-import React from 'react'
+import React, { useState } from "react";
 import { useParams, useHistory } from 'react-router';
+import useForm from '../Form/useForm';
+import { Form, Button } from 'react-bootstrap';
 import { getAd }  from '../../store/ads/selectors';
 import { saveAd } from '../../services/AdService';
-import HookForm   from '../Form/HookForm'
-import AppNavbar  from '../AppNavbar/AppNavbar';
-import { Button } from 'react-bootstrap';
+import AppNavbar from '../AppNavbar/AppNavbar';
+import TagSelect from '../TagsSelect/TagSelect'
 
-import fieldsForm from './utils/fields'
+const TYPES = ['sell', 'buy'];
 
 function AdEdit(props) {
-    
+
+    // Create & update Ads
+
+
     const { id } = useParams();
     const history = useHistory();
- 
+    const [title, setTitle] = useState('Edit advert');
+    const [method, setMethod] = useState('PUT'); //Edit -> POST to add
+
     const ad = getAd(props, id);
 
-    const F = fieldsForm
+    const handleSubmitCallback = () => {
+        saveAd(formInput, method, id)
+            .then(res => {
+                console.log('res', res)
+                if (res === 'OK') {
 
-    // Improve with map...
-    const adValues = {
-        ...F,
-        name: {
-            ...F.name,
-            value: ad.name,
-        },
-        description: {
-            ...F.description,
-            value: ad.description,
-        },
-        price: {
-            ...F.price,
-            value: ad.price,
-        },
-        type: {
-            ...F.type,
-            value: ad.type,
-        },
-        // handleSubmit: 'handleSubmit',
-    };
+                    setMethod('POST');
+                    return true;
 
-    const formProps = {
-        ...props,
-        fieldsForm: adValues,
+                } else {
+                    notifyWarning(res);
+                    return false;
+                }
+            })
+            .catch(res => {
+
+                console.log('res', res)
+            })
+
+
+        return false;        
     }
     
-    const handleSubmit = event => {
-
-        event.preventDefault();
-
-        console.log('submit', 'submit');
-        return false;
-
-        // const { name, price, description, photo } = adState.advert;
-
-        // if (name.trim().length <= 3) {
-        //     alert("The name must be bigger than 3 characters");
-        //     return;
-        // }
-
-        // if (description.trim().length <= 12) {
-        //     alert("The description must be bigger than 12 characters");
-        //     return;
-        // }
-
-        // if (price <= 0) {
-        //     alert("The price must be bigger than 0 €");
-        //     return;
-        // }
-
-        // if (photo.trim().length <= 3) {
-        //     alert("The path to photo must be bigger than 3 characters");
-        //     return;
-        // }
-
-        // saveAd(adState.advert, adState.method, adState.advert.id)
-        //     .then(res => {
-
-        //         console.log('res', res)
-        //         if (res === 'OK') {
-
-        //             if (adState.method === 'POST')
-        //                 this.setState({
-        //                     title: 'Advertisement saved!',
-        //                     status: true
-        //                 });
-
-        //             // notifySaved();
-        //         } else {
-        //             // notifyError();
-        //         }
-        //     })
-        //     .catch(res => {
-
-        //         console.log('res', res)
-        //     })
-
-
-        return false;
-    } 
+    const [handleChange, handleSubmit, formInput, notifyWarning] = useForm( ad, handleSubmitCallback );
 
     return <>
             <AppNavbar />
-             <div className="container">
-                {
-                    ad
-                    &&
-                    <HookForm {...formProps} />
-                }
-                {
-                    !ad
-                    &&
-                    <div>
-                        <br />
-                        <h3> Incorrect access </h3>
-                        <p>Follow the usual path to edit an ad </p>
-                        <br />
-                        <Button className='btn btn-default' onClick={() => history.push(`/`)} >Go Home</Button>
-                    </div>
-                }
+
+            <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
+                <h2>{title}</h2>
+            <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="formGroupName" >
+                        <Form.Label>Name</Form.Label>
+                    <Form.Control name="name" placeholder="Product name" value={formInput.name} onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupPrice" >
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control name="price" placeholder="on €" value={formInput.price} onChange={handleChange} type="number" />
+                    </Form.Group>
+                    <Form.Group controlId="formGroupPhoto" >
+                        <Form.Label>Photo</Form.Label>
+                        <Form.Control name="photo" placeholder="Select a prety photo" value={formInput.photo} onChange={handleChange} />
+                    </Form.Group>
+                    {/* <Form.Group controlId="formGroupType" >
+                        <Form.Label>Type</Form.Label>
+                        {TYPES.map(type => (
+                            <div key={`inline-${type}`} className="mb-3">
+                                <Form.Check inline type='radio' id={`check-api-${type}`}>
+                                    <Form.Check.Input
+                                        name='type'
+                                        value={`${type}`}
+                                        type='radio'
+                                        onChange={handleChange}
+                                        checked={`${type}` === formInput.type}
+                                    />
+                                    <Form.Check.Label style={{ textTransform: 'capitalize' }}>{` ${type}`}</Form.Check.Label>
+                                </Form.Check>
+                            </div>
+                        ))}
+                    </Form.Group> */}
+                    <Form.Group controlId="formGroupDescription">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control name="description" as="textarea" rows="3" value={formInput.description} onChange={handleChange} />
+                    </Form.Group>
+                    {/* <Form.Group controlId="formGrouptags" >
+                        <Form.Label>Tag</Form.Label>
+                        <TagSelect onChange={handleChange} value={formInput.tags} isMulti />
+                    </Form.Group> */}
+
+                    <Button variant="primary" type="submit">
+                        Save
+                    </Button>
+                <Button variant="secondary" className="float-right" onClick={() => history.goBack()}>Go back</Button>
+                </Form>
             </div>
         </>
-        ;
-
 }
 
 export default AdEdit;

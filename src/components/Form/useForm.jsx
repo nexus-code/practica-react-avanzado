@@ -1,75 +1,69 @@
-import { useState } from 'react'
-import { checkValidation } from './utils/validations'
+import { useReducer } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const useForm = fieldForm => {
-  const [fieldState, setFieldState] = useState({ ...fieldForm })
-  const [formIsValid, setFormIsValid] = useState(false)
+/**
+ * 
+ * @param {*} initialArgs : object with form data
+ * @param {*} handleSubmitCallback : function who update/create record
+ */
 
-  const renderElementsForm = () => {
-    const formElementsArr = []
-    if (fieldState) {
-      for (let key in fieldState) {
-        formElementsArr.push({
-          id: key,
-          config: fieldState[key]
-        })
-      }
+const useForm = (initialArgs, handleSubmitCallback) => {
+  
+  // uses toast to ui add notifications   
+  const notifySaved = () => toast.success('Record saved!');
+  const notifyError = () => toast.error('Error on save!');
+  const notifyWarning = (warning) => toast.warning(warning);
+  ///
+
+  const [formInput, setFormInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    initialArgs
+    // {
+    //   //initialArgs
+
+    // }
+  );
+
+
+  const handleChange = event => {
+    const name = event.target.name;
+    const newValue = event.target.value;
+    setFormInput({ [name]: newValue });
+  }
+  
+  const handleSubmit = event => { 
+    event.preventDefault();
+
+
+    if (handleSubmitCallback()){
+
+      notifySaved();
+    } else {
+
+      notifyError();
     }
-    return formElementsArr
+
+    // try {
+
+    //   handleSubmitCallback();
+    //   notifySaved();
+
+    // } catch (error) {
+
+    //   notifyError();
+    //   console.log(error);
+    // }
+
   }
 
-  const onSubmitJSON = () => {
 
-    // console.log('onSubmitJSON');
-    const data = {}
-    for (let key in fieldState) {
-      data[key] = fieldState[key].value
-    }
-  }
+  return [
+    handleChange,
+    handleSubmit,
+    formInput,
+    notifyWarning
+  ];
+};
 
-  const handlerFormValidation = form => {
-    let isValidForm = true
-    for (let inputElement in form) {
-      isValidForm = isValidForm && form[inputElement].valid
-    }
-    return isValidForm
-  }
-
-  const onResetForm = () => {
-    setFieldState(fieldForm)
-    setFormIsValid(false)
-  }
-
-  const handlerOnChangeForm = (ev, id) => {
-    const inputValue = ev.target.value
-    const validation = checkValidation(inputValue, fieldState[id].validation)
-    const formData = {
-      ...fieldState,
-      [id]: {
-        ...fieldState[id],
-        value: inputValue,
-        valid: validation.isValid,
-        errorMessage: validation.error
-      }
-    }
-    setFieldState(formData)
-    setFormIsValid(handlerFormValidation(formData))
-  }
-
-  const handlerLoadData = data => {
-    const loadForm = { ...fieldState }
-    for (let formElement in fieldState) {
-      loadForm[formElement] = {
-        ...fieldState[formElement],
-        value: data[formElement] || '',
-        valid: true
-      }
-    }
-    setFieldState(loadForm)
-    setFormIsValid(true)
-  }
-
-  return [ renderElementsForm, formIsValid, handlerOnChangeForm, onSubmitJSON, onResetForm, handlerLoadData ]
-}
-
-export default useForm
+export default useForm;

@@ -32,7 +32,7 @@ function Register({ user, setUser}) {
         setUserInput({ [name]: newValue });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         event.preventDefault();
 
         if (userInput.name.trim().length <= 3) {
