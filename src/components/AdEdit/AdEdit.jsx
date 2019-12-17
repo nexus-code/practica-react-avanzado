@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router';
 import useForm from '../Form/useForm';
 import { Form, Button } from 'react-bootstrap';
 import { getAd } from '../../store/ads/selectors';
-import { savedAd }  from '../../store/ads/actions';
+// import { savedAd }  from '../../store/ads/actions';
 // import { saveAd } from '../../services/AdService';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import TagSelect from '../TagsSelect/TagSelect'
@@ -42,7 +42,7 @@ function AdEdit(props) {
         // Use Redux: ¿problems with dispatch?
 
         console.log('handleSubmitCallback', formInput, method, record.id);
-        savedAd(formInput, method, record.id);
+        props.savedAd(formInput, method, record.id);
 
         // Throught adsServide. Work ok
         // await saveAd(formInput, method, record.id)

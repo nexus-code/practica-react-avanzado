@@ -44,40 +44,41 @@ export const fetchAdsSuccess = ads => ({
 
 
 // 1. Work out of Redux
-export const savedAd = async (ad, method, id) => {
+// export const savedAd = async (ad, method, id) => {
 
-    // console.log('Action savedAd', ad, method, id);
-    console.error('CONECTION TO STORE PROBLEMS: store/ads/actions: No dispatch arrives');
+//     // console.log('Action savedAd', ad, method, id);
+//     console.error('CONECTION TO STORE PROBLEMS: store/ads/actions: No dispatch arrives');
    
-    const result = await saveAd(ad, method, id)
-        .then()
-        .catch();
+//     const result = await saveAd(ad, method, id)
+//         .then()
+//         .catch();
 
-    console.log('Action savedAd result', result);
+//     console.log('Action savedAd result', result);
 
-    return result;
-};
-
-// 2. no dispatch arrives
-// export const savedAd = (ad, method, id) => {
-
-//     console.log('Action savedAd', ad, method, id);
-//     console.error('store/ads/actions ln 58: no dispatch arrives');
-
-//     return {async function (dispatch, getState, extraArgument) {
-//         // No entra ¿dispatch??
-//         console.log('Action dispatch', ad, method, id);
-
-//         dispatch(savedAdRequest());
-
-//         const result = await saveAd(ad, method, id)
-//         .then(() => dispatch(savedAdSuccess()))
-//         .catch(() => dispatch(savedAdFailure()));
-//     }};
+//     return result;
 // };
 
-export const savedAdRequest = () => ({
+// 2. no dispatch arrives
+export const savedAd = (ad, method, id) => {
+
+    console.log('Action savedAd', ad, method, id);
+    console.error('store/ads/actions ln 58: no dispatch arrives');
+
+    return async function (dispatch, getState, extraArgument) {
+        // No entra ¿dispatch??
+        console.log('Action dispatch', ad, method, id);
+
+        dispatch(savedAdRequest());
+
+        const result = await saveAd(ad, method, id)
+        .then(() => dispatch(savedAdSuccess()))
+        .catch(() => dispatch(savedAdFailure()));
+    };
+};
+
+export const savedAdRequest = ad => ({
     type:SAVED_AD_REQUEST,
+    ad,
 });
 
 export const savedAdFailure = error => ({
