@@ -44,12 +44,7 @@ export const fetchAdsSuccess = ads => ({
 
 export const savedAd = (ad, method, id) => {
 
-    console.log('Action savedAd', ad, method, id);
-    console.error('store/ads/actions ln 58: no dispatch arrives');
-
     return async function (dispatch, getState, extraArgument) {
-        // No entra ¿dispatch??
-        console.log('Action dispatch', ad, method, id);
 
         dispatch(savedAdRequest());
 
