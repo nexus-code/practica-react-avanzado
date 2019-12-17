@@ -42,23 +42,6 @@ export const fetchAdsSuccess = ads => ({
     ads,
 });
 
-
-// 1. Work out of Redux
-// export const savedAd = async (ad, method, id) => {
-
-//     // console.log('Action savedAd', ad, method, id);
-//     console.error('CONECTION TO STORE PROBLEMS: store/ads/actions: No dispatch arrives');
-   
-//     const result = await saveAd(ad, method, id)
-//         .then()
-//         .catch();
-
-//     console.log('Action savedAd result', result);
-
-//     return result;
-// };
-
-// 2. no dispatch arrives
 export const savedAd = (ad, method, id) => {
 
     console.log('Action savedAd', ad, method, id);
