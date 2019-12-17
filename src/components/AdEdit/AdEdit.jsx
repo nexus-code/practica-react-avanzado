@@ -3,16 +3,12 @@ import { useParams, useHistory } from 'react-router';
 import useForm from '../Form/useForm';
 import { Form, Button } from 'react-bootstrap';
 import { getAd } from '../../store/ads/selectors';
-// import { savedAd }  from '../../store/ads/actions';
-// import { saveAd } from '../../services/AdService';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import TagSelect from '../TagsSelect/TagSelect'
 
 const TYPES = ['sell', 'buy'];
 
 function AdEdit(props) {
-
-    // Create & update Ads
 
     let title  = 'Edit advert';
     let method = 'PUT'; //Edit , POST to add
@@ -39,29 +35,8 @@ function AdEdit(props) {
 
     const handleSubmitCallback = () => {
 
-        // Use Redux: ¿problems with dispatch?
-
         console.log('handleSubmitCallback', formInput, method, record.id);
         props.savedAd(formInput, method, record.id);
-
-        // Throught adsServide. Work ok
-        // await saveAd(formInput, method, record.id)
-        //     .then(res => {
-        //         console.log('res', res)
-        //         if (res === 'OK') {
-
-        //             return res;
-        //         } else {
-
-        //             notifyWarning(`${res.status}: ${res.statusText}`);
-        //             return 'ERROR';
-        //         }
-        //     })
-        //     .catch(res => {
-
-        //         console.log('Catch res: ', res)
-        //         return 'ERROR';
-        //     })
     }
     
     const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback );
@@ -84,7 +59,7 @@ function AdEdit(props) {
                         <Form.Label>Photo</Form.Label>
                         <Form.Control name="photo" placeholder="Select a prety photo" value={formInput.photo} onChange={handleChange} />
                     </Form.Group>
-                    {/* */} <Form.Group controlId="formGroupType" >
+                    <Form.Group controlId="formGroupType" >
                         <Form.Label>Type</Form.Label>
                         {TYPES.map(type => (
                             <div key={`inline-${type}`} className="mb-3">
