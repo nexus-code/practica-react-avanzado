@@ -19,8 +19,11 @@ const getFetch = (url) => {
     .then(res => res.json());
 }
 
+/**
+ * return[] of tags (strings)
+ */
 const getTagsList = () => {
-    // [] of tags (strings)
+    
     return getFetch(`${API_URL}tags`)
         .then(res => res.results)
         .catch(error => console.error('Error:', error));
@@ -51,8 +54,6 @@ const searchAds = (query) => {
     
     const url = query === '' ? `${API_URL}anuncios` : `${API_URL}anuncios/?${query}`;
     
-    console.log('AdService: ', url);
-
     return getFetch(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
         .catch(error => console.error('Error:', error));
@@ -65,7 +66,6 @@ const searchAds = (query) => {
  * @param {*} id empty in POST. advertisement ID with PUT <-- improve this
  */
 const saveAd = (ad, method, id) => {
-    console.log('AdService/saveAD ad:', ad);
 
     return fetch(`${API_URL}anuncios/${id}`, {
         crossDomain: true,
