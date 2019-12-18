@@ -48,25 +48,34 @@ export const savedAd = (ad, method, id) => {
 
         dispatch(savedAdRequest());
 
-        const result = await saveAd(ad, method, id)
-        .then(() => dispatch(savedAdSuccess()))
-        .catch(() => dispatch(savedAdFailure()));
+        try {
+
+            const result = await saveAd(ad, method, id)
+            console.log('result action result', result);
+            dispatch(savedAdSuccess());
+            return result;
+
+        } catch (error) {
+
+            dispatch(savedAdFailure());
+            return false;
+        }
     };
 };
 
 export const savedAdRequest = ad => ({
-    type:SAVED_AD_REQUEST,
+    type: SAVED_AD_REQUEST,
     ad,
 });
 
 export const savedAdFailure = error => ({
-    type:SAVED_AD_FAILURE,
+    type: SAVED_AD_FAILURE,
     error,
 });
 
-export const savedAdSuccess = ad => ({
-    type:SAVED_AD_SUCCESS,
-    ad,
+export const savedAdSuccess = result => ({
+    type: SAVED_AD_SUCCESS,
+    result,
 });
 
 // export const setFilter = filter => ({

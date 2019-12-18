@@ -35,8 +35,7 @@ function AdEdit(props) {
 
     const handleSubmitCallback = () => {
 
-        console.log('handleSubmitCallback', formInput, method, record.id);
-        props.savedAd(formInput, method, record.id);
+        return props.savedAd(formInput, method, record.id);
     }
     
     const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback );

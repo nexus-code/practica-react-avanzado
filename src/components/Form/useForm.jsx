@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
  */
 
 const useForm = (initialArgs, handleSubmitCallback) => {
-  
+
   // uses toast to ui add notifications   
   const notifySaved = () => toast.success('Record saved!');
   const notifyError = () => toast.error('Error on save!');
@@ -29,21 +29,23 @@ const useForm = (initialArgs, handleSubmitCallback) => {
     const newValue = event.target.value;
     setFormInput({ [name]: newValue });
   }
-  
-  const handleSubmit = async (event) => { 
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const result = await handleSubmitCallback();
-    console.log('result', result);
+    console.log('result handleSubmit', result);
 
     setSolved(result);
   }
-  
+
   useEffect(() => {
-    console.log('useEffect solved', solved);
+    console.log('useEffect solved:', solved);
 
     if (solved === 'OK') notifySaved();
     if (solved === 'ERROR') notifyError();
+    setSolved('');  //reset after notify
+
   }, [solved])
 
   return [
