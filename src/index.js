@@ -1,28 +1,27 @@
-// v1
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-// import * as serviceWorker from './serviceWorker';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-// // process.env.NODE_ENV = 'production';
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-
-// // If you want your app to work offline and load faster, you can change
-// // unregister() to register() below. Note this comes with some pitfalls.
-// // Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
-
-// v2
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { createBrowserHistory } from 'history';
+
 
 import Root from './components/Root';
-
+import { setUserLS } from './utils/localStorage';
 import { configureStore } from './store';
 
-const store = configureStore();
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// browser history
+const history = createBrowserHistory();
+
+const store = configureStore({
+    history,    
+});
+
+
+// subscribes to store -> sincronizes localStorage
+store.subscribe(() => {
+    // User user.user & ads.ads by combineReducers. View to rename
+    setUserLS(store.getState().user.user)
+});
+
 
 ReactDOM.render(<Root store={store} />, document.getElementById('root'));
