@@ -7,7 +7,9 @@ const initialState = {
     user: userLS,
 };
 
-// const initialState = userLS;
+const empty = {
+    user: '',
+};
 
 export const user = (state = initialState, action) => {
     switch (action.type) {
@@ -18,7 +20,8 @@ export const user = (state = initialState, action) => {
             };
 
         case TYPES.LOGOUT:
-            return initialState;
+            // return initialState;
+            return empty;
 
         default:
             return state;

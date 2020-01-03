@@ -3,7 +3,7 @@ import { PropTypes }    from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
 import AppNavbar from '../AppNavbar/AppNavbar';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 
 /**
  *  logged user handler
@@ -11,11 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Register({ user, setUser}) { 
 
-    // uses toast to ui add notifications   
-    const notifySaved = () => toast.success('Profile saved!');
-    const notifyError = () => toast.error('Error on save!');
+    // // uses toast to ui add notifications   
+    // const notifySaved = () => toast.success('Profile saved!');
+    // const notifyError = () => toast.error('Error on save!');
     const notifyWarning = (warning) => toast.warning(warning);
-    ///
+    // ///
 
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
@@ -45,16 +45,19 @@ function Register({ user, setUser}) {
             return;
         }
 
-        try {
+        // try {
             
-            setUser({ name: userInput.name, surname: userInput.surname});
-            notifySaved();
+        //     setUser({ name: userInput.name, surname: userInput.surname});
+        //     notifySaved();
 
-        } catch (error) {
+        // } catch (error) {
 
-            notifyError();            
-            console.log(error);
-        }
+        //     notifyError();            
+        //     console.log(error);
+        // }
+
+        setUser({ name: userInput.name, surname: userInput.surname});
+
     }
         
     return (
