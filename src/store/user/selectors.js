@@ -1,6 +1,5 @@
-import { getUserLS } from '../../utils/localStorage';
 
-export function getUser() {
+export function getUser(state) {
 
-    return getUserLS();
+    return state.user.user;
 }

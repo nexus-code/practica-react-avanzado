@@ -4,11 +4,9 @@ import Register from './Register';
 import { getUser } from '../../store/user/selectors';
 import { setUser } from '../../store/user/actions'
 
-function mapStateToProps() {
-    return {
-        user: getUser(),
-    };
-}
+const mapStateToProps = state => ({
+    user: getUser(state),
+});
 
 const mapDispatchToProps = {
     setUser,
