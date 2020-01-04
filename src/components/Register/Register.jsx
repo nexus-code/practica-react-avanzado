@@ -1,21 +1,22 @@
 import React, { useReducer } from "react";
+
+import Canvas from '../Canvas/Canvas';
+
 import { PropTypes }    from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
-import AppNavbar from '../AppNavbar/AppNavbar';
 import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 /**
- *  logged user handler
+ *  user handler
  */
 
-function Register({ user, setUser}) { 
+export default function Register({ user, setUser }) { 
 
-    // // uses toast to ui add notifications   
-    // const notifySaved = () => toast.success('Profile saved!');
-    // const notifyError = () => toast.error('Error on save!');
+    console.log('Register user', user);
+
+    // uses toast to ui add notifications   
     const notifyWarning = (warning) => toast.warning(warning);
-    // ///
+    ///
 
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
@@ -45,25 +46,11 @@ function Register({ user, setUser}) {
             return;
         }
 
-        // try {
-            
-        //     setUser({ name: userInput.name, surname: userInput.surname});
-        //     notifySaved();
-
-        // } catch (error) {
-
-        //     notifyError();            
-        //     console.log(error);
-        // }
-
         setUser({ name: userInput.name, surname: userInput.surname});
-
     }
         
     return (
-        <>
-            <AppNavbar />
-
+        <Canvas>
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                 <h2>{userInput.title}</h2>
                 <Form onSubmit = { handleSubmit }>
@@ -81,7 +68,7 @@ function Register({ user, setUser}) {
                     </Button>
                 </Form>
             </div>
-        </>
+        </Canvas>
     );
 }
 
@@ -89,5 +76,3 @@ Register.propTypes = {
     user: PropTypes.object,//.isRequired,
     // setUser: PropTypes.func.isRequired,
 }
-
-export default Register;

@@ -38,7 +38,8 @@ function AdEdit(props) {
         return props.savedAd(formInput, method, record.id);
     }
     
-    const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback );
+    // const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback);
+    const [handleChange, handleSubmit, formInput] = useForm(record, handleSubmitCallback );
 
     return <>
             <AppNavbar />
