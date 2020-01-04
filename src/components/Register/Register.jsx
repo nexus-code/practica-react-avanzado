@@ -12,7 +12,6 @@ import { toast } from 'react-toastify';
 
 export default function Register({ user, setUser }) { 
 
-    console.log('Register user', user);
 
     // uses toast to ui add notifications   
     const notifyWarning = (warning) => toast.warning(warning);

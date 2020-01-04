@@ -22,8 +22,12 @@ export const saveUser = user => ({
     user,
 });
 
+export const userLogout = () => ({
+    type: LOGOUT,
+});
+
 // export const setUser = (...args) => (dispatch, _getState, { history }) => {
-    export const setUser = (...args) => (dispatch, _getState) => {
+export const setUser = (...args) => (dispatch, _getState) => {
 
     try {
 
@@ -38,6 +42,9 @@ export const saveUser = user => ({
     }    
 };
 
-export const logout = () => ({
-    type: LOGOUT,
-});
+
+// export const logout = (...args) => (dispatch, _getState, { history }) => {
+export const logout = (...args) => (dispatch, _getState, { history }) => {
+    dispatch(userLogout(...args));
+    // history.push('/register');
+};

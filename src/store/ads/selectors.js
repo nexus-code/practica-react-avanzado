@@ -1,14 +1,25 @@
-export function getAds(ads, filter) {
+// export function getAds(ads, filter) {
+
+//     // basic implementation
+
+//     return ads;
+// }
+
+export function getAds(state) {
 
     // basic implementation
 
-    return ads;
+    console.log('getAds state', state);
+
+
+    return state.ads.ads;
 }
+
 
 export const getAd = (props, id) => {
 
     //Improve this on store!!
-    
+
     try{
         
         return props.ads.filter(ad => ad.id === id)[0];

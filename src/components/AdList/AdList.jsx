@@ -17,7 +17,7 @@ class AdList extends React.Component {
         }
     }
 
-    buildMovieList = (ads) => {
+    buildAdList = (ads) => {
         return (
             <>
                 {
@@ -82,7 +82,7 @@ class AdList extends React.Component {
                         &&
                         ads.length
                         &&
-                        this.buildMovieList(ads)
+                        this.buildAdList(ads)
                     }
 
                     {

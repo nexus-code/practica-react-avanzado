@@ -17,7 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function App({ user, ads }) {
+function App({ user, ads, props }) {
   
   toast.configure(config.toastConfigure);
 
@@ -28,25 +28,28 @@ function App({ user, ads }) {
     return <Redirect to={config.PATH_REGISTER} />
   }
 
-    return <div>
-        <ToastContainer />
-        <ErrorBoundary>
-            <Router>
-              <Switch>
-                <Route path='/register' exact component={ Register } />
-                <Route path="/profile" exact component={() => <Register user={user} />} />
-                <Route path='/advert/create' exact component={ AdEdit } />
-                <Route path='/advert/edit/:id' exact component={ AdEdit } />
-                <Route path='/advert/:id' exact component={ AdDetail } />
-                <Route path='/advert/' exact component={ Search } />
-                <Route path='/home' exact component={ Home } />
-                <Route path='/' exact component={ Home } />
-                <Route path='*' component={ NotFoundPage } />
-                <Route component={ Register } />
-              </Switch>
-            </Router>
-        </ErrorBoundary>
-    </div>
+console.log('App props', props); 
+
+
+  return <div>
+      <ToastContainer />
+      <ErrorBoundary>
+          <Router>
+            <Switch>
+              <Route path='/register' exact component={ Register } />
+              <Route path="/profile" exact component={ Register } />
+              <Route path='/advert/create' exact component={ AdEdit } />
+              <Route path='/advert/edit/:id' exact component={ AdEdit } />
+              <Route path='/advert/:id' exact component={ AdDetail } />
+              <Route path='/advert/' exact component={ Search } />
+              <Route path='/home' exact component={ Home } />
+              <Route path='/' exact component={ Home } />
+              <Route path='*' component={ NotFoundPage } />
+              <Route component={ Register } />
+            </Switch>
+          </Router>
+      </ErrorBoundary>
+  </div>
 }
 
 App.propTypes = {

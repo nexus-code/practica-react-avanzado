@@ -1,6 +1,6 @@
-import React     from "react";
-import AppNavbar from '../AppNavbar/AppNavbar';
-import AdList    from '../AdList/AdList';
+import React  from "react";
+import Canvas from '../Canvas/Canvas';
+import AdList from '../AdList/AdList';
 
 export default class Home extends React.Component {
 
@@ -15,8 +15,7 @@ export default class Home extends React.Component {
         const { ads } = this.props; 
 
         return (
-            <>
-                <AppNavbar />
+            <Canvas>
                 {
                     ads
                     &&
@@ -24,7 +23,7 @@ export default class Home extends React.Component {
                     &&
                     <AdList ads={ads} />
                 }
-            </>
+            </Canvas>
         );
     }
 }

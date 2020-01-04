@@ -5,10 +5,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from '../App';
 
-function Root({ store, ...props }) {
+export default function Root({ store, history, ...props }) {
   return (
     <Provider store={store}>
-      <Router>
+      <Router history={history}>
         <App {...props} />
       </Router>
     </Provider>
@@ -18,5 +18,3 @@ function Root({ store, ...props }) {
 Root.propTypes = {
   store: PropTypes.object.isRequired,
 };
-
-export default Root;

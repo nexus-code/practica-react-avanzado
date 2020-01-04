@@ -1,18 +1,21 @@
-import React from "react";
+import React  from "react";
+import Canvas from '../Canvas/Canvas';
+
 import { useParams, useHistory } from 'react-router';
-import { getAd } from '../../store/ads/selectors';
+import { getAd }  from '../../store/ads/selectors';
 import { Button } from 'react-bootstrap';
 
-import AppNavbar from '../AppNavbar/AppNavbar';
 
 function AdDetail(ads) {
+
+    console.log('AdDetail ads', ads);
 
     const { id } = useParams();
     const history = useHistory();
     const ad = getAd(ads, id);
 
-    return <>
-        <AppNavbar />
+    return <Canvas>
+
         <div className="container">
             {
                 ad
@@ -45,7 +48,7 @@ function AdDetail(ads) {
                 </div>
             }
         </div>
-    </>;
+    </Canvas>;
 
 }
 

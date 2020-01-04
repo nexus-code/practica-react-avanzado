@@ -1,5 +1,6 @@
-import React from "react";
-import AppNavbar from '../AppNavbar/AppNavbar';
+import React  from "react";
+import Canvas from '../Canvas/Canvas';
+
 import { Container, Row, Col, Button }  from 'react-bootstrap';
 import AdList    from '../AdList/AdList';
 import TagSelect from '../TagsSelect/TagSelect'
@@ -91,8 +92,7 @@ export default class Search extends React.Component {
         const { ads, tags, name, type, minPrice, maxPrice } = this.state;
 
         return (
-            <>
-                <AppNavbar />
+            <Canvas>
                 <Container className='container mt-5 mb-5 p-5 card'>
                     <h2 className="mb-4">Search products.</h2>
                     <h5 
@@ -149,7 +149,7 @@ export default class Search extends React.Component {
                     &&
                     <AdList ads={ads} />
                 }
-            </>
+            </Canvas>
         );
     }
 }

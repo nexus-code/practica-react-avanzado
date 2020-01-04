@@ -1,9 +1,10 @@
-import React from "react";
+import React  from "react";
+import Canvas from '../Canvas/Canvas';
+
 import { useParams, useHistory } from 'react-router';
 import useForm from '../Form/useForm';
 import { Form, Button } from 'react-bootstrap';
 import { getAd } from '../../store/ads/selectors';
-import AppNavbar from '../AppNavbar/AppNavbar';
 import TagSelect from '../TagsSelect/TagSelect'
 
 const TYPES = ['sell', 'buy'];
@@ -41,9 +42,8 @@ function AdEdit(props) {
     // const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback);
     const [handleChange, handleSubmit, formInput] = useForm(record, handleSubmitCallback );
 
-    return <>
-            <AppNavbar />
-
+    return <Canvas>
+            
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
                 <h2>{title}</h2>
             <Form onSubmit={handleSubmit}>
@@ -91,7 +91,7 @@ function AdEdit(props) {
                 <Button variant="secondary" className="float-right" onClick={() => history.goBack()}>Go back</Button>
                 </Form>
             </div>
-        </>
+        </Canvas>
 }
 
 export default AdEdit;
