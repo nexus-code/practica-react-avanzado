@@ -51,7 +51,6 @@ export const savedAd = (ad, method, id) => {
         try {
 
             const result = await saveAd(ad, method, id)
-            console.log('result action result', result);
             dispatch(savedAdSuccess());
             return result;
 
