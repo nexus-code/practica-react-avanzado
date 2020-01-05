@@ -28,9 +28,6 @@ function App({ user, ads, props }) {
     return <Redirect to={config.PATH_REGISTER} />
   }
 
-console.log('App props', props); 
-
-
   return <div>
       <ToastContainer />
       <ErrorBoundary>

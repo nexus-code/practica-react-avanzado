@@ -12,7 +12,7 @@ export function getAds(state) {
     console.log('getAds state', state);
 
 
-    return state.ads.ads;
+    return state.ads;//.ads;
 }
 
 
@@ -26,7 +26,8 @@ export const getAd = (props, id) => {
     }
     catch(err){
         
-        return props.ads.ads.filter(ad => ad.id === id)[0];
+        console.log('getAd props.ads.ads', props.ads.ads);
+        return 'error? props.ads.ads'; //.filter(ad => ad.id === id)[0];
     }
 
 };

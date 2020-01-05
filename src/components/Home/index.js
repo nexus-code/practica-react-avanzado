@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAds } from '../../store/ads/actions'
+import { fetchAds } from '../../store/ads/actions';
 
 import Home from './Home';
 
