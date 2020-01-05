@@ -3,13 +3,7 @@ import {
     LOGOUT,
 } from './types';
 
-// export const setUser = user => ({
-//     type: SET_USER,
-//     user,
-// });
-
 import { toast } from 'react-toastify';
-
 
 // uses toast to ui add notifications   
 const notifySaved = () => toast.success('Profile saved!');

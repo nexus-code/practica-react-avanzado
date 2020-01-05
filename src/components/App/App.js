@@ -12,7 +12,6 @@ import AdDetail  from '../AdDetail';
 import * as config  from '../../constants';
 import NotFoundPage from '../404/NotFoundPage';
 
-
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 

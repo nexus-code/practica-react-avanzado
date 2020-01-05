@@ -22,11 +22,9 @@ export function configureStore(preloadedState) {
         middlewares.push(loggerMiddleware);
     }
     
-    const store = createStore(
+    return createStore(
         reducer,
         preloadedState,
         composeEnhancers(applyMiddleware(...middlewares)),
     );
-
-    return store;
 }

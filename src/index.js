@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { createBrowserHistory } from 'history';
 
 import Root from './components/Root';
 import { setUserLS } from './utils/localStorage';
 import { configureStore } from './store';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// histórico del browser
+const history = createBrowserHistory();
+console.log('history', history);
 
 const store = configureStore();
 
