@@ -6,6 +6,9 @@ import Root from './components/Root';
 import { getUserLS, setUserLS } from './utils/localStorage';
 import { configureStore } from './store';
 
+const renderApp = props =>
+    ReactDOM.render(<Root {...props} />, document.getElementById('root'));
+
 // histórico del browser
 const history = createBrowserHistory();
 
@@ -22,6 +25,11 @@ store.subscribe(() => {
     
     // User user.user & ads.ads by combineReducers. View to rename
     setUserLS(user.user);
+
+
+    renderApp({ store, history });
 });
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'));
+renderApp({ store, history });
+
+// ReactDOM.render(<Root store={store} />, document.getElementById('root'));
