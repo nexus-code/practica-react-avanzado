@@ -36,8 +36,7 @@ export const setUser = (...args) => (dispatch, _getState, { history }) => {
 };
 
 
-// export const logout = (...args) => (dispatch, _getState, { history }) => {
 export const logout = (...args) => (dispatch, _getState, { history }) => {
     dispatch(userLogout(...args));
-    // history.push('/register');
+    history.push('/register');
 };

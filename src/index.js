@@ -27,9 +27,9 @@ store.subscribe(() => {
     setUserLS(user.user);
 
 
-    renderApp({ store, history });
+    // renderApp({ store, history });
 });
 
-renderApp({ store, history });
+renderApp({ store, history });  // Review
 
 // ReactDOM.render(<Root store={store} />, document.getElementById('root'));

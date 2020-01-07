@@ -1,6 +1,6 @@
 import React from 'react';
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 
@@ -30,7 +30,6 @@ function App({ user, ads, props }) {
   return <div>
       <ToastContainer />
       <ErrorBoundary>
-          <Router>
             <Switch>
               <Route path='/register' exact component={ Register } />
               <Route path="/profile" exact component={ Register } />
@@ -41,9 +40,8 @@ function App({ user, ads, props }) {
               <Route path='/home' exact component={ Home } />
               <Route path='/' exact component={ Home } />
               <Route path='*' component={ NotFoundPage } />
-              <Route component={ Register } />
+              {/* <Route component={ Register } /> */}
             </Switch>
-          </Router>
       </ErrorBoundary>
   </div>
 }
