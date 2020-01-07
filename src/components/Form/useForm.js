@@ -33,7 +33,6 @@ const useForm = (initialArgs, handleSubmitCallback) => {
     event.preventDefault();
 
     const result = await handleSubmitCallback();
-    console.log('result handleSubmit', result);
 
     setSolved(result);
   }
