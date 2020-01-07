@@ -1,13 +1,17 @@
 import * as TYPES from './types';
-import { getUserLS } from '../../utils/localStorage'
+// import { getUserLS } from '../../utils/localStorage'
 
-const userLS =  getUserLS();
+// const userLS =  getUserLS();
+
+// const initialState = {
+//     user: userLS,
+// };
+
+// const empty = {
+//     user: '',
+// };
 
 const initialState = {
-    user: userLS,
-};
-
-const empty = {
     user: '',
 };
 
@@ -20,8 +24,8 @@ export const user = (state = initialState, action) => {
             };
 
         case TYPES.LOGOUT:
-            // return initialState;
-            return empty;
+            return initialState;
+            // return empty;
 
         default:
             return state;

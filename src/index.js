@@ -3,21 +3,25 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 
 import Root from './components/Root';
-import { setUserLS } from './utils/localStorage';
+import { getUserLS, setUserLS } from './utils/localStorage';
 import { configureStore } from './store';
 
 // histórico del browser
 const history = createBrowserHistory();
-console.log('history', history);
 
-const store = configureStore();
+const user = {
+    user: getUserLS(),
+    };
+
+const store = configureStore({ history })({ user });
 
 // subscribes to store -> sincronizes localStorage
 store.subscribe(() => {
+
+    const { user } = store.getState();
     
     // User user.user & ads.ads by combineReducers. View to rename
-    setUserLS(store.getState().user.user);
-
+    setUserLS(user.user);
 });
 
 ReactDOM.render(<Root store={store} />, document.getElementById('root'));

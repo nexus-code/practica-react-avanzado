@@ -20,14 +20,15 @@ export const userLogout = () => ({
     type: LOGOUT,
 });
 
-// export const setUser = (...args) => (dispatch, _getState, { history }) => {
-export const setUser = (...args) => (dispatch, _getState) => {
+export const setUser = (...args) => (dispatch, _getState, { history }) => {
+
+    console.log('setUser history', history);
 
     try {
 
         dispatch(saveUser(...args));
+        history.push("/eppur-si-muove");
         notifySaved();
-        // history.push("/");
 
     } catch (error) {
 
