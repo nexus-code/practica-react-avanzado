@@ -35,6 +35,49 @@ export const fetchAds = () => {
     return __fetchAds;
 };
 
+// export const fetchAd = (id) => {
+
+//     return async function (dispatch) {
+
+//         dispatch(fetchAdsRequest());
+
+//         try {
+
+//             const ad = await searchAds(id);
+//             dispatch(fetchAdsSuccess(ad));
+//             console.log('!ad', ad)
+
+//             return ad;
+
+//         } catch (error) {
+
+//             dispatch(fetchAdsFailure());
+
+//             return false;
+//         }
+//     };
+// };
+
+
+export const fetchAd = id => async (
+    dispatch,
+    getState,
+) => {
+    // const state = getState();
+    // if (getAd(state, id)) {
+    //     return;
+    // }
+
+    dispatch(fetchAdsRequest());
+    try {
+        const advert = await searchAds(id);
+        dispatch(fetchAdsSuccess([advert]));
+    } catch (error) {
+        dispatch(fetchAdsFailure(error));
+    }
+};
+
+
 export const fetchAdsRequest = () => ({
     type: ADS_FETCH_REQUEST,
 });
@@ -66,7 +109,6 @@ export const savedAdSuccess = ad => ({
 
 
 export const savedAd = (ad, method) => {
-// export const savedAd = (ad, method) => (dispatch, _getState, { history }) => {
 
     return async function (dispatch, getState, extraArgument) {
 
@@ -93,6 +135,7 @@ export const savedAd = (ad, method) => {
         }
     };
 };
+
 
 // export const setFilter = filter => ({
 //     type: SET_FILTER,
