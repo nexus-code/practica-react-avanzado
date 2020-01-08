@@ -12,6 +12,13 @@ import {
 
 import { searchAds, saveAd } from '../../services/AdService';
 
+import { toast } from 'react-toastify';
+
+// uses toast to ui add notifications   
+const notifySaved = () => toast.success('Advert saved!');
+const notifyError = () => toast.error('Error on save advert!');
+// const notifyWarning = (warning) => toast.warning(warning);
+
 
 export const fetchAds = () => {
 
@@ -59,6 +66,7 @@ export const savedAdSuccess = ad => ({
 
 
 export const savedAd = (ad, method) => {
+// export const savedAd = (ad, method) => (dispatch, _getState, { history }) => {
 
     return async function (dispatch, getState, extraArgument) {
 
@@ -68,12 +76,19 @@ export const savedAd = (ad, method) => {
 
             const result = await saveAd(ad, method)
             dispatch(savedAdSuccess(result));
+            notifySaved();
+
+            // console.log('history.location.pathname', history.location.pathname);
+            // if (history.location.pathname === '/advert/create')
+            //     history.push(`/advert/edit/${result.id}`);
 
             return result;
 
         } catch (error) {
 
             dispatch(savedAdFailure());
+            notifyError();
+
             return false;
         }
     };

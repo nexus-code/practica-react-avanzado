@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 // uses toast to ui add notifications   
 const notifySaved = () => toast.success('Profile saved!');
-const notifyError = () => toast.error('Error on save!');
+const notifyError = () => toast.error('Error on save profile!');
 // const notifyWarning = (warning) => toast.warning(warning);
 
 
