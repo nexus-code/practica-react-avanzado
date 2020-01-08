@@ -15,8 +15,12 @@ const initialState = {
 
 export const ads = (state = initialState, action) => {
     switch (action.type) {
-        case TYPES.FETCH_ADS_SUCCESS:
+        case TYPES.ADS_FETCH_SUCCESS:
             return action.ads;
+        case TYPES.AD_SAVE_SUCCESS:
+            return state.map(ad =>
+                ad._id === action.ad._id ? action.ad : ad,
+            );
         default:
             return state;
     }
@@ -24,19 +28,19 @@ export const ads = (state = initialState, action) => {
 
 export const ui = (state = initialState.ui, action) => {
     switch (action.type) {
-        case TYPES.FETCH_ADS_REQUEST:
+        case TYPES.ADS_FETCH_REQUEST:
             return {
                 ...state,
                 isFetching: true,
                 error: null,
             };
-        case TYPES.FETCH_ADS_FAILURE:
+        case TYPES.ADS_FETCH_FAILURE:
             return {
                 ...state,
                 isFetching: false,
                 error: action.error,
             };
-        case TYPES.FETCH_ADS_SUCCESS:
+        case TYPES.ADS_FETCH_SUCCESS:
             return {
                 ...state,
                 isFetching: false,

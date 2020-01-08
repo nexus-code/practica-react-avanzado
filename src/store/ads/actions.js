@@ -1,7 +1,7 @@
 import {
-    FETCH_ADS_REQUEST,
-    FETCH_ADS_FAILURE,
-    FETCH_ADS_SUCCESS,
+    ADS_FETCH_REQUEST,
+    ADS_FETCH_FAILURE,
+    ADS_FETCH_SUCCESS,
 
     AD_SAVE_REQUEST,
     AD_SAVE_FAILURE,
@@ -29,16 +29,16 @@ export const fetchAds = () => {
 };
 
 export const fetchAdsRequest = () => ({
-    type: FETCH_ADS_REQUEST,
+    type: ADS_FETCH_REQUEST,
 });
 
 export const fetchAdsFailure = error => ({
-    type: FETCH_ADS_FAILURE,
+    type: ADS_FETCH_FAILURE,
     error,
 });
 
 export const fetchAdsSuccess = ads => ({
-    type: FETCH_ADS_SUCCESS,
+    type: ADS_FETCH_SUCCESS,
     ads,
 });
 
@@ -62,13 +62,13 @@ export const savedAd = (ad, method, id) => {
 
     return async function (dispatch, getState, extraArgument) {
 
-        dispatch(savedAdRequest());
+        dispatch(savedAdRequest(ad));
 
         try {
 
             const result = await saveAd(ad, method, id)
             console.log('ads/action result ->', result);
-            dispatch(savedAdSuccess());
+            dispatch(savedAdSuccess(result));
 
             return result;
 
