@@ -2,12 +2,11 @@ import React, { useReducer } from "react";
 
 import Canvas from '../Canvas/Canvas';
 
-import { PropTypes }    from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 /**
- *  user handler
+ *  session user handler
  */
 
 export default function Register({ user, setUser }) { 
@@ -22,7 +21,7 @@ export default function Register({ user, setUser }) {
         {
             name: typeof(user)    === 'undefined' ? '' : user.name,
             surname: typeof(user) === 'undefined' ? '' : user.surname, 
-            title: typeof (user)  === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
+            pageTitle: typeof (user)  === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
         }
     );
 
@@ -51,7 +50,7 @@ export default function Register({ user, setUser }) {
     return (
         <Canvas>
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                <h2>{userInput.title}</h2>
+                <h2>{userInput.pageTitle}</h2>
                 <Form onSubmit = { handleSubmit }>
                     <Form.Group controlId="formGroupname" >
                         <Form.Label>Name</Form.Label>
@@ -69,9 +68,4 @@ export default function Register({ user, setUser }) {
             </div>
         </Canvas>
     );
-}
-
-Register.propTypes = {
-    user: PropTypes.object,//.isRequired,
-    // setUser: PropTypes.func.isRequired,
 }

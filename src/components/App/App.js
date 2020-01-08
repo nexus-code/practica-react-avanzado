@@ -2,7 +2,6 @@ import React from 'react';
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import PropTypes from 'prop-types';
 
 import Home      from '../Home';
 import Search    from '../Search';
@@ -44,10 +43,6 @@ function App({ user, ads, props }) {
             </Switch>
       </ErrorBoundary>
   </div>
-}
-
-App.propTypes = {
-  user: PropTypes.object
 }
 
 export default App;
