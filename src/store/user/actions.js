@@ -25,7 +25,10 @@ export const setUser = (...args) => (dispatch, _getState, { history }) => {
     try {
 
         dispatch(saveUser(...args));
-        history.push("/");
+
+        if (history.location.pathname === '/register')
+            history.push("/");
+            
         notifySaved();
 
     } catch (error) {

@@ -11,17 +11,16 @@ import { toast } from 'react-toastify';
 
 export default function Register({ user, setUser }) { 
 
-
     // uses toast to ui add notifications   
     const notifyWarning = (warning) => toast.warning(warning);
     ///
-
+    
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
             name: typeof(user)    === 'undefined' ? '' : user.name,
             surname: typeof(user) === 'undefined' ? '' : user.surname, 
-            pageTitle: typeof (user)  === 'undefined' ? 'Register user' : 'Edit profile', // do well!!
+            pageTitle: typeof(user)  === 'undefined' ? 'Register user' : 'Edit profile', 
         }
     );
 
