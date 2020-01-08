@@ -45,12 +45,8 @@ export const fetchAd = id => async (
     getState,
 ) => {
     const state = getState();
-    console.log('fetchAd state', state);
-
     const ad = getAd(state.ads, id);
     if (ad) {
-        console.log('fetchAd salta', ad);
-
         return ad;
     }
 

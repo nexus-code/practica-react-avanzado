@@ -70,8 +70,6 @@ const searchAd = (id) => {
 
     const url = `${API_URL}anuncios/${id}`;
 
-    console.log('searchAd url', url);
-
     return Axios.get(url).then(res =>
         new AdModel(res.data.result),
     );
