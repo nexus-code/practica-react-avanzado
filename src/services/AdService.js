@@ -65,24 +65,24 @@ const searchAds = (query) => {
  * 
  * @param {*} ad {advertisement}
  * @param {*} method POST / PUT (for insert / update ) 
- * @param {*} id empty in POST. advertisement ID with PUT <-- improve this
  */
 const saveAd = (ad, method, id) => {
 
-    const baseURL = `${API_URL}anuncios/${id}`;
-    // Call endpoint and return
-    // return Axios.put(baseURL, null, { data: ad }).then(
-    //   res => new Advert(res.data.result, API_URL),
-    // );
+    const baseURL = `${API_URL}anuncios`;
 
-    const __res = Axios.put(baseURL, null, { data: ad }).then(
-        res => new AdModel(res.data.result),
-    );
+    if (method === 'POST') {
 
-    console.log('saveAd Axios __res', __res)
+        return Axios.post(baseURL, null, { data: ad }).then(
+            res => new AdModel(res.data.result),
+        );
+    }
 
-    return __res;
-
+    if (method === 'PUT') {
+                
+        return Axios.put(`${baseURL}/${ad.id}`, null, { data: ad }).then(
+            res => new AdModel(res.data.result),
+        );
+    }
 }
 
 // Pre axios

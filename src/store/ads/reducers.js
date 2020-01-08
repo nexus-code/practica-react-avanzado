@@ -19,7 +19,7 @@ export const ads = (state = initialState, action) => {
             return action.ads;
         case TYPES.AD_SAVE_SUCCESS:
             return state.map(ad =>
-                ad._id === action.ad._id ? action.ad : ad,
+                ad.id === action.ad.id ? action.ad : ad,
             );
         default:
             return state;

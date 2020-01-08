@@ -58,7 +58,7 @@ export const savedAdSuccess = ad => ({
 });
 
 
-export const savedAd = (ad, method, id) => {
+export const savedAd = (ad, method) => {
 
     return async function (dispatch, getState, extraArgument) {
 
@@ -66,8 +66,7 @@ export const savedAd = (ad, method, id) => {
 
         try {
 
-            const result = await saveAd(ad, method, id)
-            console.log('ads/action result ->', result);
+            const result = await saveAd(ad, method)
             dispatch(savedAdSuccess(result));
 
             return result;
