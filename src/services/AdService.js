@@ -1,3 +1,5 @@
+
+import Axios from 'axios';
 import AdModel from '../models/AdModel';
 
 const API_URL = 'http://localhost:3001/apiv1/';
@@ -67,7 +69,27 @@ const searchAds = (query) => {
  */
 const saveAd = (ad, method, id) => {
 
-    return fetch(`${API_URL}anuncios/${id}`, {
+    const baseURL = `${API_URL}anuncios/${id}`;
+    // Call endpoint and return
+    // return Axios.put(baseURL, null, { data: ad }).then(
+    //   res => new Advert(res.data.result, API_URL),
+    // );
+
+    const __res = Axios.put(baseURL, null, { data: ad }).then(
+        res => new AdModel(res.data.result),
+    );
+
+    console.log('saveAd Axios __res', __res)
+
+    return __res;
+
+}
+
+// Pre axios
+const __saveAd = (ad, method, id) => {
+
+    // return fetch(`${API_URL}anuncios/${id}`, {
+    const ___res = fetch(`${API_URL}anuncios/${id}`, {
         crossDomain: true,
         method: `${method}`,
         mode: "cors",
@@ -76,15 +98,24 @@ const saveAd = (ad, method, id) => {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => {
-            // the API returns status, but not de advert sent 
-            if (res.status === 200) {
-                return 'OK';
-            } else {
-                return res;
-            }
-        })
+        // .then(res => {
+        //     // the API returns status, but not de advert sent 
+        //     console.log('saveAd res', res)
+        //     console.log('saveAd res.result', res.result)
+        //     // if (res.status === 200) {
+        //     //     return 'OK';
+        //     // } else {
+        //     //     return res;
+        //     // }
+        //     return res;
+        // })
+        // .then(res => new AdModel(res))
+        .then(res => res)
         .catch(error => console.error('Error:', error));
+
+    console.log('saveAd method', method)
+    console.log('saveAd ___res', ___res)
+    return ___res;
 }
 
 export {

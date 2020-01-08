@@ -1,16 +1,4 @@
-// export function getAds(ads, filter) {
-
-//     // basic implementation
-
-//     return ads;
-// }
-
 export function getAds(state) {
-
-    // basic implementation
-
-    console.log('getAds state', state);
-
 
     return state.ads;//.ads;
 }
@@ -26,13 +14,8 @@ export const getAd = (props, id) => {
     }
     catch(err){
         
-        console.log('getAd props.ads.ads', props.ads.ads);
+        // console.log('getAd props.ads.ads', props.ads.ads);
         return 'error? props.ads.ads'; //.filter(ad => ad.id === id)[0];
     }
 
 };
-
-export const editAd = (id) => {
-
-
-}

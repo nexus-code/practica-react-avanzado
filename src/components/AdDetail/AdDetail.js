@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 
 function AdDetail(ads) {
 
-    console.log('AdDetail ads', ads);
+    // console.log('AdDetail ads', ads);
 
     const { id } = useParams();
     const history = useHistory();

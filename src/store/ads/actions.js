@@ -3,9 +3,9 @@ import {
     FETCH_ADS_FAILURE,
     FETCH_ADS_SUCCESS,
 
-    SAVED_AD_REQUEST,
-    SAVED_AD_FAILURE,
-    SAVED_AD_SUCCESS,
+    AD_SAVE_REQUEST,
+    AD_SAVE_FAILURE,
+    AD_SAVE_SUCCESS,
 
     // SET_FILTER,
 } from './types';
@@ -42,6 +42,22 @@ export const fetchAdsSuccess = ads => ({
     ads,
 });
 
+export const savedAdRequest = ad => ({
+    type: AD_SAVE_REQUEST,
+    ad,
+});
+
+export const savedAdFailure = error => ({
+    type: AD_SAVE_FAILURE,
+    error,
+});
+
+export const savedAdSuccess = ad => ({
+    type: AD_SAVE_SUCCESS,
+    ad,
+});
+
+
 export const savedAd = (ad, method, id) => {
 
     return async function (dispatch, getState, extraArgument) {
@@ -51,8 +67,9 @@ export const savedAd = (ad, method, id) => {
         try {
 
             const result = await saveAd(ad, method, id)
-            console.log('result action result', result);
+            console.log('ads/action result ->', result);
             dispatch(savedAdSuccess());
+
             return result;
 
         } catch (error) {
@@ -62,21 +79,6 @@ export const savedAd = (ad, method, id) => {
         }
     };
 };
-
-export const savedAdRequest = ad => ({
-    type: SAVED_AD_REQUEST,
-    ad,
-});
-
-export const savedAdFailure = error => ({
-    type: SAVED_AD_FAILURE,
-    error,
-});
-
-export const savedAdSuccess = result => ({
-    type: SAVED_AD_SUCCESS,
-    result,
-});
 
 // export const setFilter = filter => ({
 //     type: SET_FILTER,
