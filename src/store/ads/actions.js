@@ -10,7 +10,8 @@ import {
     // SET_FILTER,
 } from './types';
 
-import { searchAds, saveAd } from '../../services/AdService';
+import { searchAd, searchAds, saveAd } from '../../services/AdService';
+import { getAd } from '../../store/ads/selectors';
 
 import { toast } from 'react-toastify';
 
@@ -35,42 +36,27 @@ export const fetchAds = () => {
     return __fetchAds;
 };
 
-// export const fetchAd = (id) => {
-
-//     return async function (dispatch) {
-
-//         dispatch(fetchAdsRequest());
-
-//         try {
-
-//             const ad = await searchAds(id);
-//             dispatch(fetchAdsSuccess(ad));
-//             console.log('!ad', ad)
-
-//             return ad;
-
-//         } catch (error) {
-
-//             dispatch(fetchAdsFailure());
-
-//             return false;
-//         }
-//     };
-// };
-
-
+/**
+ * 
+ * @param {*} id search ad by id in store and API
+ */
 export const fetchAd = id => async (
     dispatch,
     getState,
 ) => {
-    // const state = getState();
-    // if (getAd(state, id)) {
-    //     return;
-    // }
+    const state = getState();
+    console.log('fetchAd state', state);
+
+    const ad = getAd(state.ads, id);
+    if (ad) {
+        console.log('fetchAd salta', ad);
+
+        return ad;
+    }
 
     dispatch(fetchAdsRequest());
     try {
-        const advert = await searchAds(id);
+        const advert = await searchAd(id);
         dispatch(fetchAdsSuccess([advert]));
     } catch (error) {
         dispatch(fetchAdsFailure(error));

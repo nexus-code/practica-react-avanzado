@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react";
+import React, { useState, useEffect }  from "react";
 import Canvas from '../Canvas/Canvas';
 import { useParams, useHistory } from 'react-router';
 
@@ -9,25 +9,14 @@ import { Button } from 'react-bootstrap';
 
 export default function AdDetail(props) {
 
-
-
-    
     const history = useHistory();
     const { id } = useParams();
 
-    // const ad = store.ads.length > 0 ? getAd(store, id) : fetchAd(id);
-    // const ad = getAd(ads, id);
-
-    // const ad = props.loadAd(id);
-    let ad = {}
     useEffect(() => {
         props.loadAd(id);
     }, [id]);
 
-
-
-    console.log('!ad', ad)
-
+    const ad = getAd(props, id);
 
     return <Canvas>
 

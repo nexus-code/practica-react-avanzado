@@ -49,7 +49,7 @@ const getAdDetail = (id) => {
 
 /**
  * 
- * @param {*} query: filter anuncios
+ * @param {*} query: filter anuncios. Optimize  with searchAd
  */
 
 const searchAds = (query) => {
@@ -59,6 +59,22 @@ const searchAds = (query) => {
     return getFetch(url)
         .then(res => res.results.map(ad => new AdModel(ad)))
         .catch(error => console.error('Error:', error));
+}
+
+
+/**
+ *
+ * @param {*} id: filter by ad.id. Optimize with searchAds
+ */
+const searchAd = (id) => {
+
+    const url = `${API_URL}anuncios/${id}`;
+
+    console.log('searchAd url', url);
+
+    return Axios.get(url).then(res =>
+        new AdModel(res.data.result),
+    );
 }
 
 /**
@@ -88,6 +104,7 @@ const saveAd = (ad, method) => {
 export {
     getTagsList,
     searchAds,
+    searchAd,
     getAdDetail,
     saveAd
 };
