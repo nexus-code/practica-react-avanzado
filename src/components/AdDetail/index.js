@@ -6,15 +6,11 @@ import { fetchAd } from '../../store/ads/actions';
 
 import AdDetail from './AdDetail';
 
-const mapStateToProps = (store, ownProps) => {
+const mapStateToProps = (store, ownProps) => ({
 
-    return {
-        user: getUser(store),
-        ads: getAds(store),
-        ownProps,
-    }
-};
-
+    user: getUser(store),
+    ads: getAds(store),
+});
 
 const mapDispatchToProps = dispatch => ({
     loadAd: (id) => dispatch(fetchAd(id)),
@@ -23,5 +19,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-    // null,
 )(AdDetail);

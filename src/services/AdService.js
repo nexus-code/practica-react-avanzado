@@ -84,18 +84,33 @@ const saveAd = (ad, method) => {
 
     const baseURL = `${API_URL}anuncios`;
 
-    if (method === 'POST') {
+    // if (method === 'POST') {
 
-        return Axios.post(baseURL, null, { data: ad }).then(
-            res => new AdModel(res.data.result),
-        );
-    }
+    //     return Axios.post(baseURL, null, { data: ad }).then(
+    //         res => new AdModel(res.data.result),
+    //     );
+    // }
 
-    if (method === 'PUT') {
+    // if (method === 'PUT') {
                 
-        return Axios.put(`${baseURL}/${ad.id}`, null, { data: ad }).then(
-            res => new AdModel(res.data.result),
-        );
+    //     return Axios.put(`${baseURL}/${ad.id}`, null, { data: ad }).then(
+    //         res => new AdModel(res.data.result),
+    //     );
+    // }
+
+    switch (method) {
+        case 'POST':
+            return Axios.post(baseURL, null, { data: ad }).then(
+                res => new AdModel(res.data.result),
+            );
+
+        case 'PUT':
+            return Axios.put(`${baseURL}/${ad.id}`, null, { data: ad }).then(
+                res => new AdModel(res.data.result),
+            );
+
+        default:
+            return 'Invalid method';
     }
 }
 

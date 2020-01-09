@@ -11,6 +11,10 @@ const TYPES = ['sell', 'buy'];
 
 function AdEdit(props) {
 
+
+
+    console.log('props', props);
+
     let title  = 'Edit advert';
     let method = 'PUT'; //Edit , POST to add
     let  record = {

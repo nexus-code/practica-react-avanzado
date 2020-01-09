@@ -3,10 +3,9 @@ import AdEdit from './AdEdit';
 import { savedAd } from '../../store/ads/actions';
 
 
-const mapStateToProps = (store, ownProps) => ({
+const mapStateToProps = (store) => ({
     user: store.user,
     ads: store.ads,
-    ownProps,
 })
 
 const mapDispatchToProps = dispatch => ({

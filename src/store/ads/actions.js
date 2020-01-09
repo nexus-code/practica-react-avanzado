@@ -90,33 +90,35 @@ export const savedAdSuccess = ad => ({
 });
 
 
-export const savedAd = (ad, method) => {
+export const savedAd = (ad, method) => async (dispatch, getState, { history },) => {
 
-    return async function (dispatch, getState, extraArgument) {
+    dispatch(savedAdRequest(ad));
 
-        dispatch(savedAdRequest(ad));
+    try {
 
-        try {
+        const result = await saveAd(ad, method);
+        console.log('result', result);
 
-            const result = await saveAd(ad, method)
-            dispatch(savedAdSuccess(result));
-            notifySaved();
+        dispatch(savedAdSuccess(result));
+        notifySaved();
 
-            // console.log('history.location.pathname', history.location.pathname);
-            // if (history.location.pathname === '/advert/create')
-            //     history.push(`/advert/edit/${result.id}`);
+        const state = getState();
 
-            return result;
+        console.log('Hola state!!', state);
+        console.log('history.location.pathname', history.location.pathname);
+        if (history.location.pathname === '/advert/create')
+            history.push(`/advert/edit/${result.id}`);
 
-        } catch (error) {
+        return result;
 
-            dispatch(savedAdFailure());
-            notifyError();
-            console.log(error);
+    } catch (error) {
 
-            return false;
-        }
-    };
+        dispatch(savedAdFailure());
+        notifyError();
+        console.log(error);
+
+        return false;
+    }
 };
 
 
