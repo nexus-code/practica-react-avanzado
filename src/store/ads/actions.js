@@ -112,6 +112,7 @@ export const savedAd = (ad, method) => {
 
             dispatch(savedAdFailure());
             notifyError();
+            console.log(error);
 
             return false;
         }

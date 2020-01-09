@@ -18,9 +18,19 @@ export const ads = (state = initialState, action) => {
         case TYPES.ADS_FETCH_SUCCESS:
             return action.ads;
         case TYPES.AD_SAVE_SUCCESS:
-            return state.map(ad =>
-                ad.id === action.ad.id ? action.ad : ad,
-            );
+            console.log(state);
+            console.log('action', action);
+
+            return state.ads.length > 0 ?
+                state.map(ad =>
+                    ad.id === action.ad.id ? action.ad : ad,
+                ) :
+                action.ad; 
+
+
+            // return state.map(ad =>
+            //     ad.id === action.ad.id ? action.ad : ad,
+            // );
         default:
             return state;
     }
