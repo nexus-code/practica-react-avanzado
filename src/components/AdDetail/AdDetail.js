@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react";
+import React, { useEffect } from "react";
 import Canvas from '../Canvas/Canvas';
 import { useParams, useHistory } from 'react-router';
 
@@ -7,13 +7,7 @@ import { getAd }  from '../../store/ads/selectors';
 import { Button } from 'react-bootstrap';
 
 
-// export default function AdDetail({user, ads, ownProps}) {
 export default function AdDetail(props) {
-
-    // console.log('user', user);
-    // console.log('ads', ads);
-    // console.log('ownProps', ownProps);
-    console.log('props', props);
 
 
     const history = useHistory();

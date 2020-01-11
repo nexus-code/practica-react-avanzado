@@ -7,64 +7,70 @@ const adsLS =  getAdsLS();
 
 const initialState = {
     ads: [] && adsLS,
-    ui: {
-        isFetching: false,
-        error: null,
-    },
+    // ui: {
+    //     isFetching: false,
+    //     error: null,
+    // },
 };
 
 export const ads = (state = initialState, action) => {
     switch (action.type) {
         case TYPES.ADS_FETCH_SUCCESS:
             return action.ads;
+        
+        // case TYPES.AD_UPDATE_SUCCESS:
+        //     console.log('state', state);
+        //     console.log('action', action);
+        //     return state.map(ad => ad.id === action.ad.id ? action.ad : ad);
+        
+        // case TYPES.AD_CREATE_SUCCESS:
+
+        //     console.log('state', state);
+        //     console.log('action', action);
+        //     return [action.ad];
+
+
         case TYPES.AD_SAVE_SUCCESS:
-            console.log('state', state);
-            console.log('action', action);
 
-            //Optimize:
-            if (state.hasOwnProperty('ads'))
+            if (typeof state.map === 'function'){
+                // updating
 
-                return state.ads.length > 0 ?
-                    state.map(ad =>
-                        ad.id === action.ad.id ? action.ad : ad,
-                    ) :
-                    action.ad;
-            else
-                 return action.ad; 
+                return state.map(ad => ad.id === action.ad.id ? action.ad : ad);
 
+            } else {
 
-            // return state.map(ad =>
-            //     ad.id === action.ad.id ? action.ad : ad,
-            // );
+                return [action.ad];
+            }
+
         default:
             return state;
     }
 };
 
-export const ui = (state = initialState.ui, action) => {
-    switch (action.type) {
-        case TYPES.ADS_FETCH_REQUEST:
-            return {
-                ...state,
-                isFetching: true,
-                error: null,
-            };
-        case TYPES.ADS_FETCH_FAILURE:
-            return {
-                ...state,
-                isFetching: false,
-                error: action.error,
-            };
-        case TYPES.ADS_FETCH_SUCCESS:
-            return {
-                ...state,
-                isFetching: false,
-                error: null,
-            };
-        default:
-            return state;
-    }
-};
+// export const ui = (state = initialState.ui, action) => {
+//     switch (action.type) {
+//         case TYPES.ADS_FETCH_REQUEST:
+//             return {
+//                 ...state,
+//                 isFetching: true,
+//                 error: null,
+//             };
+//         case TYPES.ADS_FETCH_FAILURE:
+//             return {
+//                 ...state,
+//                 isFetching: false,
+//                 error: action.error,
+//             };
+//         case TYPES.ADS_FETCH_SUCCESS:
+//             return {
+//                 ...state,
+//                 isFetching: false,
+//                 error: null,
+//             };
+//         default:
+//             return state;
+//     }
+// };
 
 // export const filter = (state = initialState.filter, action) => {
 //     switch (action.type) {

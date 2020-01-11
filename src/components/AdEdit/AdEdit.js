@@ -11,13 +11,11 @@ const TYPES = ['sell', 'buy'];
 
 function AdEdit(props) {
 
+    const adding = props.match.path === '/advert/create';
+    const title  = adding ? 'Create advert' : 'Edit advert';
+    const method = adding ? 'POST' : 'PUT';
 
-
-    console.log('props', props);
-
-    let title  = 'Edit advert';
-    let method = 'PUT'; //Edit , POST to add
-    let  record = {
+    let  ad = {
         id: '',
         name: '',
         price: '',
@@ -26,25 +24,20 @@ function AdEdit(props) {
         photo: '',
         tags: []
     };
+
     const history = useHistory();
     const { id } = useParams();
     
-    if (id === undefined) {
-
-        title  = 'Create new advert';
-        method = 'POST';
-    } else {
-
-        record = getAd(props, id);
+    if (id !== undefined) {
+        ad = getAd(props, id);
     }
 
     const handleSubmitCallback = () => {
 
-        return props.savedAd(formInput, method, record.id);
+        return props.savedAd(formInput, method, ad.id);
     }
     
-    // const [handleChange, handleSubmit, formInput, notifyWarning] = useForm(record, handleSubmitCallback);
-    const [handleChange, handleSubmit, formInput] = useForm(record, handleSubmitCallback );
+    const [handleChange, handleSubmit, formInput] = useForm(ad, handleSubmitCallback );
 
     return <Canvas>
             

@@ -6,6 +6,8 @@ import {
     AD_SAVE_REQUEST,
     AD_SAVE_FAILURE,
     AD_SAVE_SUCCESS,
+    // AD_UPDATE_SUCCESS,
+    // AD_CREATE_SUCCESS,
 
     // SET_FILTER,
 } from './types';
@@ -40,10 +42,7 @@ export const fetchAds = () => {
  * 
  * @param {*} id search ad by id in store and API
  */
-export const fetchAd = id => async (
-    dispatch,
-    getState,
-) => {
+export const fetchAd = id => async (dispatch, getState) => {
     const state = getState();
     const ad = getAd(state.ads, id);
     if (ad) {
@@ -89,8 +88,17 @@ export const savedAdSuccess = ad => ({
     ad,
 });
 
+// export const updateAdSuccess = ad => ({
+//     type: AD_UPDATE_SUCCESS,
+//     ad,
+// });
 
-export const savedAd = (ad, method) => async (dispatch, getState, { history },) => {
+// export const createAdSuccess = ad => ({
+//     type: AD_CREATE_SUCCESS,
+//     ad,
+// });
+
+export const savedAd = (ad, method) => async (dispatch, getState, { history }) => {
 
     dispatch(savedAdRequest(ad));
 
@@ -100,14 +108,22 @@ export const savedAd = (ad, method) => async (dispatch, getState, { history },) 
         console.log('result', result);
 
         dispatch(savedAdSuccess(result));
+        
+        // if (method === 'POST') {
+
+        //     dispatch(createAdSuccess(result));
+        // } else {
+        //     //PUT
+
+        //     dispatch(updateAdSuccess(result));
+        // }
+
         notifySaved();
+        history.push(`/advert/${result.id}`);
 
-        const state = getState();
-
-        console.log('Hola state!!', state);
-        console.log('history.location.pathname', history.location.pathname);
-        if (history.location.pathname === '/advert/create')
-            history.push(`/advert/edit/${result.id}`);
+        // // Only redirect to edit after create 
+        // if (history.location.pathname === '/advert/create')
+        //     history.push(`/advert/edit/${result.id}`);
 
         return result;
 
@@ -115,7 +131,7 @@ export const savedAd = (ad, method) => async (dispatch, getState, { history },) 
 
         dispatch(savedAdFailure());
         notifyError();
-        console.log(error);
+        console.log(error); // Improve
 
         return false;
     }
