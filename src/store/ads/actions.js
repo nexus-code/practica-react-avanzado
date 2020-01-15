@@ -8,8 +8,6 @@ import {
     AD_SAVE_SUCCESS,
     // AD_UPDATE_SUCCESS,
     // AD_CREATE_SUCCESS,
-
-    // SET_FILTER,
 } from './types';
 
 import { searchAd, searchAds, saveAd } from '../../services/AdService';
@@ -53,8 +51,10 @@ export const fetchAd = id => async (dispatch, getState) => {
     try {
         const advert = await searchAd(id);
         dispatch(fetchAdsSuccess([advert]));
+        return id;
     } catch (error) {
         dispatch(fetchAdsFailure(error));
+        return `Error: ${error}`
     }
 };
 
@@ -121,24 +121,14 @@ export const savedAd = (ad, method) => async (dispatch, getState, { history }) =
         notifySaved();
         history.push(`/advert/${result.id}`);
 
-        // // Only redirect to edit after create 
-        // if (history.location.pathname === '/advert/create')
-        //     history.push(`/advert/edit/${result.id}`);
-
         return result;
 
     } catch (error) {
 
         dispatch(savedAdFailure());
         notifyError();
-        console.log(error); // Improve
+       // console.log(error); // Improve
 
         return false;
     }
 };
-
-
-// export const setFilter = filter => ({
-//     type: SET_FILTER,
-//     filter,
-// });
