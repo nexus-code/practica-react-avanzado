@@ -1,7 +1,6 @@
-import * as types from './types';
 import { fetchAd } from './actions';
 
-describe.only('actions', () => {
+describe('actions', () => {
 
     describe('fetchAd',  () => {
     
