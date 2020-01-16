@@ -45,26 +45,32 @@ describe('ads reducers', () => {
     expect(ads(initialState, action)).toEqual([ad])
   })
 
-  // Revisar
+  // // Revisar
   // it('send TYPES.AD_SAVE_SUCCESS modify ad: should return [modified adList]', () => {
 
+  //   const __initialState = {
+  //     user: {},
+  //     ads: {
+  //       ads: adsList
+  //     },
+  //     lastAction: {},
+  //   };
+
   //   const adModified = { id: "5e19a0db2ab1b61184740c44", name: "PS4Pro MODIFIED", description: "Compro PS4 Pro con menos de 1 año de uso", price: 100.99, type: "buy", photo: "" };
+
   //   const action = {
   //     type: TYPES.AD_SAVE_SUCCESS,
   //     ad: adModified,
   //   };
-  //   const __initialState = {
-  //     user: {},
-  //     ads: adsList,
-  //     lastAction: {},
-  //   };
-  //   const expected = adsList.map(ad => ad.id === adModified.id ? adModified : ad)
 
-  //   console.log('__initialState', __initialState)
-  //   console.log('expected', expected)
-  //   console.log('action', action)
+  //   const expected = adsList.map(ad => ad.id === adModified.id ? adModified : ad);
 
-  //   expect(ads(__initialState, action)).toEqual(expected)
-  // })
+
+  //   console.log('__initialState', __initialState);
+  //   console.log('expected', expected);
+  //   console.log('action', action);
+
+  //   expect(ads(__initialState, action)).toEqual(expected);
+  // });
 
 });
