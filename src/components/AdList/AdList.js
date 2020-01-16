@@ -6,7 +6,7 @@ import AppPagination from '../AppPagination/AppPagination'
 
 const ITEMS_PER_PAGE = 3; // !! pending: to config or register !!
 
-class AdList extends React.Component {
+export class AdList extends React.Component {
 
     constructor(props) {
         super(props);
