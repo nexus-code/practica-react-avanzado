@@ -93,7 +93,7 @@ export class AdList extends React.Component {
                         </div>
                     }
                 </div>
-                <div>
+                <div className='pagination-row'>
                     <br/>
                     <hr/>
                     <br/>
