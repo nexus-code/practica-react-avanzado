@@ -1,6 +1,6 @@
 import { fetchAd } from './actions';
 
-describe('actions', () => {
+describe('Advert actions', () => {
 
     describe('fetchAd',  () => {
     
@@ -33,7 +33,7 @@ describe('actions', () => {
 
 
 
-        it('ASYNC: should return the advert in the API with especified id (calls API!)', async () => {
+        it('ASYNC: should return the advert in the API with especified id (it calls API!)', async () => {
             const state = {
                 user: {},
                 ads: {

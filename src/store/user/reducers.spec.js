@@ -23,7 +23,7 @@ describe('user reducers', () => {
       lastAction: {},
     };
 
-    console.log('action', action);
+    // console.log('action', action);
     expect(user(initialState, action)).toEqual(expectedState);
   })
 

@@ -28,7 +28,6 @@ store.subscribe(() => {
 
     const { lastAction, user } = store.getState();
 
-
     // User user.user & ads.ads by combineReducers.View to rename
     setUserLS(user.user);
 

@@ -9,20 +9,34 @@ import { toast } from 'react-toastify';
  *  session user handler
  */
 
-export default function Register({ user, setUser }) { 
+
+export default function Register({ user, setUser, logout }) { 
 
     // uses toast to ui add notifications   
     const notifyWarning = (warning) => toast.warning(warning);
     ///
-    
+
+    const status = typeof (user) === 'undefined' ? 0 : 1; // 0 'REGISTER' : 1 'EDIT';
+    const pageTitle = status ? 'Edit profile' : 'Register user';
+
+
+
+
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            name: typeof(user)    === 'undefined' ? '' : user.name,
-            surname: typeof(user) === 'undefined' ? '' : user.surname, 
-            pageTitle: typeof(user)  === 'undefined' ? 'Register user' : 'Edit profile', 
+            name: status ? user.name : '',
+            surname: status ? user.surname : '',
         }
     );
+
+
+    const handleLogout = () => {
+        setUserInput({name: '', surname: ''});
+        logout();
+    }
+    const logoutButton = status ? <Button variant="secondary" className="float-right logoutButton" onClick={handleLogout}>Logout</Button> : '';
+    
 
     const handleChange = event => {
         const name = event.target.name;
@@ -49,7 +63,7 @@ export default function Register({ user, setUser }) {
     return (
         <Canvas>
             <div style={{ padding: "20px", maxWidth: "420px", margin: "50px auto" }}>
-                <h2>{userInput.pageTitle}</h2>
+                <h2>{ pageTitle }</h2>
                 <Form onSubmit = { handleSubmit }>
                     <Form.Group controlId="formGroupname" >
                         <Form.Label>Name</Form.Label>
@@ -57,12 +71,16 @@ export default function Register({ user, setUser }) {
                     </Form.Group>
                     <Form.Group controlId="formGroupsurname" >
                         <Form.Label>Surname</Form.Label>
-                        <Form.Control name="surname" placeholder="surname" value={ userInput.surname } onChange={ handleChange } />
+                        <Form.Control name="surname" placeholder="Enter surname" value={ userInput.surname } onChange={ handleChange } />
                     </Form.Group>
 
-                    <Button variant="primary float-right" type="submit">
+
+                    <Button variant="primary" type="submit">
                         Save
                     </Button>
+                    
+                    { logoutButton }
+
                 </Form>
             </div>
         </Canvas>

@@ -85,7 +85,7 @@ function AdEdit(props) {
                     <Button variant="primary" type="submit">
                         Save
                     </Button>
-                <Button variant="secondary" className="float-right" onClick={() => history.goBack()}>Go back</Button>
+                <Button variant="secondary" className="float-right" onClick={() => history.push(`../${id}`)}>View advert</Button>
                 </Form>
             </div>
         </Canvas>

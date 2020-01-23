@@ -24,7 +24,7 @@ function AppNavbar({ user, logout }) {
                         <Nav.Link className={getNavLinkClass("/advert/create")} href="/advert/create">New advert</Nav.Link>
                         <Nav.Link className={getNavLinkClass("/advert/")} href="/advert/">Search</Nav.Link>
                         <Nav.Link className={getNavLinkClass("/profile/")} href="/profile">My profile</Nav.Link>
-                        <Nav.Link className={getNavLinkClass("/logout/")} href="" onClick={logout}>Logout</Nav.Link>
+                        {/* <Nav.Link className={getNavLinkClass("/logout/")} href="" onClick={logout}>Logout</Nav.Link> */}
                     </Nav>
                 }
             </Navbar.Collapse>
