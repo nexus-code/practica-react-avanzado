@@ -8,10 +8,8 @@ describe('Register', () => {
     
     const props = {
         user: {
-            // user: {
-                name: 'test name',
-                surname: 'test surname',
-            // },
+            name: 'test name',
+            surname: 'test surname',
         },
         setUser: jest.fn(),
         logout: jest.fn(),
@@ -37,11 +35,19 @@ describe('Register', () => {
     });
 
     describe('should register user', () => {
+        wrapper
+        .find('[name="name"]')
+        .simulate("change", { target: { value: props.user.name, name: "name" } });
+        
+        wrapper
+            .find('[name="surname"]')
+            .simulate("change", { target: { value: props.user.surname, name: "surname" } });
+            
+            
         
         const preventDefault = jest.fn();
         wrapper.find('Form').simulate('submit', { preventDefault });
-       
-                
+        
         it('should prevent default Form submission', () => {
             
             expect(preventDefault).toHaveBeenCalled();
@@ -49,13 +55,15 @@ describe('Register', () => {
         
 
         it('should save user data', () => {
-            
-            // console.log('wrapper.debug -> FORM', wrapper.find('Form').debug());;
+
+                
+            // console.log('wrapper.debug(FORM)', wrapper.find('Form').debug());
 
             expect(props.setUser).toHaveBeenCalledWith(
-
+            
                 expect.objectContaining(props.user)
             );
+
         });
 
     });

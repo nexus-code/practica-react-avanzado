@@ -35,6 +35,7 @@ export default function Register({ user, setUser, logout }) {
     
 
     const handleChange = event => {
+
         const name = event.target.name;
         const newValue = event.target.value;
         setUserInput({ [name]: newValue });
@@ -49,7 +50,7 @@ export default function Register({ user, setUser, logout }) {
         }
 
         if (userInput.surname.trim().length <= 3) {
-            notifyWarning('The surname must be bigger than 3 characters');
+            notifyWarning('The surrname must be bigger than 3 characters');
             return;
         }
 

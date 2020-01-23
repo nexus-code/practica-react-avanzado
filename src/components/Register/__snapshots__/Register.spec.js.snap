@@ -31,7 +31,7 @@ exports[`Register should render a Register component 1`] = `
           name="name"
           onChange={[Function]}
           placeholder="Enter name"
-          value=""
+          value="test name"
         />
       </FormGroup>
       <FormGroup
@@ -47,7 +47,7 @@ exports[`Register should render a Register component 1`] = `
           name="surname"
           onChange={[Function]}
           placeholder="Enter surname"
-          value=""
+          value="test surname"
         />
       </FormGroup>
       <Button
