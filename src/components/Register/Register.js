@@ -71,7 +71,7 @@ export default function Register({ user, setUser, logout }) {
                     </Form.Group>
 
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" className="submitButton" type="submit">
                         Save
                     </Button>
                     

@@ -2,13 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Register from './Register';
+// import { setUser } from '../../store/user/actions';
 
 describe('Register', () => {
     
     const props = {
         user: {
+            user: {
             name: 'test name',
             surname: 'test surname',
+            },
         },
         setUser: jest.fn(),
         logout: jest.fn(),
@@ -33,9 +36,13 @@ describe('Register', () => {
         });
     });
 
-    describe.only('should register user', () => {
+    describe('should register user', () => {
+        
+        wrapper.find('.submitButton').simulate('click');
+       
+        console.log('wrapper', wrapper.find('.submitButton'))
+
         const preventDefault = jest.fn();
-        wrapper.find('Form').simulate('submit', { preventDefault });
 
         it('should prevent default Form submission', () => {
             
@@ -43,12 +50,12 @@ describe('Register', () => {
         });
 
 
-        it.only('should save user data', () => {
+        it('should save user data', () => {
+
 
             expect(props.setUser).toHaveBeenCalledWith(
-                expect.objectContaining(props.user)
-                // expect.objectContaining(expect.anything())
 
+                expect.objectContaining(props.user)
             );
         });
 
