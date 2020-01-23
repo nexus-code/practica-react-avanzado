@@ -18,10 +18,11 @@ describe('Register', () => {
 
 
     it('should render a Register component', () => {
+        
         expect(wrapper).toMatchSnapshot();
     });
 
-    describe('doing logout', () => {
+    describe('should do logout', () => {
 
         wrapper
             .find('.logoutButton')
@@ -32,7 +33,24 @@ describe('Register', () => {
         });
     });
 
-    describe('register: saving profile', () => {
+    describe.only('should register user', () => {
+        const preventDefault = jest.fn();
+        wrapper.find('Form').simulate('submit', { preventDefault });
+
+        it('should prevent default Form submission', () => {
+            
+            expect(preventDefault).toHaveBeenCalled();
+        });
+
+
+        it.only('should save user data', () => {
+
+            expect(props.setUser).toHaveBeenCalledWith(
+                expect.objectContaining(props.user)
+                // expect.objectContaining(expect.anything())
+
+            );
+        });
 
     });
 });
