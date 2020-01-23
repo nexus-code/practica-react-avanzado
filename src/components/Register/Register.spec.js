@@ -8,10 +8,10 @@ describe('Register', () => {
     
     const props = {
         user: {
-            user: {
-            name: 'test name',
-            surname: 'test surname',
-            },
+            // user: {
+                name: 'test name',
+                surname: 'test surname',
+            // },
         },
         setUser: jest.fn(),
         logout: jest.fn(),
@@ -38,20 +38,19 @@ describe('Register', () => {
 
     describe('should register user', () => {
         
-        wrapper.find('.submitButton').simulate('click');
-       
-        console.log('wrapper', wrapper.find('.submitButton'))
-
         const preventDefault = jest.fn();
-
+        wrapper.find('Form').simulate('submit', { preventDefault });
+       
+                
         it('should prevent default Form submission', () => {
             
             expect(preventDefault).toHaveBeenCalled();
         });
-
+        
 
         it('should save user data', () => {
-
+            
+            // console.log('wrapper.debug -> FORM', wrapper.find('Form').debug());;
 
             expect(props.setUser).toHaveBeenCalledWith(
 
