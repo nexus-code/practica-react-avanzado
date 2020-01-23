@@ -23,11 +23,8 @@ describe('Register', () => {
 
     describe('doing logout', () => {
 
-        console.log('props.logout', props.logout);
-
         wrapper
             .find('.logoutButton')
-            .childAt(0)
             .simulate('click');
 
         it('should logout user', () => {

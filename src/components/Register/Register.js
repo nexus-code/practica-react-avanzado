@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
  *  session user handler
  */
 
-
 export default function Register({ user, setUser, logout }) { 
 
     // uses toast to ui add notifications   
@@ -20,8 +19,6 @@ export default function Register({ user, setUser, logout }) {
     const pageTitle = status ? 'Edit profile' : 'Register user';
 
 
-
-
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
@@ -29,7 +26,6 @@ export default function Register({ user, setUser, logout }) {
             surname: status ? user.surname : '',
         }
     );
-
 
     const handleLogout = () => {
         setUserInput({name: '', surname: ''});

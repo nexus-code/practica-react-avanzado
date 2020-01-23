@@ -31,7 +31,7 @@ exports[`Register should render a Register component 1`] = `
           name="name"
           onChange={[Function]}
           placeholder="Enter name"
-          value="test name"
+          value=""
         />
       </FormGroup>
       <FormGroup
@@ -46,8 +46,8 @@ exports[`Register should render a Register component 1`] = `
         <FormControl
           name="surname"
           onChange={[Function]}
-          placeholder="surname"
-          value="test surname"
+          placeholder="Enter surname"
+          value=""
         />
       </FormGroup>
       <Button
@@ -62,7 +62,7 @@ exports[`Register should render a Register component 1`] = `
         active={false}
         className="float-right logoutButton"
         disabled={false}
-        onClick={[MockFunction]}
+        onClick={[Function]}
         type="button"
         variant="secondary"
       >
