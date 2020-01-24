@@ -14,39 +14,22 @@ describe('Advert actions', () => {
         ];
 
         const dispatch = jest.fn();
+        const state =  {
+            user: {},
+            ads: {
+                ads: adsList
+            },
+            lastAction: {},
+        };
         
-        // Review: needs API be running
+        const ad = adsList[1];
+        const getState = () => state;
+        
         it('SYNC: should return the advert in the store with sepecified id', async () =>{
-            const state =  {
-                user: {},
-                ads: {
-                    ads: adsList
-                },
-                lastAction: {},
-            };
-            
-            const ad = adsList[1];
-            const getState = () => state;
 
-            expect( await fetchAd(ad.id)(dispatch, getState)).toEqual(ad);
+            expect(await fetchAd(ad.id)(dispatch, getState)).toEqual(ad);
         });
 
-
-
-        it('ASYNC: should return the advert in the API with especified id (it calls API!)', async () => {
-            const state = {
-                user: {},
-                ads: {
-                    ads: []
-                },
-                lastAction: {},
-            };
-
-            const ad = adsList[1];
-            const getState = () => state;
-
-            expect(await fetchAd(ad.id)(dispatch, getState)).toEqual(ad.id);
-        });
     });
 
 });
